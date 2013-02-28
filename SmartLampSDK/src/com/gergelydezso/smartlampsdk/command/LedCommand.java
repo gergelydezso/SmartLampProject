@@ -5,20 +5,20 @@ import com.gergelydezso.smartlampsdk.SmartLamp;
 
 public class LedCommand implements Command {
 
-	private SmartLamp thelamp;
+	private SmartLamp theLamp;
 	private LedPin pin;
 	private int value;
 
 	public LedCommand(SmartLamp lamp, LedPin pin, int value) {
-		this.thelamp = lamp;
+		this.theLamp = lamp;
 		this.pin = pin;
 		this.value = value;
 	}
 
 	@Override
 	public void execute() {
-		// TODO Auto-generated method stub
-		thelamp.led.setLedValue(pin, value);
+
+		theLamp.led.setLedValue(pin, value);
 	}
 
 }

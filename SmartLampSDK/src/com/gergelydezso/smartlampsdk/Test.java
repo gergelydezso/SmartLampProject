@@ -1,28 +1,23 @@
 package com.gergelydezso.smartlampsdk;
 
 import com.gergelydezso.smartlampsdk.RGBLed.LedPin;
-import com.gergelydezso.smartlampsdk.ServoMotor.servoID;
+import com.gergelydezso.smartlampsdk.ServoMotor.ServoID;
 import com.gergelydezso.smartlampsdk.command.Command;
-import com.gergelydezso.smartlampsdk.command.CommandInvoker;
+import com.gergelydezso.smartlampsdk.command.CommandEngine;
 import com.gergelydezso.smartlampsdk.command.LedCommand;
 import com.gergelydezso.smartlampsdk.command.ServoCommand;
 
 public class Test {
 
-	private static servoID id;
-	private static int degree;
-	private static LedPin pin;
-	private static int value;
-
 	public static void main(String[] args) {
 
 		SmartLamp lamp = new SmartLamp();
-		Command servo = new ServoCommand(lamp, id, degree);
-		Command led = new LedCommand(lamp, pin, value);
+		Command servo = new ServoCommand(lamp, ServoID.SERVO1, 120);
+		Command led = new LedCommand(lamp, LedPin.BLUE_PIN, 100);
 
-		CommandInvoker cmd = new CommandInvoker();
-
-		cmd.storeAndExecute(servo);
+		CommandEngine engine = new CommandEngine();
+		engine.putCommant(led);
+		engine.putCommant(servo);
 
 	}
 

@@ -1,17 +1,11 @@
 package com.gergelydezso.smartlampsdk.connection;
 
-public class Bluetooth {
+public class Bluetooth implements CommunicationBridge {
 
-	private void createConnection() {
-
-	}
-
+	@Override
 	public void sendData() {
-
-	}
-
-	public void reciveData() {
-
+		// TODO Auto-generated method stub
+		
 	}
 
 }
