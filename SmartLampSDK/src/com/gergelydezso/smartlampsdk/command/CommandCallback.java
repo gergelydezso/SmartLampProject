@@ -4,6 +4,6 @@ public interface CommandCallback {
 
 	void onSuccess();
 
-	void onError(Exception e);
+	void onError();
 
 }

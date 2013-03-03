@@ -1,6 +1,7 @@
 package com.gergelydezso.smartlampsdk;
 
-import com.gergelydezso.smartlampsdk.connection.Bluetooth;
+import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.connection.BluetoothConnection;
 import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
 
 public class RGBLed {
@@ -16,15 +17,15 @@ public class RGBLed {
 	 * 
 	 * @param pin
 	 *            - LED pin identifier.
-	 * @param value
+	 * @param intensity
 	 *            - led pin intensity.
 	 */
-	public void setLedValue(LedPin pin, int value) {
+	public void setLedValue(LedPin pin, int intensity, CommandCallback callback) {
 
-		// CommunicationBridge comm = new Bluetooth();
-		// comm.sendData();
+		 CommunicationBridge comm = new BluetoothConnection();
+		 comm.sendData(intensity, callback);
 		
-		System.out.println("Set LED value");
+		//System.out.println("LedPin: "+pin+" Value: " +intensity);
 	}
 
 	/**

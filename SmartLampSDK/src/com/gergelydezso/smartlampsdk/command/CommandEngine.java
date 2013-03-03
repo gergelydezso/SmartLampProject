@@ -5,17 +5,23 @@ import java.util.concurrent.LinkedBlockingQueue;
 
 public class CommandEngine {
 
-	BlockingQueue<Command> sharedQueue = new LinkedBlockingQueue<Command>();
-	Thread consThread = new Thread(new CommandConsumer(sharedQueue));
+	private BlockingQueue<Command> sharedQueue;
 
-	public void putCommant(Command cmd) {
+	public CommandEngine() {
+		sharedQueue = new LinkedBlockingQueue<Command>();
+		Thread consThread = new Thread(new CommandConsumer(sharedQueue));
+		consThread.start();
+	}
+
+	public void executeCommand(Command cmd) {
 
 		try {
+			System.out.println("Command added");
 			sharedQueue.put(cmd);
 
 		} catch (Exception e) {
-
 		}
 
 	}
+
 }

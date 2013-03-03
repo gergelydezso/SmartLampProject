@@ -12,12 +12,18 @@ public class CommandConsumer implements Runnable {
 
 	@Override
 	public void run() {
+
+		System.out.println("CommandConsumer runing");
+
 		while (true) {
 			try {
 
-				(sharedQueue.take()).execute();
+				Thread.sleep(1000);
+				Command cmd = sharedQueue.take();
+				cmd.execute();
 
 			} catch (Exception e) {
+				System.out.println("CommandConsumer error");
 
 			}
 		}

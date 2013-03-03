@@ -1,6 +1,7 @@
 package com.gergelydezso.smartlampsdk;
 
-import com.gergelydezso.smartlampsdk.connection.Bluetooth;
+import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.connection.BluetoothConnection;
 import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
 
 public class ServoMotor {
@@ -19,12 +20,13 @@ public class ServoMotor {
 	 * @param degree
 	 *            - angle of the servo motor.
 	 */
-	public void setServoPosition(ServoID id, int degree) {
+	public void setServoPosition(ServoID id, int degree,
+			CommandCallback callback) {
 
-		// CommunicationBridge comm = new Bluetooth();
-		// comm.sendData();
-		
-		System.out.println("Set SERVO value");
+		CommunicationBridge comm = new BluetoothConnection();
+		comm.sendData(degree, callback);
+
+		// System.out.println("ServoID: " + id + " Degree: " + degree);
 
 	}
 
