@@ -17,7 +17,7 @@ public class Test {
 
 		SmartLamp lamp = new SmartLamp();
 		CommandEngine engine = new CommandEngine();
-		boolean success = false;
+		// boolean success = false;
 		final CountDownLatch cdl = new CountDownLatch(1);
 
 		Command servo = new ServoCommand(lamp, ServoID.SERVO1, 120,
