@@ -5,11 +5,11 @@ public class ConnectionHolder {
 	public static BluetoothConnectionService con;
 
 	public void setConnection(BluetoothConnectionService con) {
-		this.con = con;
+		ConnectionHolder.con = con;
 	}
 
 	public BluetoothConnectionService getConnection() {
-		return this.con;
+		return ConnectionHolder.con;
 	}
 
 }

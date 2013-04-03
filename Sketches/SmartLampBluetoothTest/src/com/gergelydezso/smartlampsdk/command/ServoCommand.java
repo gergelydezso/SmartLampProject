@@ -10,12 +10,12 @@ public class ServoCommand implements Command {
 	private int degree;
 	private CommandCallback callback;
 
-	public ServoCommand(SmartLamp lamp, ServoPin id, int degree,
-			CommandCallback callback) {
+	public ServoCommand(SmartLamp lamp, ServoPin id, int degree, CommandCallback callback) {
 		this.theLamp = lamp;
 		this.id = id;
 		this.degree = degree;
 		this.callback = callback;
+
 	}
 
 	@Override

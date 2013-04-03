@@ -18,7 +18,6 @@ package com.gergelydezso.smartlampsdk.connection.bluetooth;
 
 import com.gergelydezso.smartlampsdk.R;
 import com.gergelydezso.smartlampsdk.TestActivity;
-
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -27,20 +26,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
-import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -77,10 +66,6 @@ public class BluetoothConnectionActivity extends Activity {
 
 	// Name of the connected device
 	private String mConnectedDeviceName = null;
-	// Array adapter for the conversation thread
-	private ArrayAdapter<String> mConversationArrayAdapter;
-	// String buffer for outgoing messages
-	private StringBuffer mOutStringBuffer;
 
 	// Local Bluetooth adapter
 	public BluetoothAdapter mBluetoothAdapter = null;
@@ -95,10 +80,8 @@ public class BluetoothConnectionActivity extends Activity {
 			Log.e(TAG, "+++ ON CREATE +++");
 
 		// Set up the window layout
-		requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
+
 		setContentView(R.layout.connection);
-		getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,
-				R.layout.custom_title);
 
 		mConnectButton = (Button) findViewById(R.id.btn_smartlamp);
 		mControlButton = (Button) findViewById(R.id.btn_control);
@@ -132,11 +115,6 @@ public class BluetoothConnectionActivity extends Activity {
 
 			}
 		});
-
-		// Set up the custom title
-		mTitle = (TextView) findViewById(R.id.title_left_text);
-		mTitle.setText(R.string.app_name);
-		mTitle = (TextView) findViewById(R.id.title_right_text);
 
 		// Get local Bluetooth adapter
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -196,8 +174,6 @@ public class BluetoothConnectionActivity extends Activity {
 		// Initialize the BluetoothChatService to perform bluetooth connections
 		mChatService = new BluetoothConnectionService();
 
-		// Initialize the buffer for outgoing messages
-		mOutStringBuffer = new StringBuffer("");
 	}
 
 	// The Handler that gets information back from the BluetoothChatService
@@ -210,32 +186,18 @@ public class BluetoothConnectionActivity extends Activity {
 					Log.i(TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
 				switch (msg.arg1) {
 				case BluetoothConnectionService.STATE_CONNECTED:
-					mTitle.setText(R.string.title_connected_to);
-					mTitle.append(mConnectedDeviceName);
-					// mConversationArrayAdapter.clear();
 					break;
 				case BluetoothConnectionService.STATE_CONNECTING:
-					mTitle.setText(R.string.title_connecting);
 					break;
 				case BluetoothConnectionService.STATE_LISTEN:
+					break;
 				case BluetoothConnectionService.STATE_NONE:
-					mTitle.setText(R.string.title_not_connected);
 					break;
 				}
 				break;
 			case MESSAGE_WRITE:
-				byte[] writeBuf = (byte[]) msg.obj;
-				// construct a string from the buffer
-				String writeMessage = new String(writeBuf);
-				// mConversationArrayAdapter.add("Me:  " + writeMessage);
 				break;
 			case MESSAGE_READ:
-				byte[] readBuf = (byte[]) msg.obj;
-				// construct a string from the valid bytes in the buffer
-				String readMessage = new String(readBuf, 0, msg.arg1);
-				// mEditServo2.setText(readMessage);
-				// mConversationArrayAdapter.add(mConnectedDeviceName + ":  "
-				// + readMessage);
 				break;
 			case MESSAGE_DEVICE_NAME:
 				// save the connected device's name
@@ -291,36 +253,6 @@ public class BluetoothConnectionActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		MenuInflater inflater = getMenuInflater();
-		inflater.inflate(R.menu.option_menu, menu);
-		return true;
-	}
-
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		Intent serverIntent = null;
-		switch (item.getItemId()) {
-		case R.id.secure_connect_scan:
-			// Launch the DeviceListActivity to see devices and do scan
-			serverIntent = new Intent(this, BluetoothDeviceListActivity.class);
-			startActivityForResult(serverIntent, REQUEST_CONNECT_DEVICE_SECURE);
-			return true;
-			// case R.id.insecure_connect_scan:
-			// // Launch the DeviceListActivity to see devices and do scan
-			// serverIntent = new Intent(this, DeviceListActivity.class);
-			// startActivityForResult(serverIntent,
-			// REQUEST_CONNECT_DEVICE_INSECURE);
-			// return true;
-			// case R.id.discoverable:
-			// // Ensure this device is discoverable by others
-			// ensureDiscoverable();
-			// return true;
-		}
-		return false;
-	}
-
-	@Override
 	public synchronized void onPause() {
 		super.onPause();
 		if (D)
@@ -337,11 +269,7 @@ public class BluetoothConnectionActivity extends Activity {
 	@Override
 	public void onDestroy() {
 		super.onDestroy();
-		// Stop the Bluetooth chat services
-		if (mChatService != null)
-			// mChatService.stop();
-			if (D)
-				Log.e(TAG, "--- ON DESTROY ---");
+		Log.e(TAG, "--- ON DESTROY ---");
 	}
 
 }

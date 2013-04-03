@@ -24,9 +24,8 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int action_settings=0x7f08001c;
+        public static final int action_settings=0x7f08001b;
         public static final int btn_blue=0x7f08000c;
-        public static final int btn_connection=0x7f08001b;
         public static final int btn_control=0x7f08000f;
         public static final int btn_green=0x7f08000a;
         public static final int btn_intent=0x7f08000d;
@@ -45,7 +44,7 @@ public final class R {
         public static final int in=0x7f080017;
         public static final int new_devices=0x7f080015;
         public static final int paired_devices=0x7f080013;
-        public static final int secure_connect_scan=0x7f08001d;
+        public static final int secure_connect_scan=0x7f08001c;
         public static final int servo1_bar=0x7f080003;
         public static final int servo1_bar2=0x7f08001a;
         public static final int servo2_bar=0x7f080006;

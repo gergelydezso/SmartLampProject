@@ -14,49 +14,32 @@ public class SmartLampAPI {
 	private SmartLamp lamp = new SmartLamp();
 	private CommandEngine engine = new CommandEngine();
 
-	public void createAddServoCommand(int servoID, int value) {
+	public void createAddServoCommand(int servoID, int value, CommandCallback callback) {
 
-		Command servo = new ServoCommand(lamp, ServoPin.SERVO1, value,
-				new CommandCallback() {
-
-					@Override
-					public void onSuccess() {
-
-						// cdl.countDown();
-						System.out.println("onSuccess");
-
-					}
-
-					@Override
-					public void onError() {
-
-						// cdl.countDown();
-						System.out.println("onError");
-					}
-				});
+		Command servo = new ServoCommand(lamp, ServoPin.SERVO1, value, callback);
 
 		engine.executeCommand(servo);
 
 	}
 
-	public void createAddLedCommand() {
-
-		Command led = new LedCommand(lamp, LedPin.BLUE_PIN, 100,
-				new CommandCallback() {
-
-					@Override
-					public void onSuccess() {
-						System.out.println("onSuccess");
-					}
-
-					@Override
-					public void onError() {
-						System.out.println("onError");
-					}
-				});
-
-		engine.executeCommand(led);
-
-	}
+	// public void createAddLedCommand() {
+	//
+	// Command led = new LedCommand(lamp, LedPin.BLUE_PIN, 100,
+	// new CommandCallback() {
+	//
+	// @Override
+	// public void onSuccess() {
+	// System.out.println("onSuccess");
+	// }
+	//
+	// @Override
+	// public void onError() {
+	// System.out.println("onError");
+	// }
+	// });
+	//
+	// engine.executeCommand(led);
+	//
+	// }
 
 }

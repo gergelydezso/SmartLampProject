@@ -23,14 +23,7 @@ import java.util.UUID;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
-import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
-import android.os.Parcel;
-import android.os.Parcelable;
 import android.util.Log;
 
 /**
@@ -47,10 +40,6 @@ public class BluetoothConnectionService {
 	// Debugging
 	private static final String TAG = "BluetoothChatService";
 	private static final boolean D = true;
-
-	// Name for the SDP record when creating server socket
-	private static final String NAME_SECURE = "BluetoothChatSecure";
-	// private static final String NAME_INSECURE = "BluetoothChatInsecure";
 
 	// Unique UUID for this application
 	private static final UUID MY_UUID_SECURE = UUID

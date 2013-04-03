@@ -41,6 +41,7 @@
                     android:id="@+id/btn_servo1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
                     android:text="Send command" />
             </LinearLayout>
 
@@ -81,6 +82,7 @@
                     android:id="@+id/btn_servo2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
                     android:text="Send command" />
             </LinearLayout>
 
@@ -95,7 +97,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="#fccece"
             android:orientation="vertical" >
 
             <TextView
@@ -123,14 +124,20 @@
                     android:id="@+id/btn_red"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
                     android:text="Send command" />
             </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/servo1_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="9" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#d8ffd4"
             android:orientation="vertical" >
 
             <TextView
@@ -158,14 +165,20 @@
                     android:id="@+id/btn_green"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
                     android:text="Send command" />
             </LinearLayout>
+
+            <SeekBar
+                android:id="@+id/servo1_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="9" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="#d4eaff"
             android:orientation="vertical" >
 
             <TextView
@@ -193,17 +206,16 @@
                     android:id="@+id/btn_blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="7dp"
                     android:text="Send command" />
             </LinearLayout>
-        </LinearLayout>
 
-        <Button
-            android:id="@+id/btn_connection"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="20dp"
-            android:text="Connect to SmartLamp" />
+            <SeekBar
+                android:id="@+id/servo1_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="9" />
+        </LinearLayout>
     </LinearLayout>
 
 </FrameLayout>
