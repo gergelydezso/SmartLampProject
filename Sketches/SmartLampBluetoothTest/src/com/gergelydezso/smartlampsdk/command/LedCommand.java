@@ -1,6 +1,6 @@
 package com.gergelydezso.smartlampsdk.command;
 
-import com.gergelydezso.smartlampsdk.RGBLed.LedPin;
+import com.gergelydezso.smartlampsdk.LedPin;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 
 public class LedCommand implements Command {

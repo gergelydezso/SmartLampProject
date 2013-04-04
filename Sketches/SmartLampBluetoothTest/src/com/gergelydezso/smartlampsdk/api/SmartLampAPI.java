@@ -1,8 +1,8 @@
 package com.gergelydezso.smartlampsdk.api;
 
+import com.gergelydezso.smartlampsdk.LedPin;
+import com.gergelydezso.smartlampsdk.ServoPin;
 import com.gergelydezso.smartlampsdk.SmartLamp;
-import com.gergelydezso.smartlampsdk.RGBLed.LedPin;
-import com.gergelydezso.smartlampsdk.ServoMotor.ServoPin;
 import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.command.CommandEngine;
@@ -14,32 +14,19 @@ public class SmartLampAPI {
 	private SmartLamp lamp = new SmartLamp();
 	private CommandEngine engine = new CommandEngine();
 
-	public void createAddServoCommand(int servoID, int value, CommandCallback callback) {
+	public void servoCommand(ServoPin servoPin, int value,
+			CommandCallback callback) {
 
-		Command servo = new ServoCommand(lamp, ServoPin.SERVO1, value, callback);
-
+		Command servo = new ServoCommand(lamp, servoPin, value, callback);
 		engine.executeCommand(servo);
 
 	}
 
-	// public void createAddLedCommand() {
-	//
-	// Command led = new LedCommand(lamp, LedPin.BLUE_PIN, 100,
-	// new CommandCallback() {
-	//
-	// @Override
-	// public void onSuccess() {
-	// System.out.println("onSuccess");
-	// }
-	//
-	// @Override
-	// public void onError() {
-	// System.out.println("onError");
-	// }
-	// });
-	//
-	// engine.executeCommand(led);
-	//
-	// }
+	public void ledCommand(LedPin ledPin, int value, CommandCallback callback) {
+
+		Command led = new LedCommand(lamp, ledPin, value, callback);
+		engine.executeCommand(led);
+
+	}
 
 }

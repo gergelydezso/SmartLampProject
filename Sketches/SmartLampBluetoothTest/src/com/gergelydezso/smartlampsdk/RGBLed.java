@@ -8,11 +8,6 @@ public class RGBLed {
 
 	private int valueAuxiliary;
 
-	public enum LedPin {
-		RED_PIN, GREEN_PIN, BLUE_PIN
-
-	}
-
 	/**
 	 * Set the LED value.
 	 * 

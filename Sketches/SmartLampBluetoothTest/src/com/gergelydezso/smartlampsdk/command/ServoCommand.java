@@ -1,6 +1,6 @@
 package com.gergelydezso.smartlampsdk.command;
 
-import com.gergelydezso.smartlampsdk.ServoMotor.ServoPin;
+import com.gergelydezso.smartlampsdk.ServoPin;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 
 public class ServoCommand implements Command {
@@ -10,7 +10,8 @@ public class ServoCommand implements Command {
 	private int degree;
 	private CommandCallback callback;
 
-	public ServoCommand(SmartLamp lamp, ServoPin id, int degree, CommandCallback callback) {
+	public ServoCommand(SmartLamp lamp, ServoPin id, int degree,
+			CommandCallback callback) {
 		this.theLamp = lamp;
 		this.id = id;
 		this.degree = degree;

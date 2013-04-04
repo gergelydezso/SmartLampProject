@@ -8,11 +8,6 @@ public class ServoMotor {
 
 	private int angleAuxiliary;
 
-	public enum ServoPin {
-		SERVO1, SERVO2, SERVO3, SERVO4, SERVO5
-
-	}
-
 	/**
 	 * Set servo motor position.
 	 * 
@@ -27,7 +22,7 @@ public class ServoMotor {
 		CommunicationBridge comm = new BluetoothConnection();
 		comm.sendData(id.name(), degree, callback);
 
-		// System.out.println("ServoID: " + id + " Degree: " + degree);
+		System.out.println("ServoID: " + id + " Degree: " + degree);
 
 	}
 

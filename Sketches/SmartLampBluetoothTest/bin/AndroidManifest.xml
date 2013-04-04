@@ -27,7 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.gergelydezso.smartlampsdk.TestActivity"
+            android:name="com.gergelydezso.smartlampsdk.test.TestActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" />
         <activity

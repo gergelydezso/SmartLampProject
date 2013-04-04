@@ -1,5 +1,8 @@
-package com.gergelydezso.smartlampsdk;
+package com.gergelydezso.smartlampsdk.test;
 
+import com.gergelydezso.smartlampsdk.LedPin;
+import com.gergelydezso.smartlampsdk.R;
+import com.gergelydezso.smartlampsdk.ServoPin;
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
@@ -73,14 +76,14 @@ public class TestActivity extends Activity implements OnClickListener {
 	@Override
 	public void onClick(View v) {
 
-		int servoID = 0;
+		ServoPin servoPin = null;
+		LedPin ledPin = null;
 		int value = 0;
-		int ledPin = 0;
 
 		switch (v.getId()) {
 
 		case R.id.btn_servo1:
-			servoID = 1;
+			servoPin = ServoPin.SERVO1;
 			if (!mEditTextServo1.getText().toString().equals("")) {
 				value = Integer.parseInt(mEditTextServo1.getText().toString());
 			}
@@ -88,7 +91,7 @@ public class TestActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.btn_servo2:
-			servoID = 2;
+			servoPin = ServoPin.SERVO2;
 			if (!mEditTextServo2.getText().toString().equals("")) {
 				value = Integer.parseInt(mEditTextServo2.getText().toString());
 			}
@@ -96,34 +99,33 @@ public class TestActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.btn_red:
-			ledPin = 1;
+			ledPin = LedPin.RED_PIN;
 			if (!mEditTextLedRed.getText().toString().equals("")) {
-				ledPin = Integer.parseInt(mEditTextLedRed.getText().toString());
+				value = Integer.parseInt(mEditTextLedRed.getText().toString());
 			}
 
 			break;
 
 		case R.id.btn_green:
-			ledPin = 2;
+			ledPin = LedPin.GREEN_PIN;
 			if (!mEditTextLedGreen.getText().toString().equals("")) {
-				ledPin = Integer.parseInt(mEditTextLedGreen.getText()
-						.toString());
+				value = Integer
+						.parseInt(mEditTextLedGreen.getText().toString());
 			}
 
 			break;
 
 		case R.id.btn_blue:
-			ledPin = 3;
+			ledPin = LedPin.BLUE_PIN;
 			if (!mEditTextLedBlue.getText().toString().equals("")) {
-				ledPin = Integer
-						.parseInt(mEditTextLedBlue.getText().toString());
+				value = Integer.parseInt(mEditTextLedBlue.getText().toString());
 			}
 
 			break;
 
 		}
 
-		mSmartLampAPI.createAddServoCommand(servoID, value,
+		mSmartLampAPI.servoCommand(servoPin, value,
 				new CommandCallback() {
 
 					@Override
