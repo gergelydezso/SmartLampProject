@@ -1,10 +1,12 @@
 package com.gergelydezso.smartlampsdk;
 
+import android.util.Log;
+
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.BluetoothConnection;
 import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
 
-public class RGBLed {
+public class LedRGB {
 
 	private int valueAuxiliary;
 
@@ -21,7 +23,7 @@ public class RGBLed {
 		CommunicationBridge comm = new BluetoothConnection();
 		comm.sendData(pin.name(), intensity, callback);
 
-		// System.out.println("LedPin: "+pin+" Value: " +intensity);
+		Log.v("LedRGB", "LedPin: " + pin + " Value: " + intensity);
 	}
 
 	/**

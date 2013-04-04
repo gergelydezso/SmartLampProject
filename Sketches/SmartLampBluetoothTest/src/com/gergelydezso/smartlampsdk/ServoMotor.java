@@ -1,5 +1,7 @@
 package com.gergelydezso.smartlampsdk;
 
+import android.util.Log;
+
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.BluetoothConnection;
 import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
@@ -22,7 +24,7 @@ public class ServoMotor {
 		CommunicationBridge comm = new BluetoothConnection();
 		comm.sendData(id.name(), degree, callback);
 
-		System.out.println("ServoID: " + id + " Degree: " + degree);
+		Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
 
 	}
 

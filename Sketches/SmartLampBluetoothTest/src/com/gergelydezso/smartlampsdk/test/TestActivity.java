@@ -17,8 +17,13 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.SeekBar.OnSeekBarChangeListener;
 
-public class TestActivity extends Activity implements OnClickListener {
+public class TestActivity extends Activity implements OnClickListener,
+		OnSeekBarChangeListener {
+
+	private static final String TAG = "TestActivity";
 
 	private BluetoothConnectionService mConnectionService;
 	private ConnectionHolder mConnectionHolder = new ConnectionHolder();
@@ -36,6 +41,12 @@ public class TestActivity extends Activity implements OnClickListener {
 	private EditText mEditTextLedRed;
 	private EditText mEditTextLedGreen;
 	private EditText mEditTextLedBlue;
+
+	private SeekBar mSeekBarServo1;
+	private SeekBar mSeekBarServo2;
+	private SeekBar mSeekBarLedRed;
+	private SeekBar mSeekBarLedGreen;
+	private SeekBar mSeekBarLedBlue;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -58,11 +69,23 @@ public class TestActivity extends Activity implements OnClickListener {
 		mEditTextLedGreen = (EditText) findViewById(R.id.edit_green);
 		mEditTextLedBlue = (EditText) findViewById(R.id.edit_blue);
 
+		mSeekBarServo1 = (SeekBar) findViewById(R.id.seekbar_servo1);
+		mSeekBarServo2 = (SeekBar) findViewById(R.id.seekbar_servo2);
+		mSeekBarLedRed = (SeekBar) findViewById(R.id.seekbar_ledred);
+		mSeekBarLedGreen = (SeekBar) findViewById(R.id.seekbar_ledgreen);
+		mSeekBarLedBlue = (SeekBar) findViewById(R.id.seekbar_ledblue);
+
 		mSendButtonServo1.setOnClickListener(this);
 		mSendButtonServo2.setOnClickListener(this);
 		mSendButtonLedRed.setOnClickListener(this);
 		mSendButtonLedGreen.setOnClickListener(this);
 		mSendButtonLedBlue.setOnClickListener(this);
+
+		mSeekBarServo1.setOnSeekBarChangeListener(this);
+		mSeekBarServo2.setOnSeekBarChangeListener(this);
+		mSeekBarLedRed.setOnSeekBarChangeListener(this);
+		mSeekBarLedGreen.setOnSeekBarChangeListener(this);
+		mSeekBarLedGreen.setOnSeekBarChangeListener(this);
 
 	}
 
@@ -70,76 +93,123 @@ public class TestActivity extends Activity implements OnClickListener {
 	protected void onResume() {
 		super.onResume();
 
-		Log.v("TestActivity", "++onResume++");
+		Log.v(TAG, "++onResume++");
 	}
 
 	@Override
 	public void onClick(View v) {
 
-		ServoPin servoPin = null;
-		LedPin ledPin = null;
 		int value = 0;
 
 		switch (v.getId()) {
 
 		case R.id.btn_servo1:
-			servoPin = ServoPin.SERVO1;
 			if (!mEditTextServo1.getText().toString().equals("")) {
 				value = Integer.parseInt(mEditTextServo1.getText().toString());
 			}
-
+			createServoCommand(ServoPin.SERVO1, value);
 			break;
 
 		case R.id.btn_servo2:
-			servoPin = ServoPin.SERVO2;
 			if (!mEditTextServo2.getText().toString().equals("")) {
 				value = Integer.parseInt(mEditTextServo2.getText().toString());
 			}
-
+			createServoCommand(ServoPin.SERVO2, value);
 			break;
 
 		case R.id.btn_red:
-			ledPin = LedPin.RED_PIN;
 			if (!mEditTextLedRed.getText().toString().equals("")) {
 				value = Integer.parseInt(mEditTextLedRed.getText().toString());
 			}
-
+			createLedCommand(LedPin.RED_PIN, value);
 			break;
 
 		case R.id.btn_green:
-			ledPin = LedPin.GREEN_PIN;
 			if (!mEditTextLedGreen.getText().toString().equals("")) {
 				value = Integer
 						.parseInt(mEditTextLedGreen.getText().toString());
 			}
-
+			createLedCommand(LedPin.GREEN_PIN, value);
 			break;
 
 		case R.id.btn_blue:
-			ledPin = LedPin.BLUE_PIN;
 			if (!mEditTextLedBlue.getText().toString().equals("")) {
 				value = Integer.parseInt(mEditTextLedBlue.getText().toString());
 			}
-
+			createLedCommand(LedPin.BLUE_PIN, value);
 			break;
 
 		}
 
-		mSmartLampAPI.servoCommand(servoPin, value,
-				new CommandCallback() {
+	}
 
-					@Override
-					public void onSuccess() {
-						System.out.println("onSuccess");
+	private void createServoCommand(ServoPin servoPin, int value) {
 
-					}
+		mSmartLampAPI.setServoPosition(servoPin, value, new CommandCallback() {
 
-					@Override
-					public void onError() {
-						System.out.println("onError");
+			@Override
+			public void onSuccess() {
+				Log.d(TAG, "onSuccess - servoCommand");
+			}
 
-					}
-				});
+			@Override
+			public void onError() {
+				Log.d(TAG, "onError - servoCommand");
+			}
+		});
+
+	}
+
+	private void createLedCommand(LedPin ledPin, int value) {
+
+		mSmartLampAPI.setLedValue(ledPin, value, new CommandCallback() {
+
+			@Override
+			public void onSuccess() {
+				Log.d(TAG, "onSuccess - ledCommand");
+			}
+
+			@Override
+			public void onError() {
+				Log.d(TAG, "onError - ledCommand");
+			}
+		});
+	}
+
+	@Override
+	public void onProgressChanged(SeekBar seekBar, int progress,
+			boolean fromUser) {
+
+		switch (seekBar.getId()) {
+		case R.id.seekbar_servo1:
+			createServoCommand(ServoPin.SERVO1, progress);
+
+			break;
+		case R.id.seekbar_servo2:
+			createServoCommand(ServoPin.SERVO2, progress);
+
+			break;
+		case R.id.seekbar_ledred:
+			createLedCommand(LedPin.RED_PIN, progress);
+			break;
+		case R.id.seekbar_ledgreen:
+			createLedCommand(LedPin.GREEN_PIN, progress);
+			break;
+		case R.id.seekbar_ledblue:
+			createLedCommand(LedPin.BLUE_PIN, progress);
+			break;
+
+		}
+
+	}
+
+	@Override
+	public void onStartTrackingTouch(SeekBar seekBar) {
+
+	}
+
+	@Override
+	public void onStopTrackingTouch(SeekBar seekBar) {
 
 	}
 
@@ -147,7 +217,7 @@ public class TestActivity extends Activity implements OnClickListener {
 	protected void onDestroy() {
 		super.onDestroy();
 		mConnectionService.stop();
-		Log.v("TestActivity", "++onDestroy++");
+		Log.v(TAG, "++onDestroy++");
 
 	}
 

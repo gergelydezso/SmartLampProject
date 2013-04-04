@@ -18,7 +18,7 @@ public class CommandConsumer implements Runnable {
 		while (true) {
 			try {
 
-				Thread.sleep(1000);
+				Thread.sleep(500);
 				Command cmd = sharedQueue.take();
 				cmd.execute();
 

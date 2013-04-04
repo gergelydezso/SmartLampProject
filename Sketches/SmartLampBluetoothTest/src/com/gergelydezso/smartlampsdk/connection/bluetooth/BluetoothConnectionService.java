@@ -228,8 +228,6 @@ public class BluetoothConnectionService {
 	public void write(byte[] out) {
 		// Create temporary object
 
-		Log.v(TAG, "Command sended");
-
 		ConnectedThread r;
 		// Synchronize a copy of the ConnectedThread
 		synchronized (this) {
@@ -408,8 +406,6 @@ public class BluetoothConnectionService {
 		 */
 		public void write(byte[] buffer) {
 			try {
-
-				Log.v(TAG, "Command run");
 
 				mmOutStream.write(buffer);
 

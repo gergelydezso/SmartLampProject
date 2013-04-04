@@ -46,7 +46,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/servo1_bar"
+                android:id="@+id/seekbar_servo1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="9" />
@@ -87,7 +87,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/servo1_bar2"
+                android:id="@+id/seekbar_servo2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="9" />
@@ -129,7 +129,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/servo1_bar"
+                android:id="@+id/seekbar_ledred"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="9" />
@@ -170,7 +170,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/servo1_bar"
+                android:id="@+id/seekbar_ledgreen"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="9" />
@@ -211,7 +211,7 @@
             </LinearLayout>
 
             <SeekBar
-                android:id="@+id/servo1_bar"
+                android:id="@+id/seekbar_ledblue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="9" />

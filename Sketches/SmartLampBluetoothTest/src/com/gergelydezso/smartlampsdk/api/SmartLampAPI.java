@@ -14,7 +14,7 @@ public class SmartLampAPI {
 	private SmartLamp lamp = new SmartLamp();
 	private CommandEngine engine = new CommandEngine();
 
-	public void servoCommand(ServoPin servoPin, int value,
+	public void setServoPosition(ServoPin servoPin, int value,
 			CommandCallback callback) {
 
 		Command servo = new ServoCommand(lamp, servoPin, value, callback);
@@ -22,7 +22,7 @@ public class SmartLampAPI {
 
 	}
 
-	public void ledCommand(LedPin ledPin, int value, CommandCallback callback) {
+	public void setLedValue(LedPin ledPin, int value, CommandCallback callback) {
 
 		Command led = new LedCommand(lamp, ledPin, value, callback);
 		engine.executeCommand(led);

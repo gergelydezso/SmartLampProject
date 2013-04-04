@@ -40,7 +40,7 @@ import android.widget.Toast;
 public class BluetoothConnectionActivity extends Activity {
 
 	// Debugging
-	private static final String TAG = "BluetoothChat";
+	private static final String TAG = "BluetoothConnectionActivity";
 	private static final boolean D = true;
 
 	// Message types sent from the BluetoothChatService Handler

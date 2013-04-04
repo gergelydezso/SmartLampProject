@@ -3,6 +3,8 @@ package com.gergelydezso.smartlampsdk.command;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import android.util.Log;
+
 public class CommandEngine {
 
 	private BlockingQueue<Command> sharedQueue;
@@ -16,7 +18,7 @@ public class CommandEngine {
 	public void executeCommand(Command cmd) {
 
 		try {
-			System.out.println("Command added");
+			Log.v("CommandEngine", "Command added");
 			sharedQueue.put(cmd);
 
 		} catch (Exception e) {
