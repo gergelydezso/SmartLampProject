@@ -14,6 +14,15 @@ public class SmartLampAPI {
 	private SmartLamp lamp = new SmartLamp();
 	private CommandEngine engine = new CommandEngine();
 
+	/**
+	 * Set servo motor position.
+	 * 
+	 * @param servoPin
+	 *            - servo motor identifier.
+	 * @param value
+	 *            - angle of the servo motor.
+	 * 
+	 */
 	public void setServoPosition(ServoPin servoPin, int value,
 			CommandCallback callback) {
 
@@ -22,6 +31,14 @@ public class SmartLampAPI {
 
 	}
 
+	/**
+	 * Set the LED value.
+	 * 
+	 * @param ledPin
+	 *            - LED pin identifier.
+	 * @param value
+	 *            - led pin intensity.
+	 */
 	public void setLedValue(LedPin ledPin, int value, CommandCallback callback) {
 
 		Command led = new LedCommand(lamp, ledPin, value, callback);
