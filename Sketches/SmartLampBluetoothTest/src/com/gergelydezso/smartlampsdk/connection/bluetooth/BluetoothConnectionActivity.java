@@ -121,7 +121,7 @@ public class BluetoothConnectionActivity extends Activity {
 	private void setupChat() {
 		Log.d(TAG, "setupChat()");
 
-		mChatService = new BluetoothConnectionService();
+		mChatService = new BluetoothConnectionService(mHandler);
 
 	}
 
@@ -153,6 +153,8 @@ public class BluetoothConnectionActivity extends Activity {
 				Toast.makeText(getApplicationContext(),
 						"Connected to " + mConnectedDeviceName,
 						Toast.LENGTH_SHORT).show();
+				mControlButton.setEnabled(true);
+
 				break;
 			case MESSAGE_TOAST:
 				Toast.makeText(getApplicationContext(),
@@ -170,7 +172,6 @@ public class BluetoothConnectionActivity extends Activity {
 		case REQUEST_CONNECT_DEVICE_SECURE:
 
 			if (resultCode == Activity.RESULT_OK) {
-				mControlButton.setEnabled(true);
 				connectDevice(data);
 			}
 			break;

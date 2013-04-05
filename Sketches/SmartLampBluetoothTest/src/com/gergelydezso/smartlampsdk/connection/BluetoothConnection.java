@@ -1,5 +1,7 @@
 package com.gergelydezso.smartlampsdk.connection;
 
+import android.os.Message;
+
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectionHolder;

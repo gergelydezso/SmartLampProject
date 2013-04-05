@@ -9,6 +9,8 @@ import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionSer
 import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectionHolder;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 
 import android.app.Activity;
 import android.util.Log;
@@ -18,10 +20,22 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
+import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
 public class TestActivity extends Activity implements OnClickListener,
 		OnSeekBarChangeListener {
+
+	public static final String DEVICE_NAME = "device_name";
+	public static final String TOAST = "toast";
+	private static final boolean D = true;
+	private String mConnectedDeviceName = null;
+
+	public static final int MESSAGE_STATE_CHANGE = 1;
+	public static final int MESSAGE_READ = 2;
+	public static final int MESSAGE_WRITE = 3;
+	public static final int MESSAGE_DEVICE_NAME = 4;
+	public static final int MESSAGE_TOAST = 5;
 
 	private static final String TAG = "TestActivity";
 
