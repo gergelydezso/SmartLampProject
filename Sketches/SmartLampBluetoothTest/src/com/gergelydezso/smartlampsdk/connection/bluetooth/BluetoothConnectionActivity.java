@@ -14,7 +14,6 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class BluetoothConnectionActivity extends Activity {
@@ -34,7 +33,6 @@ public class BluetoothConnectionActivity extends Activity {
 	private static final int REQUEST_CONNECT_DEVICE_SECURE = 1;
 	private static final int REQUEST_ENABLE_BT = 3;
 
-	private TextView mTitle;
 	private Button mControlButton;
 	private Button mConnectButton;
 
@@ -99,7 +97,7 @@ public class BluetoothConnectionActivity extends Activity {
 			startActivityForResult(enableIntent, REQUEST_ENABLE_BT);
 		} else {
 			if (mChatService == null)
-				setupChat();
+				setupConnection();
 		}
 	}
 
@@ -118,8 +116,8 @@ public class BluetoothConnectionActivity extends Activity {
 		}
 	}
 
-	private void setupChat() {
-		Log.d(TAG, "setupChat()");
+	private void setupConnection() {
+		Log.d(TAG, "setupConnection()");
 
 		mChatService = new BluetoothConnectionService(mHandler);
 
@@ -179,7 +177,7 @@ public class BluetoothConnectionActivity extends Activity {
 		case REQUEST_ENABLE_BT:
 
 			if (resultCode == Activity.RESULT_OK) {
-				setupChat();
+				setupConnection();
 			} else {
 
 				Log.d(TAG, "BT not enabled");

@@ -21,7 +21,8 @@ public class SmartLampAPI {
 	 *            - servo motor identifier.
 	 * @param value
 	 *            - angle of the servo motor.
-	 * 
+	 * @param callback
+	 *            - onSucess() - onError().
 	 */
 	public void setServoPosition(ServoPin servoPin, int value,
 			CommandCallback callback) {
@@ -38,6 +39,8 @@ public class SmartLampAPI {
 	 *            - LED pin identifier.
 	 * @param value
 	 *            - led pin intensity.
+	 * @param callback
+	 *            - onSucess() - onError().
 	 */
 	public void setLedValue(LedPin ledPin, int value, CommandCallback callback) {
 

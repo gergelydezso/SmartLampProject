@@ -10,14 +10,6 @@ public class LedRGB {
 
 	private int valueAuxiliary;
 
-	/**
-	 * Set the LED value.
-	 * 
-	 * @param pin
-	 *            - LED pin identifier.
-	 * @param intensity
-	 *            - led pin intensity.
-	 */
 	public void setLedValue(LedPin pin, int intensity, CommandCallback callback) {
 
 		CommunicationBridge comm = new BluetoothConnection();
@@ -26,12 +18,6 @@ public class LedRGB {
 		Log.v("LedRGB", "LedPin: " + pin + " Value: " + intensity);
 	}
 
-	/**
-	 * Get the LED value.
-	 * 
-	 * @param pin
-	 *            - LED pin identifier.
-	 */
 	public int getLedValue(LedPin pin) {
 		return valueAuxiliary;
 	}
