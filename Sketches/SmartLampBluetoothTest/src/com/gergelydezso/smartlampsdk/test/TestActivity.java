@@ -85,7 +85,7 @@ public class TestActivity extends Activity implements OnClickListener,
 		mSeekBarServo2.setOnSeekBarChangeListener(this);
 		mSeekBarLedRed.setOnSeekBarChangeListener(this);
 		mSeekBarLedGreen.setOnSeekBarChangeListener(this);
-		mSeekBarLedGreen.setOnSeekBarChangeListener(this);
+		mSeekBarLedBlue.setOnSeekBarChangeListener(this);
 
 	}
 

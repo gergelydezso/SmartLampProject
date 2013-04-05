@@ -7,11 +7,10 @@ import android.util.Log;
 
 public class CommandEngine {
 
-	private BlockingQueue<Command> sharedQueue;
+	private BlockingQueue<Command> sharedQueue = new LinkedBlockingQueue<Command>();
+	Thread consThread = new Thread(new CommandConsumer(sharedQueue));
 
 	public CommandEngine() {
-		sharedQueue = new LinkedBlockingQueue<Command>();
-		Thread consThread = new Thread(new CommandConsumer(sharedQueue));
 		consThread.start();
 	}
 
