@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.UUID;
 
+import com.gergelydezso.smartlampsdk.connection.ValueChackCallback;
+
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
@@ -14,6 +16,8 @@ import android.os.Message;
 import android.util.Log;
 
 public class BluetoothConnectionService {
+
+	private ValueChackCallback mValueChack;
 
 	// BluetoothChat - Activity onDestroy() called
 	private boolean mDestoryed;
@@ -151,7 +155,9 @@ public class BluetoothConnectionService {
 		setState(STATE_NONE);
 	}
 
-	public void write(byte[] out) {
+	public void write(byte[] out, ValueChackCallback valueChack) {
+
+		this.mValueChack = valueChack;
 
 		ConnectedThread r;
 		synchronized (this) {
@@ -275,6 +281,12 @@ public class BluetoothConnectionService {
 			while (true) {
 				try {
 					bytes = mmInStream.read(buffer);
+
+					String readedValue = new String(buffer, 0, 1);
+
+					// Log.d(TAG, readedValue);
+
+					mValueChack.valueChack(readedValue);
 
 					// Send the obtained bytes to the UI Activity
 					mHandler.obtainMessage(
