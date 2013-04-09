@@ -1,7 +1,8 @@
-package com.gergelydezso.smartlampsdk.connection.bluetooth;
+package com.gergelydezso.smartlampsdk.test;
 
 import com.gergelydezso.smartlampsdk.R;
-import com.gergelydezso.smartlampsdk.test.TestActivity;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectionHolder;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;

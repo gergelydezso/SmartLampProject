@@ -1,4 +1,4 @@
-package com.gergelydezso.smartlampsdk.connection.bluetooth;
+package com.gergelydezso.smartlampsdk.test;
 
 import java.util.Set;
 
