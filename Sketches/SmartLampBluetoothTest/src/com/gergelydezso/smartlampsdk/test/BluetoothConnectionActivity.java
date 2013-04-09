@@ -2,7 +2,7 @@ package com.gergelydezso.smartlampsdk.test;
 
 import com.gergelydezso.smartlampsdk.R;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectionHolder;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionHolder;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -67,7 +67,7 @@ public class BluetoothConnectionActivity extends Activity {
 		mControlButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				ConnectionHolder con = new ConnectionHolder();
+				BluetoothConnectionHolder con = new BluetoothConnectionHolder();
 				con.setConnection(mChatService);
 				Intent intent = new Intent(BluetoothConnectionActivity.this,
 						TestActivity.class);

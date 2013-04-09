@@ -6,7 +6,7 @@ import com.gergelydezso.smartlampsdk.ServoPin;
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectionHolder;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionHolder;
 
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,7 +40,7 @@ public class TestActivity extends Activity implements OnClickListener,
 	private static final String TAG = "TestActivity";
 
 	private BluetoothConnectionService mConnectionService;
-	private ConnectionHolder mConnectionHolder = new ConnectionHolder();
+	private BluetoothConnectionHolder mConnectionHolder = new BluetoothConnectionHolder();
 
 	private SmartLampAPI mSmartLampAPI = new SmartLampAPI();
 

@@ -4,14 +4,14 @@ import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectionHolder;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionHolder;
 
 public class BluetoothConnection implements CommunicationBridge {
 
 	private int mValue;
 	private CommandCallback mCallback;
 	private BluetoothConnectionService con;
-	private ConnectionHolder conHolder = new ConnectionHolder();
+	private BluetoothConnectionHolder conHolder = new BluetoothConnectionHolder();
 
 	public BluetoothConnection() {
 
