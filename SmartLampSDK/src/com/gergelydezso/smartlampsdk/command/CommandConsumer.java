@@ -16,16 +16,18 @@ public class CommandConsumer implements Runnable {
 		System.out.println("CommandConsumer runing");
 
 		while (true) {
+
 			try {
 
-				Thread.sleep(1000);
 				Command cmd = sharedQueue.take();
 				cmd.execute();
+				Thread.sleep(500);
 
 			} catch (Exception e) {
 				System.out.println("CommandConsumer error");
 
 			}
+
 		}
 	}
 

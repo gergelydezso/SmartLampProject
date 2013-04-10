@@ -6,22 +6,20 @@ import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.BluetoothConnection;
 import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
 
-public class ServoMotor {
+public class LedRGB {
 
-	private int angleAuxiliary;
+	private int valueAuxiliary;
 
-	public void setServoPosition(ServoPin id, int degree,
-			CommandCallback callback) {
+	public void setLedValue(LedPin pin, int intensity, CommandCallback callback) {
 
 		CommunicationBridge comm = new BluetoothConnection();
-		comm.sendData(id.name(), degree, callback);
+		comm.sendData(pin.name(), intensity, callback);
 
-		Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
-
+		Log.v("LedRGB", "LedPin: " + pin + " Value: " + intensity);
 	}
 
-	public int getServoPosition(ServoPin id) {
-		return angleAuxiliary;
+	public int getLedValue(LedPin pin) {
+		return valueAuxiliary;
 	}
 
 }

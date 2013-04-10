@@ -5,7 +5,7 @@ import com.gergelydezso.smartlampsdk.command.CommandCallback;
 public class WireConnection implements CommunicationBridge {
 
 	@Override
-	public void sendData(int value, CommandCallback callback) {
+	public void sendData(String id, int value, CommandCallback callback) {
 
 	}
 
