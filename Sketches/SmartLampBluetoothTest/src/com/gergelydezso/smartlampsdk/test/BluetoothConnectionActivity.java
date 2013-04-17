@@ -51,7 +51,7 @@ public class BluetoothConnectionActivity extends Activity {
 
 		mConnectButton = (Button) findViewById(R.id.btn_smartlamp);
 		mControlButton = (Button) findViewById(R.id.btn_control);
-		mControlButton.setEnabled(false);
+		// mControlButton.setEnabled(false);
 
 		mConnectButton.setOnClickListener(new OnClickListener() {
 			@Override

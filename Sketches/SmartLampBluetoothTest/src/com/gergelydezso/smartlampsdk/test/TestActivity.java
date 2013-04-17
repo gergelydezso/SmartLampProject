@@ -40,7 +40,8 @@ public class TestActivity extends Activity implements OnClickListener,
 	private static final String TAG = "TestActivity";
 
 	private BluetoothConnectionService mConnectionService;
-	private BluetoothConnectionHolder mConnectionHolder = new BluetoothConnectionHolder();
+	// private BluetoothConnectionHolder mConnectionHolder = new
+	// BluetoothConnectionHolder();
 
 	private SmartLampAPI mSmartLampAPI = new SmartLampAPI();
 
@@ -66,7 +67,7 @@ public class TestActivity extends Activity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		mConnectionService = mConnectionHolder.getConnection();
+		mConnectionService = BluetoothConnectionHolder.con;
 
 		Log.v("TestActivity", "++onCreate++");
 		setContentView(R.layout.test_activity);
