@@ -21,6 +21,7 @@ import com.gergelydezso.smartlampsdk.sample.R;
 public class TestActivity extends Activity implements OnClickListener,
 		OnSeekBarChangeListener {
 	
+	
 	public static final String DEVICE_NAME = "device_name";
 	public static final String TOAST = "toast";
 	private static final boolean D = true;
