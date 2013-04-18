@@ -20,6 +20,7 @@ import com.gergelydezso.smartlampsdk.sample.ui.TestActivity;
 
 public class BluetoothConnectionActivity extends Activity {
 
+	
 	private static final String TAG = "BluetoothConnectionActivity";
 	private static final boolean D = true;
 
