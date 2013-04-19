@@ -21,7 +21,7 @@ public class LedCommand implements Command {
 
 	@Override
 	public void execute() {
-
+// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - this is not java-like coding. Please use methods unless you are restricted by some design decision.
 		theLamp.led.setLedValue(pin, intensity, callback);
 	}
 
