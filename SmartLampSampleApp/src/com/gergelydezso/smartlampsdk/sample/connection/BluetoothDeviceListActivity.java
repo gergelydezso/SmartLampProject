@@ -1,8 +1,6 @@
-package com.gergelydezso.smartlampsdk.test;
+package com.gergelydezso.smartlampsdk.sample.connection;
 
 import java.util.Set;
-
-import com.gergelydezso.smartlampsdk.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -14,14 +12,16 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.view.View.OnClickListener;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
+
+import com.gergelydezso.smartlampsdk.sample.R;
 
 public class BluetoothDeviceListActivity extends Activity {
 

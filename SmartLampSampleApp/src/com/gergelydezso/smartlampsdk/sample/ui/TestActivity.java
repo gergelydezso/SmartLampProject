@@ -1,31 +1,27 @@
-package com.gergelydezso.smartlampsdk.test;
-
-import com.gergelydezso.smartlampsdk.LedPin;
-import com.gergelydezso.smartlampsdk.R;
-import com.gergelydezso.smartlampsdk.ServoPin;
-import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
-import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionHolder;
-
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+package com.gergelydezso.smartlampsdk.sample.ui;
 
 import android.app.Activity;
+import android.os.Bundle;
 import android.util.Log;
-
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.SeekBar;
-import android.widget.Toast;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+
+import com.gergelydezso.smartlampsdk.LedPin;
+import com.gergelydezso.smartlampsdk.ServoPin;
+import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionHolder;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
+import com.gergelydezso.smartlampsdk.sample.R;
 
 public class TestActivity extends Activity implements OnClickListener,
 		OnSeekBarChangeListener {
-
+	
+	
 	public static final String DEVICE_NAME = "device_name";
 	public static final String TOAST = "toast";
 	private static final boolean D = true;
@@ -40,7 +36,8 @@ public class TestActivity extends Activity implements OnClickListener,
 	private static final String TAG = "TestActivity";
 
 	private BluetoothConnectionService mConnectionService;
-	private BluetoothConnectionHolder mConnectionHolder = new BluetoothConnectionHolder();
+	// private BluetoothConnectionHolder mConnectionHolder = new
+	// BluetoothConnectionHolder();
 
 	private SmartLampAPI mSmartLampAPI = new SmartLampAPI();
 
@@ -66,7 +63,7 @@ public class TestActivity extends Activity implements OnClickListener,
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		mConnectionService = mConnectionHolder.getConnection();
+		mConnectionService = BluetoothConnectionHolder.con;
 
 		Log.v("TestActivity", "++onCreate++");
 		setContentView(R.layout.test_activity);

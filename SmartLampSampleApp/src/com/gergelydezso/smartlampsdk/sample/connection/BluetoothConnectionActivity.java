@@ -1,8 +1,4 @@
-package com.gergelydezso.smartlampsdk.test;
-
-import com.gergelydezso.smartlampsdk.R;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionHolder;
+package com.gergelydezso.smartlampsdk.sample.connection;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
@@ -17,8 +13,14 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionHolder;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionService;
+import com.gergelydezso.smartlampsdk.sample.R;
+import com.gergelydezso.smartlampsdk.sample.ui.TestActivity;
+
 public class BluetoothConnectionActivity extends Activity {
 
+	
 	private static final String TAG = "BluetoothConnectionActivity";
 	private static final boolean D = true;
 
@@ -51,7 +53,7 @@ public class BluetoothConnectionActivity extends Activity {
 
 		mConnectButton = (Button) findViewById(R.id.btn_smartlamp);
 		mControlButton = (Button) findViewById(R.id.btn_control);
-		mControlButton.setEnabled(false);
+		// mControlButton.setEnabled(false);
 
 		mConnectButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -120,7 +122,7 @@ public class BluetoothConnectionActivity extends Activity {
 	private void setupConnection() {
 		Log.d(TAG, "setupConnection()");
 
-		mChatService = new BluetoothConnectionService(mHandler);
+		mChatService = new BluetoothConnectionService();
 
 	}
 
