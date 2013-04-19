@@ -20,6 +20,7 @@ public class ServoMotor {
 
 	}
 
+	// TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - this value is never set. where should it be used?
 	public int getServoPosition(ServoPin id) {
 		return angleAuxiliary;
 	}

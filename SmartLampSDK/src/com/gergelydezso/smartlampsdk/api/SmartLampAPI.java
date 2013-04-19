@@ -19,15 +19,12 @@ public class SmartLampAPI {
   /**
    * Set servo motor position.
    * 
-   * @param servoPin
-   *            - servo motor identifier.
-   * @param value
-   *            - angle of the servo motor.
+   * @param servoPin - servo motor identifier.
+   * @param value - angle of the servo motor.
    * @param callback
    * 
    */
-  public void setServoPosition(ServoPin servoPin, int value,
-      CommandCallback callback) {
+  public void setServoPosition(ServoPin servoPin, int value, CommandCallback callback) {
 
     Command servo = new ServoCommand(lamp, servoPin, value, callback);
     engine.executeCommand(servo);
@@ -37,10 +34,8 @@ public class SmartLampAPI {
   /**
    * Set the LED value.
    * 
-   * @param ledPin
-   *            - LED pin identifier.
-   * @param value
-   *            - led pin intensity.
+   * @param ledPin - LED pin identifier.
+   * @param value - led pin intensity.
    * @param callback
    */
   public void setLedValue(LedPin ledPin, int value, CommandCallback callback) {
@@ -49,5 +44,11 @@ public class SmartLampAPI {
     engine.executeCommand(led);
 
   }
+
+  // TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - why aren't there any methods to check the current state of the
+  // lamp? i.e is the led turned on? what color does it have? what angles are the servomotors in?
+  
+  
+  // TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - Don't forget about the external configuration object which sets up the SDK to work with a Bluetooth connection of a WiFi connection or a WiFiDirect connection..etc
 
 }

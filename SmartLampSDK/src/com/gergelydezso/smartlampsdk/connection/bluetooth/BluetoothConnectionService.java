@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
 
+// TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - Might be appropriate to implement a Finite State Machine instead of using the if/else constructs to check the state. Ask me for an FSM example.
 public class BluetoothConnectionService {
 
 	private ValueChackCallback mValueChack;
