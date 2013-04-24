@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="SmartLamp Project" default="buildall">
+
+<!-- locations of the individual projects -->
+	<property name="smartlamp-sdk-folder" value="SmartLampSDK"/>
+	<property name="smartlamp-sampleapp-folder" value="SmartLampSampleApp"/>
+	<property name="smartlamp-library-jar-name" value="classes.jar" />
+
+	<target name="buildsdk" description="Builds the SmartLamp SDK">
+		<ant antfile="${smartlamp-sdk-folder}/build.xml" inheritAll="false"/>
+	</target>
+	
+	<target name="buildsampleapp" description="Builds the sample app">
+		<ant antfile="${smartlamp-sampleapp-folder}/build.xml" inheritAll="false"/>
+	</target>
+	
+	<target name="refreshjar" description="Copies the library jar to the lib folder of all the depending projects.">
+		<delete file="./${smartlamp-sampleapp-folder}/libs/${smartlamp-library-jar-name}"/>
+		<copy file="./${smartlamp-sdk-folder}/bin/${smartlamp-library-jar-name}" todir="./${smartlamp-sampleapp-folder}/libs"/>
+	</target>
+	
+	<target name="buildall" depends="buildsdk,refreshjar,buildsampleapp" description="Builds the whole project, including the SDK, sample app" >
+		<echo message="Built SDK and all dependencies."/>
+	</target>
+	
+	<target name="release" depends="buildall" />
+</project>
