@@ -3,26 +3,25 @@ package com.gergelydezso.smartlampsdk;
 import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.BluetoothConnection;
 import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
 
 public class ServoMotor {
 
-	private int angleAuxiliary;
+  private CommunicationBridge mPipe;
+  private String mServoId = "servo";
 
-	public void setServoPosition(ServoPin id, int degree,
-			CommandCallback callback) {
+  public ServoMotor(CommunicationBridge pipe) {
+    mPipe = pipe;
+  }
 
-		CommunicationBridge comm = new BluetoothConnection();
-		comm.sendData(id.name(), degree, callback);
+  public void setServoPosition(ServoMotorEntities id, int degree, CommandCallback callback) {
+    mPipe.sendSetCommand(id.name(), degree, callback);
+    Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
+  }
 
-		Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
+  public void getServoState(CommandCallback callback) {
+    mPipe.sendRequestCommand(mServoId, callback);
 
-	}
-
-	// TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - this value is never set. where should it be used?
-	public int getServoPosition(ServoPin id) {
-		return angleAuxiliary;
-	}
+  }
 
 }

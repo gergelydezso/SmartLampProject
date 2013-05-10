@@ -7,24 +7,36 @@ import android.util.Log;
 
 public class CommandEngine {
 
-	private BlockingQueue<Command> sharedQueue = new LinkedBlockingQueue<Command>();
-	// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - why does the thread have default visibility? Also the name is very ambiguous. Try naming it with something that describes its role.
-	Thread consThread = new Thread(new CommandConsumer(sharedQueue));
+  private static final String TAG = "CommanEngine";
+  private BlockingQueue<Command> sharedQueue = new LinkedBlockingQueue<Command>();
 
-	public CommandEngine() {
-		consThread.start();
-	}
+  public CommandEngine() {
 
-	public void executeCommand(Command cmd) {
+    initConsumerThread();
+  }
 
-		try {
-			Log.v("CommandEngine", "Command added");
-			sharedQueue.put(cmd);
+  public void initConsumerThread() {
 
-		} catch (Exception e) {
-		  // TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - if some exception occurs here, you will not be able to identify it, unless you do debugging. Don't let exceptions slip!
-		}
+    Thread mConsumerThread = new Thread(new CommandConsumer(sharedQueue, new ConsumerCallback() {
 
-	}
+      @Override
+      public void onConsumerThreadError() {
+        CommandEngine.this.initConsumerThread();
+      }
+    }));
+    mConsumerThread.start();
+  }
+
+  public void executeCommand(Command cmd) {
+
+    try {
+      Log.v(TAG, "Command added");
+      sharedQueue.put(cmd);
+    }
+    catch (Exception e) {
+      Log.e(TAG, e.getMessage());
+    }
+
+  }
 
 }

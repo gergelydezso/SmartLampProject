@@ -1,7 +1,12 @@
 package com.gergelydezso.smartlampsdk.command;
 
-// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - javadoc!
+/**
+ * Interface for specific commands.
+ */
 public interface Command {
 
-	public void execute();
+  /**
+   * Execute the command.
+   */
+  public void execute();
 }

@@ -3,24 +3,26 @@ package com.gergelydezso.smartlampsdk;
 import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.BluetoothConnection;
 import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
 
-//TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - same as in SmartLampAPI. This class is part of the public API. It should have javadoc.
 public class LedRGB {
 
-	private int valueAuxiliary;
+  private CommunicationBridge mPipe;
+  private String mLedID = "led";
 
-	public void setLedValue(LedPin pin, int intensity, CommandCallback callback) {
+  public LedRGB(CommunicationBridge pipe) {
+    mPipe = pipe;
+  }
 
-		CommunicationBridge comm = new BluetoothConnection();
-		comm.sendData(pin.name(), intensity, callback);
+  public void setLedValue(LedPinTypes pin, int intensity, CommandCallback callback) {
 
-		Log.v("LedRGB", "LedPin: " + pin + " Value: " + intensity);
-	}
+    mPipe.sendSetCommand(pin.name(), intensity, callback);
+    Log.v("LedRGB", "LedPin: " + pin + " Value: " + intensity);
+  }
 
-	public int getLedValue(LedPin pin) {
-		return valueAuxiliary;
-	}
+  public void getLedState(CommandCallback callback) {
+    // Integer.toString(9) - jut a test
+    mPipe.sendRequestCommand(Integer.toString(9), callback);
+  }
 
 }

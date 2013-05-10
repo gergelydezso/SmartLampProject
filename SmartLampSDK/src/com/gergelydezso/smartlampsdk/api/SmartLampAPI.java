@@ -1,54 +1,83 @@
 package com.gergelydezso.smartlampsdk.api;
 
-import com.gergelydezso.smartlampsdk.LedPin;
-import com.gergelydezso.smartlampsdk.ServoPin;
+import com.gergelydezso.smartlampsdk.LedPinTypes;
+import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.command.CommandEngine;
-import com.gergelydezso.smartlampsdk.command.LedCommand;
-import com.gergelydezso.smartlampsdk.command.ServoCommand;
-// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - please use code formatting: ctrl+shift+f; also use iQuest coding standard 
+import com.gergelydezso.smartlampsdk.command.LedSetCommand;
+import com.gergelydezso.smartlampsdk.command.LedStateCommand;
+import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
+import com.gergelydezso.smartlampsdk.command.ServoStateCommand;
 
-// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - javadoc? responsablity/role of the class should be declared here in detail. This is the public API.
+/**
+ * This is the public API
+ * <p>
+ * <ul>
+ * <li>Set SmartLamp - LedRGB color with {@link SmartLampAPI#setLedValue(LedPinTypes, int, CommandCallback)}. Set
+ * <li>Set SmartLamp - ServoMotor position with
+ * {@link SmartLampAPI#setServoPosition(ServoMotorEntities, int, CommandCallback)}.
+ * <li>Get SmartLamp - LedRGB state with {@link SmartLampAPI#getLedState(CommandCallback)}.
+ * <li>Get SmartLamp - ServoMotor state with {@link SmartLampAPI#getServoState(CommandCallback)}.
+ */
+
 public class SmartLampAPI {
 
-  private SmartLamp lamp = new SmartLamp();
-  private CommandEngine engine = new CommandEngine();
+  private SmartLamp mLamp = new SmartLamp();
+  private CommandEngine mEngine = new CommandEngine();
+  private String mRecievedValue;
 
   /**
    * Set servo motor position.
    * 
-   * @param servoPin - servo motor identifier.
-   * @param value - angle of the servo motor.
-   * @param callback
+   * @param servoPin - ServoMotor identifier.
+   * @param value - angle of the ServoMotor.
+   * @param callback - onSuccess()/onError()
    * 
    */
-  public void setServoPosition(ServoPin servoPin, int value, CommandCallback callback) {
+  public void setServoPosition(ServoMotorEntities servoPin, int value, CommandCallback callback) {
 
-    Command servo = new ServoCommand(lamp, servoPin, value, callback);
-    engine.executeCommand(servo);
+    Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
+    mEngine.executeCommand(servoSet);
 
   }
 
   /**
    * Set the LED value.
    * 
-   * @param ledPin - LED pin identifier.
-   * @param value - led pin intensity.
-   * @param callback
+   * @param ledPin - LedRGB pin identifier.
+   * @param value - LedRGB pin intensity.
+   * @param callback - onSuccess()/onError()
    */
-  public void setLedValue(LedPin ledPin, int value, CommandCallback callback) {
+  public void setLedValue(LedPinTypes ledPin, int value, CommandCallback callback) {
 
-    Command led = new LedCommand(lamp, ledPin, value, callback);
-    engine.executeCommand(led);
+    Command ledSet = new LedSetCommand(mLamp, ledPin, value, callback);
+    mEngine.executeCommand(ledSet);
 
   }
 
-  // TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - why aren't there any methods to check the current state of the
-  // lamp? i.e is the led turned on? what color does it have? what angles are the servomotors in?
-  
-  
-  // TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - Don't forget about the external configuration object which sets up the SDK to work with a Bluetooth connection of a WiFi connection or a WiFiDirect connection..etc
+  /**
+   * Get LedRGB state.
+   * 
+   * @param callback - onResult()
+   */
+  public void getLedState(CommandCallback callback) {
 
+    Command ledState = new LedStateCommand(mLamp, callback);
+
+    mEngine.executeCommand(ledState);
+  }
+
+  /**
+   * Get ServoMotor state.
+   * 
+   * @param callback - onResult()
+   */
+  public void getServoState(CommandCallback callback) {
+
+    Command servoState = new ServoStateCommand(mLamp, callback);
+    mEngine.executeCommand(servoState);
+
+  }
 }

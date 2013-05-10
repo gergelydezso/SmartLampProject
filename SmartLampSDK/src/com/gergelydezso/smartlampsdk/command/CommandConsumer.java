@@ -2,34 +2,38 @@ package com.gergelydezso.smartlampsdk.command;
 
 import java.util.concurrent.BlockingQueue;
 
+import android.util.Log;
+
 public class CommandConsumer implements Runnable {
 
-	private final BlockingQueue<Command> sharedQueue;
+  private static final String TAG = "CommanConsumer";
+  private final BlockingQueue<Command> mSharedQueue;
+  private ConsumerCallback mCallback;
 
-	public CommandConsumer(BlockingQueue<Command> sharedQueue) {
-		this.sharedQueue = sharedQueue;
-	}
+  public CommandConsumer(BlockingQueue<Command> sharedQueue, ConsumerCallback callback) {
+    this.mSharedQueue = sharedQueue;
+    this.mCallback = callback;
+  }
 
-	@Override
-	public void run() {
-// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - use Log from Android instead of writing to the console.
-		System.out.println("CommandConsumer runing");
+  @Override
+  public void run() {
+    Log.v(TAG, "CommandConsumer runing");
 
-		while (true) {
+    while (true) {
 
-			try {
+      try {
 
-				Command cmd = sharedQueue.take();
-				cmd.execute();
-				Thread.sleep(500);
+        Command cmd = mSharedQueue.take();
+        cmd.execute();
+        Thread.sleep(500);
 
-			} catch (Exception e) {
-			  // TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - shouldn't the consumer wake up again here? If not please document.
-				System.out.println("CommandConsumer error");
+      }
+      catch (Exception e) {
+        Log.v(TAG, "CommandConsumer error");
+        mCallback.onConsumerThreadError();
+      }
 
-			}
-
-		}
-	}
+    }
+  }
 
 }

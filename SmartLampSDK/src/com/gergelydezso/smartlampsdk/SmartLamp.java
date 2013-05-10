@@ -1,10 +1,21 @@
 package com.gergelydezso.smartlampsdk;
 
+import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnection;
+
 public class SmartLamp {
 
-	public ServoMotor servo = new ServoMotor();
-	public LedRGB led = new LedRGB();
-	
-	// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - why no getter methods?
+  private CommunicationBridge mPipe = new BluetoothConnection();
+
+  private ServoMotor mServo = new ServoMotor(mPipe);
+  private LedRGB mLed = new LedRGB(mPipe);
+
+  public LedRGB getLed() {
+    return mLed;
+  }
+
+  public ServoMotor getServo() {
+    return mServo;
+  }
 
 }

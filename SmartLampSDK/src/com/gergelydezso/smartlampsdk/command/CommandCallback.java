@@ -1,9 +1,27 @@
 package com.gergelydezso.smartlampsdk.command;
-// TODO - CODE_REVIEW - andrei.hegedus|Apr 17, 2013 - javadoc
-public interface CommandCallback {
 
-	void onSuccess();
+/**
+ * Callback for commands.
+ */
+public abstract class CommandCallback {
 
-	void onError();
+  /**
+   * Called when the command has been executed correctly.
+   */
+  public abstract void onSuccess();
+
+  /**
+   * Called if an error has occurred.
+   */
+  public abstract void onError();
+
+  /**
+   * Called when the state command has been executed correctly.
+   * 
+   * @param state - state of the SmartLamp.
+   */
+  public void onResult(String state) {
+
+  }
 
 }

@@ -2,9 +2,21 @@ package com.gergelydezso.smartlampsdk.connection;
 
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 
+/**
+ * Interface for specific communications.
+ */
 public interface CommunicationBridge {
 
-  // TODO - CODE_REVIEW - andrei.hegedus|Apr 19, 2013 - isn't sendCommand a better name? Also add some javadoc that describes the role of the params as well.
-	public void sendData(String id, int value, CommandCallback callback);
+  /**
+   * Send a command to the .
+   * 
+   * @param id - identifier of the servo/led pin.
+   * @param value - control value of the servo/led pin.
+   * @param callback - retrieve the result of command (onSuccess/onError).
+   * 
+   */
+  public void sendSetCommand(String id, int value, CommandCallback callback);
+
+  public void sendRequestCommand(String id, CommandCallback callback);
 
 }
