@@ -55,7 +55,7 @@ public class BluetoothConnectionService {
     mState = state;
 
     // Give the new state to the Handler so the UI Activity can update
-    mHandler.obtainMessage(BluetoothConnectionActivity.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
+    mHandler.obtainMessage(BluetoothConnectionControl.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
   }
 
   public synchronized int getState() {
@@ -118,9 +118,9 @@ public class BluetoothConnectionService {
     mConnectedThread.start();
 
     // Send the name of the connected device back to the UI Activity
-    Message msg = mHandler.obtainMessage(BluetoothConnectionActivity.MESSAGE_DEVICE_NAME);
+    Message msg = mHandler.obtainMessage(BluetoothConnectionControl.MESSAGE_DEVICE_NAME);
     Bundle bundle = new Bundle();
-    bundle.putString(BluetoothConnectionActivity.DEVICE_NAME, device.getName());
+    bundle.putString(BluetoothConnectionControl.DEVICE_NAME, device.getName());
     msg.setData(bundle);
     mHandler.sendMessage(msg);
 
@@ -165,9 +165,9 @@ public class BluetoothConnectionService {
 
   private void connectionFailed() {
     // Send a failure message back to the Activity
-    Message msg = mHandler.obtainMessage(BluetoothConnectionActivity.MESSAGE_TOAST);
+    Message msg = mHandler.obtainMessage(BluetoothConnectionControl.MESSAGE_TOAST);
     Bundle bundle = new Bundle();
-    bundle.putString(BluetoothConnectionActivity.TOAST, "Unable to connect device");
+    bundle.putString(BluetoothConnectionControl.TOAST, "Unable to connect device");
     msg.setData(bundle);
     mHandler.sendMessage(msg);
 
@@ -178,9 +178,9 @@ public class BluetoothConnectionService {
 
   private void connectionLost() {
     // Send a failure message back to the Activity
-    Message msg = mHandler.obtainMessage(BluetoothConnectionActivity.MESSAGE_TOAST);
+    Message msg = mHandler.obtainMessage(BluetoothConnectionControl.MESSAGE_TOAST);
     Bundle bundle = new Bundle();
-    bundle.putString(BluetoothConnectionActivity.TOAST, "Device connection was lost");
+    bundle.putString(BluetoothConnectionControl.TOAST, "Device connection was lost");
     msg.setData(bundle);
     mHandler.sendMessage(msg);
 
@@ -290,7 +290,7 @@ public class BluetoothConnectionService {
           }
 
           // Send the obtained bytes to the UI Activity
-          mHandler.obtainMessage(BluetoothConnectionActivity.MESSAGE_READ, bytes, -1, buffer).sendToTarget();
+          mHandler.obtainMessage(BluetoothConnectionControl.MESSAGE_READ, bytes, -1, buffer).sendToTarget();
         }
         catch (IOException e) {
           Log.e(TAG, "disconnected", e);
@@ -306,7 +306,7 @@ public class BluetoothConnectionService {
         mmOutStream.write(buffer);
 
         // Share the sent message back to the UI Activity
-        mHandler.obtainMessage(BluetoothConnectionActivity.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
+        mHandler.obtainMessage(BluetoothConnectionControl.MESSAGE_WRITE, -1, -1, buffer).sendToTarget();
       }
       catch (IOException e) {
         Log.e(TAG, "Exception during write", e);

@@ -26,7 +26,6 @@ public class SmartLampAPI {
 
   private SmartLamp mLamp = new SmartLamp();
   private CommandEngine mEngine = new CommandEngine();
-  private String mRecievedValue;
 
   /**
    * Set servo motor position.
