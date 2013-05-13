@@ -1,4 +1,4 @@
-package com.gergelydezso.smartlampsdk.sample.control;
+package com.gergelydezso.smartlampsdk.sample.test;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -48,7 +48,7 @@ public class TestActivity extends Activity implements OnClickListener, OnSeekBar
     mConnectionService = BluetoothConnectionHolder.getConnection();
 
     Log.v("TestActivity", "++onCreate++");
-    setContentView(R.layout.test_activity);
+    setContentView(R.layout.activity_test);
 
     mSendButtonServo1 = (Button) findViewById(R.id.btn_servo1);
     mSendButtonServo2 = (Button) findViewById(R.id.btn_servo2);

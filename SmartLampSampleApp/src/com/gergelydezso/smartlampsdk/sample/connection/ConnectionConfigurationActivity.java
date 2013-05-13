@@ -7,12 +7,12 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionActivity;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionControl;
 import com.gergelydezso.smartlampsdk.sample.R;
 import com.gergelydezso.smartlampsdk.sample.R.id;
-import com.gergelydezso.smartlampsdk.sample.control.TestActivity;
+import com.gergelydezso.smartlampsdk.sample.test.TestActivity;
 
-public class ConnectionConfiguration extends Activity {
+public class ConnectionConfigurationActivity extends Activity {
 
   private Button mConnectBtton;
   private Button mControlButton;
@@ -20,15 +20,18 @@ public class ConnectionConfiguration extends Activity {
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.connection_activity);
+    setContentView(R.layout.activity_connection);
 
     mConnectBtton = (Button) findViewById(id.btn_connection_config);
     mConnectBtton.setOnClickListener(new OnClickListener() {
 
       @Override
       public void onClick(View v) {
-        Intent intent = new Intent(ConnectionConfiguration.this, BluetoothConnectionActivity.class);
-        startActivity(intent);
+        BluetoothConnectionControl b = new BluetoothConnectionControl(ConnectionConfigurationActivity.this);
+        b.makeConnection();
+
+        // Intent intent = new Intent(ConnectionConfiguration.this, BluetoothConnectionActivity.class);
+        // startActivity(intent);
       }
     });
 
@@ -37,8 +40,7 @@ public class ConnectionConfiguration extends Activity {
 
       @Override
       public void onClick(View v) {
-
-        Intent intent = new Intent(ConnectionConfiguration.this, TestActivity.class);
+        Intent intent = new Intent(ConnectionConfigurationActivity.this, TestActivity.class);
         startActivity(intent);
 
       }
