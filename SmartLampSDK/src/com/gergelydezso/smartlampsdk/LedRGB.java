@@ -14,15 +14,14 @@ public class LedRGB {
     mPipe = pipe;
   }
 
-  public void setLedValue(LedPinTypes pin, int intensity, CommandCallback callback) {
+  public void setLedValue(int red, int green, int blue, CommandCallback callback) {
 
-    mPipe.sendSetCommand(pin.name(), intensity, callback);
-    Log.v("LedRGB", "LedPin: " + pin + " Value: " + intensity);
+    mPipe.sendSetLedCommand(red, green, blue, callback);
+    Log.v("LedRGB", "Red: " + red + ", Green: " + green + ",Blue: " + blue);
   }
 
   public void getLedState(CommandCallback callback) {
-    // Integer.toString(9) - jut a test
-    mPipe.sendRequestCommand(Integer.toString(9), callback);
+    mPipe.sendRequestCommand(mLedID, callback);
   }
 
 }

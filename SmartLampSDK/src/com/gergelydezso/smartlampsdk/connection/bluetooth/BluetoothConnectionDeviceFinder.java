@@ -22,7 +22,7 @@ public class BluetoothConnectionDeviceFinder {
     this.mCallback = callback;
   }
 
-  public void enableBluetooth() {
+  public void initConnection() {
 
     filter = new IntentFilter();
     filter.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
@@ -31,10 +31,23 @@ public class BluetoothConnectionDeviceFinder {
     mContext.registerReceiver(mReceiver, filter);
 
     mBtAdapter = BluetoothAdapter.getDefaultAdapter();
+
+    if (!mBtAdapter.isEnabled()) {
+      enableBluetooth();
+    }
+    else {
+      searchSmartLamp();
+    }
+
+  }
+
+  private void enableBluetooth() {
+
     if (!mBtAdapter.isEnabled()) {
       Intent enableIntent = new Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE);
       mContext.startActivity(enableIntent);
     }
+
   }
 
   public void searchSmartLamp() {
@@ -50,6 +63,7 @@ public class BluetoothConnectionDeviceFinder {
           Log.d(TAG, "SmartLamp found!");
           found = true;
           mCallback.foundSmartLamp(device.getAddress());
+          mContext.unregisterReceiver(mReceiver);
         }
       }
     }
@@ -76,7 +90,8 @@ public class BluetoothConnectionDeviceFinder {
           if (device.getName().equals("SmartLamp")) {
             Log.d(TAG, "SmartLamp found!");
             mCallback.foundSmartLamp(device.getAddress());
-            // mBtAdapter.cancelDiscovery();
+            mBtAdapter.cancelDiscovery();
+            mContext.unregisterReceiver(mReceiver);
           }
         }
       }

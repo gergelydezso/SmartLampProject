@@ -1,6 +1,5 @@
 package com.gergelydezso.smartlampsdk.api;
 
-import com.gergelydezso.smartlampsdk.LedPinTypes;
 import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.Command;
@@ -45,13 +44,14 @@ public class SmartLampAPI {
   /**
    * Set the LED value.
    * 
-   * @param ledPin - LedRGB pin identifier.
-   * @param value - LedRGB pin intensity.
+   * @param red - LedRGB red pin value
+   * @param green - LedRGB green pin value
+   * @param blue - LedRGB blue pin value
    * @param callback - onSuccess()/onError()
    */
-  public void setLedValue(LedPinTypes ledPin, int value, CommandCallback callback) {
+  public void setLedValue(int red, int green, int blue, CommandCallback callback) {
 
-    Command ledSet = new LedSetCommand(mLamp, ledPin, value, callback);
+    Command ledSet = new LedSetCommand(mLamp, red, green, blue, callback);
     mEngine.executeCommand(ledSet);
 
   }

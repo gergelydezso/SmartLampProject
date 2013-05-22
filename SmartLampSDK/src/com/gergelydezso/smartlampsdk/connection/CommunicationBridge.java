@@ -8,14 +8,16 @@ import com.gergelydezso.smartlampsdk.command.CommandCallback;
 public interface CommunicationBridge {
 
   /**
-   * Send a command to the .
+   * Send a command.
    * 
-   * @param id - identifier of the servo/led pin.
-   * @param value - control value of the servo/led pin.
+   * @param id - identifier of the servo entitie.
+   * @param value - control value of the servo.
    * @param callback - retrieve the result of command (onSuccess/onError).
    * 
    */
-  public void sendSetCommand(String id, int value, CommandCallback callback);
+  public void sendSetServoCommand(String id, int value, CommandCallback callback);
+
+  public void sendSetLedCommand(int reg, int green, int blue, CommandCallback callback);
 
   public void sendRequestCommand(String id, CommandCallback callback);
 

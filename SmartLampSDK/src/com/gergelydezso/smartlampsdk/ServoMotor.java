@@ -15,7 +15,7 @@ public class ServoMotor {
   }
 
   public void setServoPosition(ServoMotorEntities id, int degree, CommandCallback callback) {
-    mPipe.sendSetCommand(id.name(), degree, callback);
+    mPipe.sendSetServoCommand(id.name(), degree, callback);
     Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
   }
 

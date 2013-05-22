@@ -1,21 +1,22 @@
 package com.gergelydezso.smartlampsdk.command;
 
-import com.gergelydezso.smartlampsdk.LedPinTypes;
 import com.gergelydezso.smartlampsdk.LedRGB;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 
 public class LedSetCommand implements Command {
 
   private SmartLamp mLamp;
-  private LedPinTypes mPin;
-  private int mIntensity;
+  private int mRed;
+  private int mGreen;
+  private int mBlue;
   private CommandCallback mCallback;
   private LedRGB mLed;
 
-  public LedSetCommand(SmartLamp lamp, LedPinTypes pin, int intensity, CommandCallback callback) {
+  public LedSetCommand(SmartLamp lamp, int red, int green, int blue, CommandCallback callback) {
     this.mLamp = lamp;
-    this.mPin = pin;
-    this.mIntensity = intensity;
+    this.mRed = red;
+    this.mGreen = green;
+    this.mBlue = blue;
     this.mCallback = callback;
 
   }
@@ -23,7 +24,7 @@ public class LedSetCommand implements Command {
   @Override
   public void execute() {
     mLed = mLamp.getLed();
-    mLed.setLedValue(mPin, mIntensity, mCallback);
+    mLed.setLedValue(mRed, mGreen, mBlue, mCallback);
   }
 
 }

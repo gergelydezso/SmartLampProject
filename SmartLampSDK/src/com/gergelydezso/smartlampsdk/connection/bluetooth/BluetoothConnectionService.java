@@ -293,7 +293,9 @@ public class BluetoothConnectionService {
           mHandler.obtainMessage(BluetoothConnectionControl.MESSAGE_READ, bytes, -1, buffer).sendToTarget();
         }
         catch (IOException e) {
-          Log.e(TAG, "disconnected", e);
+          if (!mDestoryed) {
+            Log.e(TAG, "disconnected", e);
+          }
           connectionLost();
           break;
         }

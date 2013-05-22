@@ -29,11 +29,6 @@ public class BluetoothConnectionControl {
     this.mContext = context;
   }
 
-  public void connectDevice(String address) {
-    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-    mConnectionService.connect(device);
-  }
-
   public void makeConnection() {
 
     mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -46,7 +41,12 @@ public class BluetoothConnectionControl {
         connectDevice(address);
       }
     });
-    mDeviceFinder.enableBluetooth();
+    mDeviceFinder.initConnection();
+  }
+
+  public void connectDevice(String address) {
+    BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
+    mConnectionService.connect(device);
   }
 
   private final Handler mHandler = new Handler() {
