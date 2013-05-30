@@ -5,7 +5,6 @@ import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
 
 public class BluetoothConnection implements CommunicationBridge {
 
-  // private static final String TAG = "BluetoothConnection";
   private BluetoothConnectionService mConnectionService;
 
   public BluetoothConnection() {

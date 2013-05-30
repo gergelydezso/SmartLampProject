@@ -35,7 +35,6 @@ public class SmartLampAPI {
    * 
    */
   public void setServoPosition(ServoMotorEntities servoPin, int value, CommandCallback callback) {
-
     Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
     mEngine.executeCommand(servoSet);
 
@@ -50,7 +49,6 @@ public class SmartLampAPI {
    * @param callback - onSuccess()/onError()
    */
   public void setLedValue(int red, int green, int blue, CommandCallback callback) {
-
     Command ledSet = new LedSetCommand(mLamp, red, green, blue, callback);
     mEngine.executeCommand(ledSet);
 
@@ -62,9 +60,7 @@ public class SmartLampAPI {
    * @param callback - onResult()
    */
   public void getLedState(CommandCallback callback) {
-
     Command ledState = new LedStateCommand(mLamp, callback);
-
     mEngine.executeCommand(ledState);
   }
 
@@ -74,7 +70,6 @@ public class SmartLampAPI {
    * @param callback - onResult()
    */
   public void getServoState(CommandCallback callback) {
-
     Command servoState = new ServoStateCommand(mLamp, callback);
     mEngine.executeCommand(servoState);
 
