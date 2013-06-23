@@ -1,0 +1,37 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ColorControlPickerActivity" >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical" >
+
+        <com.larswerkman.colorpicker.ColorPicker
+            android:id="@+id/picker"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.larswerkman.colorpicker.OpacityBar
+            android:id="@+id/opacitybar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <com.larswerkman.colorpicker.SaturationBar
+            android:id="@+id/saturationbar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+
+        <com.larswerkman.colorpicker.ValueBar
+            android:id="@+id/valuebar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+</FrameLayout>

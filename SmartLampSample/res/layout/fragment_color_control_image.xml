@@ -1,0 +1,57 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <FrameLayout
+            android:id="@+id/frameLayout1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <ImageView
+                android:id="@+id/imageView_color_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/color_palette" />
+
+            <com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorPickerCustomView
+                android:id="@+id/color_picker"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+        </FrameLayout>
+
+        <it.sephiroth.android.library.widget.HorizontalVariableListView
+            android:id="@+id/color_list"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#222222"
+            android:gravity="bottom|center_vertical"
+            android:paddingBottom="0dp"
+            android:paddingTop="0dp" >
+        </it.sephiroth.android.library.widget.HorizontalVariableListView>
+
+        <SeekBar
+            android:id="@+id/seekBar_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/frameLayout1"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="20dp" />
+
+        <SeekBar
+            android:id="@+id/seekBar1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/seekBar_b"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="40dp" />
+    </RelativeLayout>
+
+</FrameLayout>

@@ -1,0 +1,90 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg" >
+
+    <RelativeLayout
+        android:id="@+id/custom_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <com.gergelydezso.smartlampsdk.sampleapp.motioncontrol.LampMotion
+            android:id="@+id/lamp_motion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/imageView_coordinate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:alpha="50"
+            android:padding="10dp"
+            android:src="@drawable/coordinate_syztem" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_below="@+id/lamp_motion"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView_part0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="lamp rotate by Y (0)" />
+
+                <SeekBar
+                    android:id="@+id/seekBar_part0"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:max="360" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView_part4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="head rotate by X (0)" />
+
+                <SeekBar
+                    android:id="@+id/seekBar_part4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:max="360" />
+            </LinearLayout>
+        </LinearLayout>
+    </RelativeLayout>
+
+    <it.sephiroth.android.library.widget.HorizontalVariableListView
+        android:id="@+id/list"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_gravity="bottom"
+        android:background="#222222"
+        android:gravity="bottom|center_vertical"
+        android:paddingBottom="0dp"
+        android:paddingTop="0dp" >
+    </it.sephiroth.android.library.widget.HorizontalVariableListView>
+
+</FrameLayout>
