@@ -3,14 +3,16 @@ package com.gergelydezso.smartlampsdk;
 import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
+import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
 
 public class ServoMotor {
 
-  private CommunicationBridge mPipe;
+  // TODO- change name to ..bridge
+  private SmartLampCommunicationBridge mPipe;
   private String mServoId = "servo";
+  // TODO - change to static final
 
-  public ServoMotor(CommunicationBridge pipe) {
+  public ServoMotor(SmartLampCommunicationBridge pipe) {
     mPipe = pipe;
   }
 

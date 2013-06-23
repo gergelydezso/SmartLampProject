@@ -21,7 +21,7 @@ public class BluetoothConnectionControl {
 
   private Context mContext;
   private static final String TAG = "BluetoothConnecctionControl";
-  private BluetoothConnectionDeviceFinder mDeviceFinder = null;
+  private BluetoothDeviceFinder mDeviceFinder = null;
   public BluetoothConnectionService mConnectionService = null;
   public BluetoothAdapter mBluetoothAdapter = null;
 
@@ -33,7 +33,7 @@ public class BluetoothConnectionControl {
 
     mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     mConnectionService = new BluetoothConnectionService(mHandler);
-    mDeviceFinder = new BluetoothConnectionDeviceFinder(mContext, new ConnectionCallback() {
+    mDeviceFinder = new BluetoothDeviceFinder(mContext, new ConnectionCallback() {
 
       @Override
       public void foundSmartLamp(String address) {
@@ -65,8 +65,10 @@ public class BluetoothConnectionControl {
           Toast.makeText(mContext, "Connected to SmartLamp", Toast.LENGTH_SHORT).show();
           break;
         case BluetoothConnectionService.STATE_CONNECTING:
+          // TODO
           break;
         case BluetoothConnectionService.STATE_NONE:
+          // TODO
           break;
         }
         break;

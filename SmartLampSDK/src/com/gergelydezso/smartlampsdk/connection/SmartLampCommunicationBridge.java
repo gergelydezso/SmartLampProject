@@ -5,7 +5,7 @@ import com.gergelydezso.smartlampsdk.command.CommandCallback;
 /**
  * Interface for specific communications.
  */
-public interface CommunicationBridge {
+public interface SmartLampCommunicationBridge {
 
   /**
    * Send servo command.

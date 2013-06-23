@@ -26,6 +26,12 @@ public class SmartLampAPI {
   private SmartLamp mLamp = new SmartLamp();
   private CommandEngine mEngine = new CommandEngine();
 
+  // - last code review modifications
+  // public SmartLampAPI(){
+  // //TODO check configuration received in params
+  // mLamp = new SmartLamp(new BluetoothCommunicationBridge());
+  // }
+
   /**
    * Set servo motor position.
    * 

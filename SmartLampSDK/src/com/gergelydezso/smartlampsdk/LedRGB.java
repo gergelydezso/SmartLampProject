@@ -3,14 +3,14 @@ package com.gergelydezso.smartlampsdk;
 import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
+import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
 
 public class LedRGB {
 
-  private CommunicationBridge mPipe;
+  private SmartLampCommunicationBridge mPipe;
   private String mLedID = "led";
 
-  public LedRGB(CommunicationBridge pipe) {
+  public LedRGB(SmartLampCommunicationBridge pipe) {
     mPipe = pipe;
   }
 

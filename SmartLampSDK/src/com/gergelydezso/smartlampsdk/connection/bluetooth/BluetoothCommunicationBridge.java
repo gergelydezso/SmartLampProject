@@ -1,13 +1,15 @@
 package com.gergelydezso.smartlampsdk.connection.bluetooth;
 
-import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.CommunicationBridge;
+import android.view.ViewDebug.IntToString;
 
-public class BluetoothConnection implements CommunicationBridge {
+import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
+
+public class BluetoothCommunicationBridge implements SmartLampCommunicationBridge {
 
   private BluetoothConnectionService mConnectionService;
 
-  public BluetoothConnection() {
+  public BluetoothCommunicationBridge() {
     mConnectionService = BluetoothConnectionHolder.getConnection();
   }
 
@@ -18,7 +20,7 @@ public class BluetoothConnection implements CommunicationBridge {
 
   @Override
   public void sendSetServoCommand(String id, int value, CommandCallback callback) {
-    mConnectionService.write(id, callback);
+    mConnectionService.write(Integer.toString(value), callback);
   }
 
   @Override
