@@ -10,7 +10,6 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 
-import com.gergelydezso.smartlampsdk.LedPinTypes;
 import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
@@ -112,14 +111,12 @@ public class TestActivity extends Activity implements OnClickListener, OnSeekBar
       if (!mEditTextLedRed.getText().toString().equals("")) {
         value = Integer.parseInt(mEditTextLedRed.getText().toString());
       }
-      createLedCommand(LedPinTypes.RED_PIN, value);
       break;
 
     case R.id.btn_green:
       if (!mEditTextLedGreen.getText().toString().equals("")) {
         value = Integer.parseInt(mEditTextLedGreen.getText().toString());
       }
-      createLedCommand(LedPinTypes.GREEN_PIN, value);
       break;
 
     case R.id.btn_state:
@@ -141,7 +138,6 @@ public class TestActivity extends Activity implements OnClickListener, OnSeekBar
       @Override
       public void onResult(String state) {
         Log.v(TAG, state);
-        // mEditTextState.setText(state);
       }
 
       @Override
@@ -149,6 +145,25 @@ public class TestActivity extends Activity implements OnClickListener, OnSeekBar
 
       }
     });
+  }
+
+  @Override
+  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+
+    switch (seekBar.getId()) {
+    case R.id.seekbar_servo1:
+      createServoSetCommand(ServoMotorEntities.SERVO1, progress);
+      break;
+    case R.id.seekbar_servo2:
+      createServoSetCommand(ServoMotorEntities.SERVO2, progress);
+      break;
+    case R.id.seekbar_ledred:
+      break;
+    case R.id.seekbar_ledgreen:
+      break;
+
+    }
+
   }
 
   private void createServoSetCommand(ServoMotorEntities servoPin, int value) {
@@ -165,46 +180,37 @@ public class TestActivity extends Activity implements OnClickListener, OnSeekBar
         Log.d(TAG, "onError - servoCommand");
       }
 
+      @Override
+      public void onResult(String state) {
+        // TODO Auto-generated method stub
+
+      }
+
     });
 
   }
 
-  private void createLedCommand(LedPinTypes ledPin, int value) {
+  private void createLedCommand(int red, int green, int blue) {
 
-    mSmartLampAPI.setLedValue(ledPin, value, new CommandCallback() {
+    mSmartLampAPI.setLedValue(red, green, blue, new CommandCallback() {
 
       @Override
       public void onSuccess() {
-        Log.d(TAG, "onSuccess - ledCommand");
+        // TODO Auto-generated method stub
       }
 
       @Override
       public void onError() {
-        Log.d(TAG, "onError - ledCommand");
+        // TODO Auto-generated method stub
+
       }
 
+      @Override
+      public void onResult(String state) {
+        // TODO Auto-generated method stub
+
+      }
     });
-  }
-
-  @Override
-  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-
-    switch (seekBar.getId()) {
-    case R.id.seekbar_servo1:
-      createServoSetCommand(ServoMotorEntities.SERVO1, progress);
-      break;
-    case R.id.seekbar_servo2:
-      createServoSetCommand(ServoMotorEntities.SERVO2, progress);
-      break;
-    case R.id.seekbar_ledred:
-      createLedCommand(LedPinTypes.RED_PIN, progress);
-      break;
-    case R.id.seekbar_ledgreen:
-      createLedCommand(LedPinTypes.GREEN_PIN, progress);
-      break;
-
-    }
-
   }
 
   @Override

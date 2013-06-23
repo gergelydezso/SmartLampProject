@@ -5,20 +5,19 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
 
     <application
-        android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name" >
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
         <activity
             android:name="com.gergelydezso.smartlampsdk.sample.menu.MenuActivity"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo" >
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -27,34 +26,8 @@
         </activity>
         <activity
             android:name="com.gergelydezso.smartlampsdk.sample.test.TestActivity"
-            android:label="Test"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo" />
-        <activity
-            android:name="com.gergelydezso.smartlampsdk.sample.menu.alarmclock.AlarmClockActivity"
-            android:label="AlarmClock"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo" />
-        <activity
-            android:name="com.gergelydezso.smartlampsdk.sample.menu.colorcontrol.ColorControlActivity"
-            android:label="ColorControl"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo" />
-        <activity
-            android:name="com.gergelydezso.smartlampsdk.sample.menu.motioncontrol.MotionControlActivity"
-            android:label="MotionControl"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo" />
-        <activity
-            android:name="com.gergelydezso.smartlampsdk.sample.menu.musicvisualization.MusicVisualizationActivity"
-            android:label="MusicVisualization"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo" />
-        <activity
-            android:name="com.gergelydezso.smartlampsdk.sample.menu.notifications.NotificationsActivity"
-            android:label="Notifications"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Holo" />
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

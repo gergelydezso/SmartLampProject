@@ -9,12 +9,11 @@ import android.widget.Button;
 
 import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionControl;
 import com.gergelydezso.smartlampsdk.sample.R;
-import com.gergelydezso.smartlampsdk.sample.connection.ConnectionConfigurationActivity;
-import com.gergelydezso.smartlampsdk.sample.menu.alarmclock.AlarmClockActivity;
-import com.gergelydezso.smartlampsdk.sample.menu.colorcontrol.ColorControlActivity;
-import com.gergelydezso.smartlampsdk.sample.menu.motioncontrol.MotionControlActivity;
-import com.gergelydezso.smartlampsdk.sample.menu.musicvisualization.MusicVisualizationActivity;
-import com.gergelydezso.smartlampsdk.sample.menu.notifications.NotificationsActivity;
+import com.gergelydezso.smartlampsdk.sample.alarmclock.AlarmClockActivity;
+import com.gergelydezso.smartlampsdk.sample.colorcontrol.ColorControlPickerActivity;
+import com.gergelydezso.smartlampsdk.sample.motioncontrol.MotionControlActivity;
+import com.gergelydezso.smartlampsdk.sample.musicvisualization.MusicVisualizationActivity;
+import com.gergelydezso.smartlampsdk.sample.notifications.NotificationsActivity;
 import com.gergelydezso.smartlampsdk.sample.test.TestActivity;
 
 public class MenuActivity extends Activity implements OnClickListener {
@@ -61,7 +60,7 @@ public class MenuActivity extends Activity implements OnClickListener {
       break;
 
     case R.id.btn_color_control:
-      Intent intent2 = new Intent(MenuActivity.this, ColorControlActivity.class);
+      Intent intent2 = new Intent(MenuActivity.this, ColorControlPickerActivity.class);
       startActivity(intent2);
       break;
 
