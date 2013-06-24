@@ -1,7 +1,5 @@
 package com.gergelydezso.smartlampsdk.connection.bluetooth;
 
-import android.view.ViewDebug.IntToString;
-
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
 
