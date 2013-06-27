@@ -10,6 +10,7 @@ import android.widget.RelativeLayout;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.menu.BaseMenuActivity;
+import com.gergelydezso.smartlampsdk.sampleapp.notifications.DeviceNotifications;
 
 public class Intro extends Activity {
 
@@ -28,7 +29,6 @@ public class Intro extends Activity {
     // mAnimImage.setBackgroundResource(R.drawable.lamp_animation_list);
     // frameAnimation = (AnimationDrawable) mAnimImage.getBackground();
     // frameAnimation.setOneShot(true);
-
     mButtonPlay = (ImageButton) findViewById(R.id.ImageButton_paly);
     mButtonPlay.setOnClickListener(new OnClickListener() {
 

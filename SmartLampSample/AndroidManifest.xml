@@ -8,7 +8,11 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="17" />
 
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
     <application
+        android:name=".SmartLampSampleApplication"
         android:allowBackup="true"
         android:hardwareAccelerated="true"
         android:icon="@drawable/ic_launcher"
@@ -30,6 +34,30 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Holo.Light.DarkActionBar" >
         </activity>
+
+        <service
+            android:name="com.gergelydezso.smartlampsdk.sampleapp.notifications.AccesibilityNotificationListenerService"
+            android:label="SmartLamp"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE" >
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/accessibilityservice" />
+        </service>
+
+        <receiver android:name="com.gergelydezso.smartlampsdk.sampleapp.notifications.SMSBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.gergelydezso.smartlampsdk.sampleapp.notifications.CallReceiver" >
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
