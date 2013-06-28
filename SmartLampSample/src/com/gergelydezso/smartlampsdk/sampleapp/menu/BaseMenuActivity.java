@@ -78,7 +78,7 @@ public class BaseMenuActivity extends FragmentActivity {
     mDrawerLayout.setDrawerListener(mDrawerToggle);
 
     if (savedInstanceState == null) {
-      selectItem(0);
+      selectItem(1);
     }
   }
 

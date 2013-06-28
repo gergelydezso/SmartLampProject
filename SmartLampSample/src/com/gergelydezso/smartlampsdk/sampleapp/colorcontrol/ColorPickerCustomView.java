@@ -22,17 +22,14 @@ public class ColorPickerCustomView extends View {
     mPaintStroke.setStrokeWidth(10);
     mPaintStroke.setColor(Color.GRAY);
     mPaintStroke.setAntiAlias(true);
-
     mPaintCircle.setAntiAlias(true);
 
-    setLayerType(View.LAYER_TYPE_HARDWARE, null);
-
   }
 
-  @Override
-  protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-    setMeasuredDimension(720, 407);
-  }
+  // @Override
+  // protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+  // setMeasuredDimension(720, 407);
+  // }
 
   public void setValues(int x, int y, int color) {
     this.mX = x;

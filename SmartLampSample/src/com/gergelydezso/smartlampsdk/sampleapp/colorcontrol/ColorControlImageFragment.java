@@ -30,7 +30,8 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
   private ColorPickerCustomView mColorPicker;
   @SuppressWarnings("unused")
   private int w, h;
-  private HorizontalVariableListView mList;
+
+  // private HorizontalVariableListView mList;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,19 +48,19 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
     w = bitmap.getWidth();
     h = bitmap.getHeight();
 
-    List<String> data = new ArrayList<String>();
-    for (int i = 0; i < 20; i++) {
-      data.add(String.valueOf(i));
-    }
-
-    ListAdapter adapter = new HorizontalListAdapter(getActivity(), R.layout.view1, R.layout.divider, data);
-
-    mList = (HorizontalVariableListView) rootView.findViewById(R.id.color_list);
-    mList.setSelectionMode(SelectionMode.Single);
-    mList.setOverScrollMode(HorizontalVariableListView.OVER_SCROLL_ALWAYS);
-    mList.setEdgeGravityY(Gravity.CENTER);
-    mList.setAdapter(adapter);
-    mList.setGravity(Gravity.CENTER);
+    // List<String> data = new ArrayList<String>();
+    // for (int i = 0; i < 20; i++) {
+    // data.add(String.valueOf(i));
+    // }
+    //
+    // ListAdapter adapter = new HorizontalListAdapter(getActivity(), R.layout.view1, R.layout.divider, data);
+    //
+    // mList = (HorizontalVariableListView) rootView.findViewById(R.id.color_list);
+    // mList.setSelectionMode(SelectionMode.Single);
+    // mList.setOverScrollMode(HorizontalVariableListView.OVER_SCROLL_ALWAYS);
+    // mList.setEdgeGravityY(Gravity.CENTER);
+    // mList.setAdapter(adapter);
+    // mList.setGravity(Gravity.CENTER);
 
     return rootView;
 
@@ -75,36 +76,32 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
     int x = (int) event.getX();
     int y = (int) event.getY();
 
-    if (y > 0 && y < h) {
+    int pixelColor = bitmap.getPixel(x, y);
+    // int redValue = Color.red(pixelColor);
+    // int greenValue = Color.green(pixelColor);
+    // int blueValue = Color.blue(pixelColor);
+    // int alpha = Color.alpha(pixelColor);
 
-      int pixelColor = bitmap.getPixel(x, y);
-      // int redValue = Color.red(pixelColor);
-      // int greenValue = Color.green(pixelColor);
-      // int blueValue = Color.blue(pixelColor);
-      // int alpha = Color.alpha(pixelColor);
+    switch (event.getAction()) {
 
-      switch (event.getAction()) {
-
-      case MotionEvent.ACTION_MOVE:
-        mColorPicker.setValues(x, y, pixelColor);
-        break;
-      case MotionEvent.ACTION_UP:
-        // mSmartLampAPI.setLedValue(redValue, greenValue, blueValue, new CommandCallback() {
-        //
-        // @Override
-        // public void onSuccess() {
-        // }
-        //
-        // @Override
-        // public void onError() {
-        // }
-        // });
-        break;
-      case MotionEvent.ACTION_DOWN:
-        mColorPicker.setValues(x, y, pixelColor);
-        break;
-
-      }
+    case MotionEvent.ACTION_MOVE:
+      mColorPicker.setValues(x, y, pixelColor);
+      break;
+    case MotionEvent.ACTION_UP:
+      // mSmartLampAPI.setLedValue(redValue, greenValue, blueValue, new CommandCallback() {
+      //
+      // @Override
+      // public void onSuccess() {
+      // }
+      //
+      // @Override
+      // public void onError() {
+      // }
+      // });
+      break;
+    case MotionEvent.ACTION_DOWN:
+      mColorPicker.setValues(x, y, pixelColor);
+      break;
 
     }
 
