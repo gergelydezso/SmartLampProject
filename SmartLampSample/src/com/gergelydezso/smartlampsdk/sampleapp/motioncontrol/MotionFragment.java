@@ -47,7 +47,7 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-    View rootView = inflater.inflate(R.layout.robot_motion_fragment, container, false);
+    View rootView = inflater.inflate(R.layout.fragment_motion_control, container, false);
 
     mRelativLayoutContainer = (RelativeLayout) rootView.findViewById(R.id.custom_view_container);
     mTextPart0 = (TextView) rootView.findViewById(R.id.textView_part0);
@@ -64,57 +64,57 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
     mLampMotion.setOwnerObejct(this);
 
-    List<String> data = new ArrayList<String>();
-    for (int i = 0; i < 5; i++) {
-      data.add(String.valueOf(i));
-    }
-
-    HorizontalListAdapter adapter = new HorizontalListAdapter(getActivity(), R.layout.view1, R.layout.divider, data);
-
-    mList = (HorizontalVariableListView) rootView.findViewById(R.id.list);
-    mList.setSelectionMode(SelectionMode.Single);
-    mList.setOverScrollMode(HorizontalVariableListView.OVER_SCROLL_ALWAYS);
-    mList.setEdgeGravityY(Gravity.CENTER);
-    mList.setAdapter(adapter);
-    mList.setGravity(Gravity.CENTER);
-
-    mList.setOnLayoutChangeListener(new OnLayoutChangeListener() {
-
-      @Override
-      public void onLayoutChange(boolean changed, int left, int top, int right, int bottom) {
-        Log.d("MotionFragment", "onLayoutChange: " + changed + ", " + bottom + ", " + top);
-        if (changed) {
-          mList.setEdgeHeight(bottom - top);
-        }
-      }
-    });
-
-    mList.setOnItemClickedListener(new OnItemClickedListener() {
-
-      @Override
-      public boolean onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Log.i("MotionFragment", "onItemClick: " + position);
-
-        // item has been clicked, return true if you want the
-        // HorizontalVariableList to handle the event
-        // false otherwise
-        return true;
-      }
-    });
-
-    mList.setOnItemSelectedListener(new OnItemSelectedListener() {
-
-      @Override
-      public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        // mText.setText("item selected: " + position + ", selected items: " + mList.getSelectedPositions().length);
-      }
-
-      @Override
-      public void onNothingSelected(android.widget.AdapterView<?> parent) {
-        // mText.setText("nothing selected");
-      };
-
-    });
+    // List<String> data = new ArrayList<String>();
+    // for (int i = 0; i < 5; i++) {
+    // data.add(String.valueOf(i));
+    // }
+    //
+    // HorizontalListAdapter adapter = new HorizontalListAdapter(getActivity(), R.layout.view1, R.layout.divider, data);
+    //
+    // mList = (HorizontalVariableListView) rootView.findViewById(R.id.list);
+    // mList.setSelectionMode(SelectionMode.Single);
+    // mList.setOverScrollMode(HorizontalVariableListView.OVER_SCROLL_ALWAYS);
+    // mList.setEdgeGravityY(Gravity.CENTER);
+    // mList.setAdapter(adapter);
+    // mList.setGravity(Gravity.CENTER);
+    //
+    // mList.setOnLayoutChangeListener(new OnLayoutChangeListener() {
+    //
+    // @Override
+    // public void onLayoutChange(boolean changed, int left, int top, int right, int bottom) {
+    // Log.d("MotionFragment", "onLayoutChange: " + changed + ", " + bottom + ", " + top);
+    // if (changed) {
+    // mList.setEdgeHeight(bottom - top);
+    // }
+    // }
+    // });
+    //
+    // mList.setOnItemClickedListener(new OnItemClickedListener() {
+    //
+    // @Override
+    // public boolean onItemClick(AdapterView<?> parent, View view, int position, long id) {
+    // Log.i("MotionFragment", "onItemClick: " + position);
+    //
+    // // item has been clicked, return true if you want the
+    // // HorizontalVariableList to handle the event
+    // // false otherwise
+    // return true;
+    // }
+    // });
+    //
+    // mList.setOnItemSelectedListener(new OnItemSelectedListener() {
+    //
+    // @Override
+    // public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+    // // mText.setText("item selected: " + position + ", selected items: " + mList.getSelectedPositions().length);
+    // }
+    //
+    // @Override
+    // public void onNothingSelected(android.widget.AdapterView<?> parent) {
+    // // mText.setText("nothing selected");
+    // };
+    //
+    // });
 
     return rootView;
   }
