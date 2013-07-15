@@ -10,8 +10,6 @@ import com.gergelydezso.smartlampsdk.command.LedStateCommand;
 import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
 import com.gergelydezso.smartlampsdk.command.ServoStateCommand;
 
-//test
-
 /**
  * This is the public API
  * <p>

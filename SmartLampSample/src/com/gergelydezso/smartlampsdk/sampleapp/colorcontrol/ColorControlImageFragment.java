@@ -1,16 +1,10 @@
 package com.gergelydezso.smartlampsdk.sampleapp.colorcontrol;
 
-import it.sephiroth.android.library.widget.HorizontalVariableListView;
-import it.sephiroth.android.library.widget.HorizontalVariableListView.SelectionMode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,10 +12,11 @@ import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 
-import com.gergelydezso.smartlampsdk.sampleapp.HorizontalListAdapter;
+import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
+import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
 
 public class ColorControlImageFragment extends Fragment implements OnTouchListener, OnClickListener {
 
@@ -30,11 +25,14 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
   private ColorPickerCustomView mColorPicker;
   @SuppressWarnings("unused")
   private int w, h;
+  private SmartLampAPI mApi;
 
   // private HorizontalVariableListView mList;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    mApi = SmartLampAPIHolder.getApi();
 
     View rootView = inflater.inflate(R.layout.fragment_color_control_image, container, false);
 
@@ -77,10 +75,11 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
     int y = (int) event.getY();
 
     int pixelColor = bitmap.getPixel(x, y);
-    // int redValue = Color.red(pixelColor);
-    // int greenValue = Color.green(pixelColor);
-    // int blueValue = Color.blue(pixelColor);
-    // int alpha = Color.alpha(pixelColor);
+
+    int redValue = Color.red(pixelColor);
+    int greenValue = Color.green(pixelColor);
+    int blueValue = Color.blue(pixelColor);
+    int alpha = Color.alpha(pixelColor);
 
     switch (event.getAction()) {
 
@@ -88,16 +87,25 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
       mColorPicker.setValues(x, y, pixelColor);
       break;
     case MotionEvent.ACTION_UP:
-      // mSmartLampAPI.setLedValue(redValue, greenValue, blueValue, new CommandCallback() {
-      //
-      // @Override
-      // public void onSuccess() {
-      // }
-      //
-      // @Override
-      // public void onError() {
-      // }
-      // });
+
+      // redValue = (int) (redValue * 0.7 * 1.5);
+      // greenValue = (int) (greenValue * 1.2 * 1.5);
+      // blueValue = (int) (blueValue * 1.5);
+
+      mApi.setLedValue(redValue, blueValue, greenValue, new CommandCallback() {
+
+        @Override
+        public void onSuccess() {
+        }
+
+        @Override
+        public void onResult(String state) {
+        }
+
+        @Override
+        public void onError() {
+        }
+      });
       break;
     case MotionEvent.ACTION_DOWN:
       mColorPicker.setValues(x, y, pixelColor);

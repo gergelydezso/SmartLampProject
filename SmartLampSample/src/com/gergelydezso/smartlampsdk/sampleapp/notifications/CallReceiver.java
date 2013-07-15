@@ -28,7 +28,7 @@ public class CallReceiver extends BroadcastReceiver {
   public void onReceive(Context context, Intent intent) {
     Log.d(TAG, "Intent recieved: " + intent.getAction());
     String state = intent.getStringExtra(TelephonyManager.EXTRA_STATE);
-    Log.d(TAG, "state: "+state);
+    Log.d(TAG, "state: " + state);
     if (state.equals("RINGING")) {
       for (NotificationListener notificationListener : notificationListeners) {
         notificationListener.onNewNotification(Notification.CALL);

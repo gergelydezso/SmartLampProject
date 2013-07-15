@@ -10,6 +10,7 @@ public class ServoMotor {
   // TODO- change name to ..bridge
   private SmartLampCommunicationBridge mPipe;
   private String mServoId = "servo";
+
   // TODO - change to static final
 
   public ServoMotor(SmartLampCommunicationBridge pipe) {

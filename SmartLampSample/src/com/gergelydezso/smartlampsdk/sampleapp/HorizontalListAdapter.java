@@ -1,7 +1,9 @@
 package com.gergelydezso.smartlampsdk.sampleapp;
 
 import it.sephiroth.android.library.widget.HorizontalVariableListView;
+
 import java.util.List;
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;

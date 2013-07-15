@@ -60,8 +60,7 @@
             android:layout_width="fill_parent"
             android:layout_height="15dip"
             android:layout_marginLeft="10dip"
-            android:layout_marginRight="10dip"
-            />
+            android:layout_marginRight="10dip" />
     </LinearLayout>
 
 </LinearLayout>

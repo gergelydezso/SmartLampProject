@@ -1,5 +1,5 @@
 package com.gergelydezso.smartlampsdk.sampleapp.notifications;
 
-public interface NotificationListener{
+public interface NotificationListener {
   void onNewNotification(Notification notification);
 }

@@ -46,7 +46,6 @@ public class NotificationSettings {
     notificationsAndColors.put(notification, new SimpleEntry<Boolean, Integer>(enabled, entry.getValue()));
   }
 
-
   public synchronized int getNotificationColor(Notification notification) {
     SimpleEntry<Boolean, Integer> entry = notificationsAndColors.get(notification);
     return entry.getValue();

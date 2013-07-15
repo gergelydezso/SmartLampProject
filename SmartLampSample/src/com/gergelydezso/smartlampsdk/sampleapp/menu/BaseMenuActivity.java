@@ -17,7 +17,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
+import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
 import com.gergelydezso.smartlampsdk.sampleapp.alarmclock.AlarmClockFragment;
 import com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorControlImageFragment;
 import com.gergelydezso.smartlampsdk.sampleapp.motioncontrol.MotionFragment;
@@ -39,6 +41,10 @@ public class BaseMenuActivity extends FragmentActivity {
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_navigate);
+
+    SmartLampAPIHolder mApiHoldel = new SmartLampAPIHolder();
+    SmartLampAPI mApi = new SmartLampAPI();
+    mApiHoldel.setAPI(mApi);
 
     fragmentManager = getSupportFragmentManager();
 

@@ -20,7 +20,6 @@ public class LampMotion extends View {
     ARM1, ARM2, ARM3, NONE
   }
 
-  @SuppressWarnings("unused")
   private final static String TAG = "LampMotion";
   private MovingArm mActiveArm;
   private int mDistanceArm1;
@@ -96,12 +95,12 @@ public class LampMotion extends View {
     mRectangleBalck.setStyle(Style.FILL);
 
     mRectanglePaint = new Paint();
-    mRectanglePaint.setColor(Color.BLUE);
+    mRectanglePaint.setColor(Color.rgb(228, 162, 21));
     mRectanglePaint.setAlpha(40);
     mRectanglePaint.setStyle(Style.FILL);
 
     mLinePaintBold = new Paint();
-    mLinePaintBold.setColor(Color.DKGRAY);
+    mLinePaintBold.setColor(Color.rgb(202, 202, 202));
     mLinePaintBold.setStrokeWidth(40);
     mLinePaintBold.setStyle(Style.FILL);
 
@@ -111,19 +110,19 @@ public class LampMotion extends View {
     mLinePaintBoldPlus.setStyle(Style.FILL);
 
     mLinePaint0 = new Paint();
-    mLinePaint0.setColor(Color.DKGRAY);
+    mLinePaint0.setColor(Color.rgb(202, 202, 202));
     mLinePaint0.setStrokeWidth(20);
     mLinePaint0.setStyle(Style.FILL);
     mLinePaint0.setAntiAlias(true);
 
     mLinePaint1 = new Paint();
-    mLinePaint1.setColor(Color.DKGRAY);
+    mLinePaint1.setColor(Color.rgb(202, 202, 202));
     mLinePaint1.setStrokeWidth(20);
     mLinePaint1.setStyle(Style.FILL);
     mLinePaint1.setAntiAlias(true);
 
     mLinePaint2 = new Paint();
-    mLinePaint2.setColor(Color.DKGRAY);
+    mLinePaint2.setColor(Color.rgb(202, 202, 202));
     mLinePaint2.setStrokeWidth(20);
     mLinePaint2.setStyle(Style.FILL);
     mLinePaint2.setAntiAlias(true);
@@ -135,13 +134,13 @@ public class LampMotion extends View {
     mLinePaint.setAntiAlias(true);
 
     mLinePaint3 = new Paint();
-    mLinePaint3.setColor(Color.DKGRAY);
+    mLinePaint3.setColor(Color.rgb(202, 202, 202));
     mLinePaint3.setStrokeWidth(20);
     mLinePaint3.setStyle(Style.FILL);
     mLinePaint3.setAntiAlias(true);
 
     mLinePaint4 = new Paint();
-    mLinePaint4.setColor(Color.DKGRAY);
+    mLinePaint4.setColor(Color.rgb(202, 202, 202));
     mLinePaint4.setStrokeWidth(60);
     mLinePaint4.setStyle(Style.FILL);
     mLinePaint4.setAntiAlias(true);
@@ -195,18 +194,18 @@ public class LampMotion extends View {
     switch (part) {
     case 0:
       mLinePaint0.setColor(Color.rgb(118, 155, 47));
-      mLinePaint1.setColor(Color.DKGRAY);
-      mLinePaint2.setColor(Color.DKGRAY);
-      mLinePaint3.setColor(Color.DKGRAY);
-      mLinePaint4.setColor(Color.DKGRAY);
+      mLinePaint1.setColor(Color.rgb(202, 202, 202));
+      mLinePaint2.setColor(Color.rgb(202, 202, 202));
+      mLinePaint3.setColor(Color.rgb(202, 202, 202));
+      mLinePaint4.setColor(Color.rgb(202, 202, 202));
       invalidate();
       break;
     case 4:
       mLinePaint4.setColor(Color.rgb(118, 155, 47));
-      mLinePaint0.setColor(Color.DKGRAY);
-      mLinePaint1.setColor(Color.DKGRAY);
-      mLinePaint2.setColor(Color.DKGRAY);
-      mLinePaint3.setColor(Color.DKGRAY);
+      mLinePaint0.setColor(Color.rgb(202, 202, 202));
+      mLinePaint1.setColor(Color.rgb(202, 202, 202));
+      mLinePaint2.setColor(Color.rgb(202, 202, 202));
+      mLinePaint3.setColor(Color.rgb(202, 202, 202));
       invalidate();
       break;
 
@@ -224,35 +223,33 @@ public class LampMotion extends View {
     switch (event.getAction()) {
 
     case MotionEvent.ACTION_DOWN:
-      // if (mRect1.contains(x, y)) {
-      // mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
-      // mActiveArm = MovingArm.ARM1;
-      // mLinePaint1.setColor(Color.rgb(118, 155, 47));
-      // mLinePaint0.setColor(Color.DKGRAY);
-      // mLinePaint2.setColor(Color.DKGRAY);
-      // mLinePaint3.setColor(Color.DKGRAY);
-      // mLinePaint4.setColor(Color.DKGRAY);
-      // }
-      // else
-
-      if (mRect2.contains(x, y)) {
+      if (mRect1.contains(x, y)) {
+        mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
+        mActiveArm = MovingArm.ARM1;
+        mLinePaint1.setColor(Color.rgb(118, 155, 47));
+        mLinePaint0.setColor(Color.rgb(202, 202, 202));
+        mLinePaint2.setColor(Color.rgb(202, 202, 202));
+        mLinePaint3.setColor(Color.rgb(202, 202, 202));
+        mLinePaint4.setColor(Color.rgb(202, 202, 202));
+      }
+      else if (mRect2.contains(x, y)) {
         mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
         mActiveArm = MovingArm.ARM2;
         mLinePaint2.setColor(Color.rgb(118, 155, 47));
-        mLinePaint0.setColor(Color.DKGRAY);
-        mLinePaint1.setColor(Color.DKGRAY);
-        mLinePaint3.setColor(Color.DKGRAY);
-        mLinePaint4.setColor(Color.DKGRAY);
+        mLinePaint0.setColor(Color.rgb(202, 202, 202));
+        mLinePaint1.setColor(Color.rgb(202, 202, 202));
+        mLinePaint3.setColor(Color.rgb(202, 202, 202));
+        mLinePaint4.setColor(Color.rgb(202, 202, 202));
       }
-      // else if (mRect3.contains(x, y)) {
-      // mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
-      // mActiveArm = MovingArm.ARM3;
-      // mLinePaint3.setColor(Color.rgb(118, 155, 47));
-      // mLinePaint0.setColor(Color.DKGRAY);
-      // mLinePaint1.setColor(Color.DKGRAY);
-      // mLinePaint2.setColor(Color.DKGRAY);
-      // mLinePaint4.setColor(Color.DKGRAY);
-      // }
+      else if (mRect3.contains(x, y)) {
+        mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
+        mActiveArm = MovingArm.ARM3;
+        mLinePaint3.setColor(Color.rgb(118, 155, 47));
+        mLinePaint0.setColor(Color.rgb(202, 202, 202));
+        mLinePaint1.setColor(Color.rgb(202, 202, 202));
+        mLinePaint2.setColor(Color.rgb(202, 202, 202));
+        mLinePaint4.setColor(Color.rgb(202, 202, 202));
+      }
       else
         mActiveArm = MovingArm.NONE;
       break;
@@ -260,24 +257,24 @@ public class LampMotion extends View {
     case MotionEvent.ACTION_MOVE:
 
       switch (mActiveArm) {
-      // case ARM1:
-      // mMovingPointArm1 = calculatePoint(mFixPoint, 200, radian);
-      // mRect1.set(mMovingPointArm1[0], mMovingPointArm1[1], mFixPoint[0], mFixPoint[1]);
-      // mRect2.set(mMovingPointArm1[0], mMovingPointArm1[1] - mRampDistance2, mMovingPointArm2[0], mMovingPointArm2[1]
-      // + mRampDistance2);
-      // mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45));
-      // mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150, mMovingPointArm2[1] + 80);
-      // mMovingPointArm3[0] = mMovingPointArm2[0] + 60;
-      // mMovingPointArm3[1] = mMovingPointArm2[1];
-      // mMovingPointArm3_1[0] = mMovingPointArm3[0] + 50;
-      // mMovingPointArm3_1[1] = mMovingPointArm3[1];
-      //
-      // mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
-      // mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
-      // mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
-      // mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
-      //
-      // break;
+      case ARM1:
+        mMovingPointArm1 = calculatePoint(mFixPoint, 200, radian);
+        mRect1.set(mMovingPointArm1[0], mMovingPointArm1[1], mFixPoint[0], mFixPoint[1]);
+        mRect2.set(mMovingPointArm1[0], mMovingPointArm1[1] - mRampDistance2, mMovingPointArm2[0], mMovingPointArm2[1]
+            + mRampDistance2);
+        mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45));
+        mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150, mMovingPointArm2[1] + 80);
+        mMovingPointArm3[0] = mMovingPointArm2[0] + 60;
+        mMovingPointArm3[1] = mMovingPointArm2[1];
+        mMovingPointArm3_1[0] = mMovingPointArm3[0] + 50;
+        mMovingPointArm3_1[1] = mMovingPointArm3[1];
+
+        mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
+        mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
+        mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
+        mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
+
+        break;
       case ARM2:
         if ((radian < 1) && (radian > -0.1)) {
           Log.d(TAG, "radian value: " + radian);
@@ -295,14 +292,14 @@ public class LampMotion extends View {
           mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
         }
         break;
-      // case ARM3:
-      // mMovingPointArm3 = calculatePoint(mMovingPointArm2, 60, Math.toRadians(90) + radian);
-      // mMovingPointArm3_1 = calculatePoint(mMovingPointArm3, 50, Math.toRadians(90) + radian);
-      // mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150, mMovingPointArm2[1] + 80);
-      // mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
-      // mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
-      // mMovingPointArm3_2_2 = calculatePoint(mMovingPointArm3_2_1, 110, Math.toRadians(90) + radian);
-      // break;
+      case ARM3:
+        mMovingPointArm3 = calculatePoint(mMovingPointArm2, 60, Math.toRadians(90) + radian);
+        mMovingPointArm3_1 = calculatePoint(mMovingPointArm3, 50, Math.toRadians(90) + radian);
+        mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150, mMovingPointArm2[1] + 80);
+        mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
+        mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
+        mMovingPointArm3_2_2 = calculatePoint(mMovingPointArm3_2_1, 110, Math.toRadians(90) + radian);
+        break;
       case NONE:
         break;
 

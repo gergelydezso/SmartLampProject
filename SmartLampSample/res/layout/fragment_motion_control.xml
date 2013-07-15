@@ -27,9 +27,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
             android:layout_alignParentLeft="true"
-            android:layout_marginBottom="56dp"
+            android:layout_below="@+id/lamp_motion"
+            android:layout_marginTop="54dp"
             android:orientation="vertical" >
 
             <LinearLayout
@@ -44,7 +44,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="lamp rotate by Y (0)"
+                    android:text="part0"
                     android:textColor="#a8a1a1" />
 
                 <SeekBar
@@ -67,11 +67,34 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:padding="10dp"
-                    android:text="head rotate by X (0)"
+                    android:text="part4"
                     android:textColor="#a8a1a1" />
 
                 <SeekBar
                     android:id="@+id/seekBar_part4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:max="180"
+                    android:progress="90" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView_part0"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="10dp"
+                    android:text="part3"
+                    android:textColor="#a8a1a1" />
+
+                <SeekBar
+                    android:id="@+id/seekBar_part3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"

@@ -4,25 +4,26 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg" >
 
-<!--     <TimePicker -->
-<!--         android:id="@+id/timePicker1" -->
-<!--         android:layout_width="wrap_content" -->
-<!--         android:layout_height="wrap_content" -->
-<!--         android:layout_alignParentTop="true" -->
-<!--         android:layout_centerHorizontal="true" -->
-<!--         android:layout_marginTop="71dp" /> -->
+    <!-- <TimePicker -->
+    <!-- android:id="@+id/timePicker1" -->
+    <!-- android:layout_width="wrap_content" -->
+    <!-- android:layout_height="wrap_content" -->
+    <!-- android:layout_alignParentTop="true" -->
+    <!-- android:layout_centerHorizontal="true" -->
+    <!-- android:layout_marginTop="71dp" /> -->
 
-<!--     <it.sephiroth.android.library.widget.HorizontalVariableListView -->
-<!--         android:id="@+id/list" -->
-<!--         android:layout_width="match_parent" -->
-<!--         android:layout_height="150dp" -->
-<!--         android:layout_alignParentBottom="true" -->
-<!--         android:layout_alignParentLeft="true" -->
-<!--         android:background="#222222" -->
-<!--         android:gravity="bottom|center_vertical" -->
-<!--         android:paddingBottom="0dp" -->
-<!--         android:paddingTop="0dp" > -->
-<!--     </it.sephiroth.android.library.widget.HorizontalVariableListView> -->
+
+    <!-- <it.sephiroth.android.library.widget.HorizontalVariableListView -->
+    <!-- android:id="@+id/list" -->
+    <!-- android:layout_width="match_parent" -->
+    <!-- android:layout_height="150dp" -->
+    <!-- android:layout_alignParentBottom="true" -->
+    <!-- android:layout_alignParentLeft="true" -->
+    <!-- android:background="#222222" -->
+    <!-- android:gravity="bottom|center_vertical" -->
+    <!-- android:paddingBottom="0dp" -->
+    <!-- android:paddingTop="0dp" > -->
+    <!-- </it.sephiroth.android.library.widget.HorizontalVariableListView> -->
 
     <ImageView
         android:id="@+id/imageView1"

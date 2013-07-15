@@ -1,24 +1,16 @@
 package com.gergelydezso.smartlampsdk.sampleapp.alarmclock;
 
-import it.sephiroth.android.library.widget.HorizontalVariableListView;
-import it.sephiroth.android.library.widget.HorizontalVariableListView.SelectionMode;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gergelydezso.smartlampsdk.sampleapp.HorizontalListAdapter;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 
 public class AlarmClockFragment extends Fragment {
 
-  //private HorizontalVariableListView mList;
+  // private HorizontalVariableListView mList;
 
   @SuppressWarnings("unused")
   private static final String TAG = "AlarmClock";
@@ -32,9 +24,12 @@ public class AlarmClockFragment extends Fragment {
     // data.add(String.valueOf(i));
     // }
     //
-    // HorizontalListAdapter adapter = new HorizontalListAdapter(getActivity(), R.layout.view1, R.layout.divider, data);
+    // HorizontalListAdapter adapter = new
+    // HorizontalListAdapter(getActivity(), R.layout.view1,
+    // R.layout.divider, data);
     //
-    // mList = (HorizontalVariableListView) rootView.findViewById(R.id.list);
+    // mList = (HorizontalVariableListView)
+    // rootView.findViewById(R.id.list);
     // mList.setSelectionMode(SelectionMode.Single);
     // mList.setOverScrollMode(HorizontalVariableListView.OVER_SCROLL_ALWAYS);
     // mList.setEdgeGravityY(Gravity.CENTER);

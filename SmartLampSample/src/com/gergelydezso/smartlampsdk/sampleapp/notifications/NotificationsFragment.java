@@ -31,12 +31,12 @@ public class NotificationsFragment extends Fragment {
   private boolean isNotificationEnabled(Notification notification) {
     return DeviceNotifications.getInstance().getNotificationSettings().isNotificationEnabled(notification);
   }
-  
-  private void setNotificationColor(Notification notification, int color){
+
+  private void setNotificationColor(Notification notification, int color) {
     DeviceNotifications.getInstance().getNotificationSettings().setNotificationColor(notification, color);
   }
-  
-  private void enableNotification(Notification notification, boolean enabled){
+
+  private void enableNotification(Notification notification, boolean enabled) {
     DeviceNotifications.getInstance().getNotificationSettings().enableNotification(notification, enabled);
   }
 
@@ -150,7 +150,5 @@ public class NotificationsFragment extends Fragment {
       enableNotification(notification, enabled);
     }
   };
-  
- 
 
 }

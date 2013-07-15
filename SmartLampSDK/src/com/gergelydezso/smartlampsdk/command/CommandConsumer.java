@@ -29,8 +29,8 @@ public class CommandConsumer implements Runnable {
 
       }
       catch (Exception e) {
-        Log.v(TAG, "CommandConsumer error");
-        //mCallback.onConsumerThreadError();
+        Log.e(TAG, "CommandConsumer error", e);
+        // mCallback.onConsumerThreadError();
       }
 
     }
