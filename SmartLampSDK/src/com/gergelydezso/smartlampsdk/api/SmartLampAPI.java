@@ -2,13 +2,11 @@ package com.gergelydezso.smartlampsdk.api;
 
 import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.SmartLamp;
-import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.command.CommandEngine;
-import com.gergelydezso.smartlampsdk.command.LedSetCommand;
-import com.gergelydezso.smartlampsdk.command.LedStateCommand;
-import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
-import com.gergelydezso.smartlampsdk.command.ServoStateCommand;
+import com.gergelydezso.smartlampsdk.command.filter.CapacityCommandFilter;
+import com.gergelydezso.smartlampsdk.command.filter.CommandFilterClient;
+import com.gergelydezso.smartlampsdk.command.filter.CommandFilterManager;
+import com.gergelydezso.smartlampsdk.command.filter.CommandTarget;
 
 /**
  * This is the public API
@@ -23,14 +21,23 @@ import com.gergelydezso.smartlampsdk.command.ServoStateCommand;
 
 public class SmartLampAPI {
 
+  private static final String TAG = "SmartLampAPI";
   private SmartLamp mLamp = new SmartLamp();
-  private CommandEngine mEngine = new CommandEngine();
+  // private CommandEngine mEngine = new CommandEngine();
+  private CommandFilterClient client;
 
   // - last code review modifications
   // public SmartLampAPI(){
   // //TODO check configuration received in params
   // mLamp = new SmartLamp(new BluetoothCommunicationBridge());
   // }
+
+  public SmartLampAPI() {
+    CommandFilterManager filterManager = new CommandFilterManager(new CommandTarget());
+    filterManager.setFilter(new CapacityCommandFilter());
+    client = new CommandFilterClient();
+    client.setFilterManager(filterManager);
+  }
 
   /**
    * Set servo motor position.
@@ -41,9 +48,15 @@ public class SmartLampAPI {
    * 
    */
   public void setServoPosition(ServoMotorEntities servoPin, int value, CommandCallback callback) {
-    Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
-    mEngine.executeCommand(servoSet);
 
+    // long startTime = System.currentTimeMillis();
+    //
+    // Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
+    // mEngine.executeCommand(servoSet);
+    //
+    // long estimatedTime = System.currentTimeMillis() - startTime;
+    // Log.d(TAG, "estimatedTime: " + estimatedTime);
+    client.sendRequest("lala");
   }
 
   /**
@@ -55,8 +68,8 @@ public class SmartLampAPI {
    * @param callback - onSuccess()/onError()
    */
   public void setLedValue(int red, int green, int blue, CommandCallback callback) {
-    Command ledSet = new LedSetCommand(mLamp, red, green, blue, callback);
-    mEngine.executeCommand(ledSet);
+    // Command ledSet = new LedSetCommand(mLamp, red, green, blue, callback);
+    // mEngine.executeCommand(ledSet);
 
   }
 
@@ -66,8 +79,8 @@ public class SmartLampAPI {
    * @param callback - onResult()
    */
   public void getLedState(CommandCallback callback) {
-    Command ledState = new LedStateCommand(mLamp, callback);
-    mEngine.executeCommand(ledState);
+    // Command ledState = new LedStateCommand(mLamp, callback);
+    // mEngine.executeCommand(ledState);
   }
 
   /**
@@ -76,8 +89,8 @@ public class SmartLampAPI {
    * @param callback - onResult()
    */
   public void getServoState(CommandCallback callback) {
-    Command servoState = new ServoStateCommand(mLamp, callback);
-    mEngine.executeCommand(servoState);
+    // Command servoState = new ServoStateCommand(mLamp, callback);
+    // mEngine.executeCommand(servoState);
 
   }
 }
