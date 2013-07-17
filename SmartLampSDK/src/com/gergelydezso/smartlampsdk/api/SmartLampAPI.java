@@ -4,6 +4,7 @@ import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.command.LedSetCommand;
 import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
 import com.gergelydezso.smartlampsdk.command.filter.CapacityCommandFilter;
 import com.gergelydezso.smartlampsdk.command.filter.CommandFilterManager;
@@ -26,7 +27,7 @@ public class SmartLampAPI {
   @SuppressWarnings("unused")
   private static final String TAG = "SmartLampAPI";
   private SmartLamp mLamp = new SmartLamp();
-  CommandFilterManager filterManager;
+  private CommandFilterManager filterManager = new CommandFilterManager(new CommandTarget());;
 
   // - last code review modifications
   // public SmartLampAPI(){
@@ -35,11 +36,9 @@ public class SmartLampAPI {
   // }
 
   public SmartLampAPI() {
-    filterManager = new CommandFilterManager(new CommandTarget());
     filterManager.setFilter(new CapacityCommandFilter());
     filterManager.setFilter(new ServoCommandSplitterFilter());
   }
-  
 
   /**
    * Set servo motor position.
@@ -65,8 +64,8 @@ public class SmartLampAPI {
    * @param callback - onSuccess()/onError()
    */
   public void setLedValue(int red, int green, int blue, CommandCallback callback) {
-    // Command ledSet = new LedSetCommand(mLamp, red, green, blue, callback);
-    // mEngine.executeCommand(ledSet);
+    Command ledSet = new LedSetCommand(mLamp, red, green, blue, callback);
+    filterManager.sendCommand(ledSet);
 
   }
 

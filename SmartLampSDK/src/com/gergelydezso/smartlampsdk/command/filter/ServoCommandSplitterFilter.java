@@ -9,8 +9,9 @@ public class ServoCommandSplitterFilter implements CommandFilter {
   private static final String TAG = "ServoCommandSplitterFilter";
 
   @Override
-  public void execute(Command CommandToBeFiltered) {
-    Log.d(TAG, "filtered");
+  public boolean execute(Command CommandToBeFiltered) {
+    Log.d(TAG, "ok");
+    return true;
   }
 
 }

@@ -6,8 +6,8 @@ public class CommandFilterManager {
   CommandFilterChain filterChain;
 
   public CommandFilterManager(CommandTarget target) {
-    filterChain.setTarget(target);
     filterChain = new CommandFilterChain();
+    filterChain.setTarget(target);
   }
 
   public void setFilter(CommandFilter filter) {

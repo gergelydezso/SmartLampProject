@@ -27,7 +27,7 @@ public class Intro extends Activity {
 
   private ImageView mImageStart;
   private ImageButton mButtonPlay;
-  private BluetoothConnectionService mConnectionService;
+  // private BluetoothConnectionService mConnectionService;
   private VideoView mVideoIntro;
 
   @Override

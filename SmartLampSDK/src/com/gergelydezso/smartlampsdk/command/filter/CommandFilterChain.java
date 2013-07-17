@@ -7,7 +7,9 @@ import com.gergelydezso.smartlampsdk.command.Command;
 
 public class CommandFilterChain {
   private List<CommandFilter> filters = new ArrayList<CommandFilter>();
+  // private Iterator<CommandFilter> filterIterator = filters.iterator();
   private CommandTarget target;
+  private boolean ok;
 
   public void setTarget(CommandTarget target) {
     this.target = target;
@@ -18,10 +20,18 @@ public class CommandFilterChain {
   }
 
   public void execute(Command command) {
+
+    ok = true;
+
     for (CommandFilter filter : filters) {
-      filter.execute(command);
+      if (!filter.execute(command)) {
+        ok = false;
+        break;
+      }
     }
-    target.execute(command);
+
+    if (ok)
+      target.execute(command);
   }
 
 }

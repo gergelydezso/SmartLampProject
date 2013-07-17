@@ -7,9 +7,20 @@ import com.gergelydezso.smartlampsdk.command.Command;
 public class CapacityCommandFilter implements CommandFilter {
 
   private static final String TAG = "CapacityCommandFilter";
+  private long mTime = System.currentTimeMillis();
 
   @Override
-  public void execute(Command CommandToBeFiltered) {
-    Log.d(TAG, "filtered");
+  public boolean execute(Command CommandToBeFiltered) {
+
+    Log.d(TAG, "try");
+
+    if ((System.currentTimeMillis() - mTime) > 1000) {
+      Log.d(TAG, "ok");
+      mTime = System.currentTimeMillis();
+      return true;
+    }
+    else
+      return false;
+
   }
 }
