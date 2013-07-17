@@ -4,12 +4,13 @@ import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.Command;
 
-public class CapacityCommandFilter implements CommandFilter {
+public class ServoCommandSplitterFilter implements CommandFilter {
 
-  private static final String TAG = "CapacityCommandFilter";
+  private static final String TAG = "ServoCommandSplitterFilter";
 
   @Override
   public void execute(Command CommandToBeFiltered) {
     Log.d(TAG, "filtered");
   }
+
 }
