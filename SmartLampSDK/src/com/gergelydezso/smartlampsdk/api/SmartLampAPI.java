@@ -39,6 +39,7 @@ public class SmartLampAPI {
     filterManager.setFilter(new CapacityCommandFilter());
     filterManager.setFilter(new ServoCommandSplitterFilter());
   }
+  
 
   /**
    * Set servo motor position.
