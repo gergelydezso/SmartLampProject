@@ -2,11 +2,13 @@ package com.gergelydezso.smartlampsdk.api;
 
 import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.SmartLamp;
+import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
 import com.gergelydezso.smartlampsdk.command.filter.CapacityCommandFilter;
-import com.gergelydezso.smartlampsdk.command.filter.CommandFilterClient;
 import com.gergelydezso.smartlampsdk.command.filter.CommandFilterManager;
 import com.gergelydezso.smartlampsdk.command.filter.CommandTarget;
+import com.gergelydezso.smartlampsdk.command.filter.ServoCommandSplitterFilter;
 
 /**
  * This is the public API
@@ -21,10 +23,10 @@ import com.gergelydezso.smartlampsdk.command.filter.CommandTarget;
 
 public class SmartLampAPI {
 
+  @SuppressWarnings("unused")
   private static final String TAG = "SmartLampAPI";
   private SmartLamp mLamp = new SmartLamp();
-  // private CommandEngine mEngine = new CommandEngine();
-  private CommandFilterClient client;
+  CommandFilterManager filterManager;
 
   // - last code review modifications
   // public SmartLampAPI(){
@@ -33,10 +35,9 @@ public class SmartLampAPI {
   // }
 
   public SmartLampAPI() {
-    CommandFilterManager filterManager = new CommandFilterManager(new CommandTarget());
+    filterManager = new CommandFilterManager(new CommandTarget());
     filterManager.setFilter(new CapacityCommandFilter());
-    client = new CommandFilterClient();
-    client.setFilterManager(filterManager);
+    filterManager.setFilter(new ServoCommandSplitterFilter());
   }
 
   /**
@@ -47,16 +48,11 @@ public class SmartLampAPI {
    * @param callback - onSuccess()/onError()
    * 
    */
+
   public void setServoPosition(ServoMotorEntities servoPin, int value, CommandCallback callback) {
 
-    // long startTime = System.currentTimeMillis();
-    //
-    // Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
-    // mEngine.executeCommand(servoSet);
-    //
-    // long estimatedTime = System.currentTimeMillis() - startTime;
-    // Log.d(TAG, "estimatedTime: " + estimatedTime);
-    client.sendRequest("lala");
+    Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
+    filterManager.sendCommand(servoSet);
   }
 
   /**
