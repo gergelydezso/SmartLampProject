@@ -4,13 +4,14 @@ import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.Command;
 
-public class ServoCommandSplitterFilter implements CommandFilter {
+public class SplitterCommandFilter implements CommandFilter {
 
-  private static final String TAG = "ServoCommandSplitterFilter";
+  private static final String TAG = "SplitterCommandFilter";
 
   @Override
-  public boolean execute(Command CommandToBeFiltered) {
+  public boolean execute(Command commandToBeFiltered) {
     Log.d(TAG, "ok");
+
     return true;
   }
 

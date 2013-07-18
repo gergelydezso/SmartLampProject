@@ -8,6 +8,7 @@ public class CommandConsumer implements Runnable {
 
   private static final String TAG = "CommanConsumer";
   private final BlockingQueue<Command> mSharedQueue;
+  @SuppressWarnings("unused")
   private ConsumerCallback mCallback;
 
   public CommandConsumer(BlockingQueue<Command> sharedQueue, ConsumerCallback callback) {
@@ -25,7 +26,7 @@ public class CommandConsumer implements Runnable {
 
         Command cmd = mSharedQueue.take();
         cmd.execute();
-        Thread.sleep(500);
+        Thread.sleep(100);
 
       }
       catch (Exception e) {

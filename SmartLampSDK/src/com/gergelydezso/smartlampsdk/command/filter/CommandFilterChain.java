@@ -9,7 +9,7 @@ public class CommandFilterChain {
   private List<CommandFilter> filters = new ArrayList<CommandFilter>();
   // private Iterator<CommandFilter> filterIterator = filters.iterator();
   private CommandTarget target;
-  private boolean ok;
+  private boolean mFilterOk;
 
   public void setTarget(CommandTarget target) {
     this.target = target;
@@ -21,16 +21,16 @@ public class CommandFilterChain {
 
   public void execute(Command command) {
 
-    ok = true;
+    mFilterOk = true;
 
     for (CommandFilter filter : filters) {
       if (!filter.execute(command)) {
-        ok = false;
+        mFilterOk = false;
         break;
       }
     }
 
-    if (ok)
+    if (mFilterOk)
       target.execute(command);
   }
 

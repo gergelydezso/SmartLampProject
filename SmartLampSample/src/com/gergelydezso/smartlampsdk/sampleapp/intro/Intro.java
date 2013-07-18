@@ -58,12 +58,16 @@ public class Intro extends Activity {
       @Override
       public void onClick(View v) {
 
-        mImageStart.setVisibility(View.INVISIBLE);
-        mVideoIntro.start();
+        // mImageStart.setVisibility(View.INVISIBLE);
+        // mVideoIntro.start();
 
         // Intent intent = new Intent(Intro.this,
         // BaseMenuActivity.class);
         // startActivity(intent);
+
+        Intent intent = new Intent(Intro.this, BaseMenuActivity.class);
+        startActivity(intent);
+
       }
     });
 

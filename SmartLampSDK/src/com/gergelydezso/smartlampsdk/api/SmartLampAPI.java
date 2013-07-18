@@ -2,14 +2,15 @@ package com.gergelydezso.smartlampsdk.api;
 
 import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.SmartLamp;
+import com.gergelydezso.smartlampsdk.SmartLampGestures;
 import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.command.LedSetCommand;
 import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
-import com.gergelydezso.smartlampsdk.command.filter.CapacityCommandFilter;
+import com.gergelydezso.smartlampsdk.command.filter.TimeCommandFilter;
 import com.gergelydezso.smartlampsdk.command.filter.CommandFilterManager;
 import com.gergelydezso.smartlampsdk.command.filter.CommandTarget;
-import com.gergelydezso.smartlampsdk.command.filter.ServoCommandSplitterFilter;
+import com.gergelydezso.smartlampsdk.command.filter.SplitterCommandFilter;
 
 /**
  * This is the public API
@@ -36,8 +37,8 @@ public class SmartLampAPI {
   // }
 
   public SmartLampAPI() {
-    filterManager.setFilter(new CapacityCommandFilter());
-    filterManager.setFilter(new ServoCommandSplitterFilter());
+    filterManager.setFilter(new TimeCommandFilter());
+    filterManager.setFilter(new SplitterCommandFilter());
   }
 
   /**
@@ -52,7 +53,12 @@ public class SmartLampAPI {
   public void setServoPosition(ServoMotorEntities servoPin, int value, CommandCallback callback) {
 
     Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
+    servoSet.setTimeTicket(System.currentTimeMillis());
     filterManager.sendCommand(servoSet);
+  }
+
+  public void setLampGesture(SmartLampGestures gesture) {
+
   }
 
   /**

@@ -11,6 +11,7 @@ public class LedSetCommand implements Command {
   private int mBlue;
   private CommandCallback mCallback;
   private LedRGB mLed;
+  private long mTimeTicket;
 
   public LedSetCommand(SmartLamp lamp, int red, int green, int blue, CommandCallback callback) {
     this.mLamp = lamp;
@@ -25,6 +26,17 @@ public class LedSetCommand implements Command {
   public void execute() {
     mLed = mLamp.getLed();
     mLed.setLedValue(mRed, mGreen, mBlue, mCallback);
+  }
+
+  @Override
+  public void setTimeTicket(long time) {
+    this.mTimeTicket = time;
+
+  }
+
+  @Override
+  public long getTimeTicket() {
+    return mTimeTicket;
   }
 
 }
