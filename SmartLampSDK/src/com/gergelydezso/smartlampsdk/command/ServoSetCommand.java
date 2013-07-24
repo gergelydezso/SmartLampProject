@@ -20,6 +20,14 @@ public class ServoSetCommand implements Command {
     this.mCallback = callback;
   }
 
+  public ServoMotorEntities getServoID() {
+    return mId;
+  }
+
+  public int getServoDegree() {
+    return mDegree;
+  }
+
   @Override
   public void execute() {
     mServo = mLamp.getServo();

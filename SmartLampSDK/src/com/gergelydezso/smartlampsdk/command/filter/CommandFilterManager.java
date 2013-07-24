@@ -14,7 +14,8 @@ public class CommandFilterManager {
     filterChain.addFilter(filter);
   }
 
-  public void sendCommand(Command comand) {
-    filterChain.execute(comand);
+  public void sendCommand(Command command) {
+
+    filterChain.execute(command);
   }
 }

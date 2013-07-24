@@ -85,13 +85,13 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
 
     case MotionEvent.ACTION_MOVE:
       mColorPicker.setValues(x, y, pixelColor);
+
       break;
     case MotionEvent.ACTION_UP:
 
       // redValue = (int) (redValue * 0.7 * 1.5);
       // greenValue = (int) (greenValue * 1.2 * 1.5);
       // blueValue = (int) (blueValue * 1.5);
-
       mApi.setLedValue(redValue, blueValue, greenValue, new CommandCallback() {
 
         @Override

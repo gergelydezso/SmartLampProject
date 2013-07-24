@@ -6,7 +6,9 @@ import com.gergelydezso.smartlampsdk.SmartLampGestures;
 import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.command.LedSetCommand;
+import com.gergelydezso.smartlampsdk.command.LedStateCommand;
 import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
+import com.gergelydezso.smartlampsdk.command.ServoStateCommand;
 import com.gergelydezso.smartlampsdk.command.filter.TimeCommandFilter;
 import com.gergelydezso.smartlampsdk.command.filter.CommandFilterManager;
 import com.gergelydezso.smartlampsdk.command.filter.CommandTarget;
@@ -71,6 +73,7 @@ public class SmartLampAPI {
    */
   public void setLedValue(int red, int green, int blue, CommandCallback callback) {
     Command ledSet = new LedSetCommand(mLamp, red, green, blue, callback);
+    ledSet.setTimeTicket(System.currentTimeMillis());
     filterManager.sendCommand(ledSet);
 
   }
@@ -81,8 +84,9 @@ public class SmartLampAPI {
    * @param callback - onResult()
    */
   public void getLedState(CommandCallback callback) {
-    // Command ledState = new LedStateCommand(mLamp, callback);
-    // mEngine.executeCommand(ledState);
+    Command ledState = new LedStateCommand(mLamp, callback);
+    ledState.setTimeTicket(System.currentTimeMillis());
+    filterManager.sendCommand(ledState);
   }
 
   /**
@@ -91,8 +95,9 @@ public class SmartLampAPI {
    * @param callback - onResult()
    */
   public void getServoState(CommandCallback callback) {
-    // Command servoState = new ServoStateCommand(mLamp, callback);
-    // mEngine.executeCommand(servoState);
+    Command servoState = new ServoStateCommand(mLamp, callback);
+    servoState.setTimeTicket(System.currentTimeMillis());
+    filterManager.sendCommand(servoState);
 
   }
 }
