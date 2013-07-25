@@ -52,10 +52,9 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="com.gergelydezso.smartlampsdk.command.filter.SplitterCommandFilter" 
-    project="SmartLampSDK" 
-    file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/filter/SplitterCommandFilter.java" binary="false" 
-    corner="BOTTOM_RIGHT">    
+  <class id="6" language="java" name="com.gergelydezso.smartlampsdk.command.filter.BlankCommandFilter" 
+    project="SmartLampSDK" file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/filter/BlankCommandFilter.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
     <position height="117" width="214" x="296" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      

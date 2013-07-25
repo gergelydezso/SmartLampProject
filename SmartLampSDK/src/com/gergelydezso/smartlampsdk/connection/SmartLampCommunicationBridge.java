@@ -1,5 +1,6 @@
 package com.gergelydezso.smartlampsdk.connection;
 
+import com.gergelydezso.smartlampsdk.ServoMotorEntities;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 
 /**
@@ -15,7 +16,7 @@ public interface SmartLampCommunicationBridge {
    * @param callback - retrieve the result of command (onSuccess/onError).
    * 
    */
-  public void sendSetServoCommand(String id, int value, CommandCallback callback);
+  public void sendSetServoCommand(ServoMotorEntities id, int value, CommandCallback callback);
 
   /**
    * Send led command.

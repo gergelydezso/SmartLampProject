@@ -159,19 +159,16 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
         @Override
         public void onSuccess() {
-          // TODO Auto-generated method stub
 
         }
 
         @Override
         public void onResult(String state) {
-          // TODO Auto-generated method stub
 
         }
 
         @Override
         public void onError() {
-          // TODO Auto-generated method stub
 
         }
       });
@@ -186,20 +183,17 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
         @Override
         public void onSuccess() {
-          // TODO Auto-generated method stub
-
+     
         }
 
         @Override
         public void onResult(String state) {
-          // TODO Auto-generated method stub
-
+     
         }
 
         @Override
         public void onError() {
-          // TODO Auto-generated method stub
-
+   
         }
       });
 
@@ -213,20 +207,17 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
         @Override
         public void onSuccess() {
-          // TODO Auto-generated method stub
-
+   
         }
 
         @Override
         public void onResult(String state) {
-          // TODO Auto-generated method stub
 
         }
 
         @Override
         public void onError() {
-          // TODO Auto-generated method stub
-
+       
         }
       });
 

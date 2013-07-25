@@ -15,9 +15,9 @@ public class BluetoothDeviceFinder {
   private BluetoothAdapter mBtAdapter = null;
   private Context mContext;
   private IntentFilter filter = null;
-  private ConnectionCallback mCallback;
+  private FinderCallback mCallback;
 
-  public BluetoothDeviceFinder(Context context, ConnectionCallback callback) {
+  public BluetoothDeviceFinder(Context context, FinderCallback callback) {
     this.mContext = context;
     this.mCallback = callback;
   }

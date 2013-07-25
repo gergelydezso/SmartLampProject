@@ -12,7 +12,8 @@ import com.gergelydezso.smartlampsdk.command.ServoStateCommand;
 import com.gergelydezso.smartlampsdk.command.filter.TimeCommandFilter;
 import com.gergelydezso.smartlampsdk.command.filter.CommandFilterManager;
 import com.gergelydezso.smartlampsdk.command.filter.CommandTarget;
-import com.gergelydezso.smartlampsdk.command.filter.SplitterCommandFilter;
+import com.gergelydezso.smartlampsdk.command.filter.BlankCommandFilter;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothCommunicationBridge;
 
 /**
  * This is the public API
@@ -29,8 +30,9 @@ public class SmartLampAPI {
 
   @SuppressWarnings("unused")
   private static final String TAG = "SmartLampAPI";
-  private SmartLamp mLamp = new SmartLamp();
-  private CommandFilterManager filterManager = new CommandFilterManager(new CommandTarget());;
+  // private SmartLamp mLamp = new SmartLamp();
+  private SmartLamp mLamp = null;
+  private CommandFilterManager filterManager = new CommandFilterManager(new CommandTarget());
 
   // - last code review modifications
   // public SmartLampAPI(){
@@ -38,9 +40,10 @@ public class SmartLampAPI {
   // mLamp = new SmartLamp(new BluetoothCommunicationBridge());
   // }
 
-  public SmartLampAPI() {
+  public SmartLampAPI(BluetoothCommunicationBridge bridge) {
+    mLamp = new SmartLamp(bridge);
     filterManager.setFilter(new TimeCommandFilter());
-    filterManager.setFilter(new SplitterCommandFilter());
+    filterManager.setFilter(new BlankCommandFilter());
   }
 
   /**

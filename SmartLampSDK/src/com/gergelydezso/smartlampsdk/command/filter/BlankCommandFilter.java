@@ -4,13 +4,13 @@ import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.command.Command;
 
-public class SplitterCommandFilter implements CommandFilter {
+public class BlankCommandFilter implements CommandFilter {
 
   private static final String TAG = "SplitterCommandFilter";
 
   @Override
   public boolean execute(Command commandToBeFiltered) {
-    Log.d(TAG, "ok");
+    Log.d(TAG, "Just a blank filter");
 
     return true;
   }

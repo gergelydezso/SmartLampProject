@@ -7,21 +7,32 @@ public enum ServoMotorEntities {
   /**
    * Servomotor 1.
    * */
-  SERVO1,
+  SERVO1(1),
   /**
    * Servomotor 2.
    * */
-  SERVO2,
+  SERVO2(2),
   /**
    * Servomotor 3.
    * */
-  SERVO3,
+  SERVO3(3),
   /**
    * Servomotor 4.
    * */
-  SERVO4,
+  SERVO4(4),
   /**
    * Servomotor 5.
    * */
-  SERVO5
+  SERVO5(5);
+
+  ServoMotorEntities(int i) {
+    this.value = i;
+  }
+
+  private int value;
+
+  public int getValue() {
+    return value;
+  }
+
 }
