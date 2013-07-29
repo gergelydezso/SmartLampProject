@@ -63,6 +63,8 @@ public class BluetoothDeviceFinder {
           found = true;
           mCallback.foundSmartLamp(device.getAddress());
           mContext.unregisterReceiver(mReceiver);
+          // !!!
+          break;
         }
       }
     }

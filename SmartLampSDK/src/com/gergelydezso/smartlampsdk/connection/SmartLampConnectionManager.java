@@ -14,9 +14,8 @@ public class SmartLampConnectionManager {
 
   public void makeConnection(ConnectionStatusListener connectionListener) {
 
-    BluetoothConnectionControl b = new BluetoothConnectionControl(mContext, connectionListener);
-    // connectionListener.onConnectionReady(new SmartLampAPI(new BluetoothCommunicationBridge()));
-
+    BluetoothConnectionControl connectionControl = new BluetoothConnectionControl(mContext, connectionListener);
+    connectionControl.makeConnection();
   }
 
   public void breakConnection() {

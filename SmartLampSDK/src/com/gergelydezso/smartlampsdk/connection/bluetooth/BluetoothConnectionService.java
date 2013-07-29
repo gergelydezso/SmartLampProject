@@ -219,6 +219,8 @@ public class BluetoothConnectionService {
       catch (IOException e) {
         try {
           mmSocket.close();
+          // !!!
+          Log.d(TAG, "Connection failted_1");
         }
         catch (IOException e2) {
           Log.e(TAG, "unable to close() socket during connection failure", e2);

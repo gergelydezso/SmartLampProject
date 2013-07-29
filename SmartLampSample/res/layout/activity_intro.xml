@@ -18,8 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/lamp_start"
-        android:visibility="invisible" />
+        android:src="@drawable/lamp_start" />
 
     <ImageButton
         android:id="@+id/ImageButton_paly"
@@ -29,7 +28,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         android:background="@null"
-        android:src="@drawable/play_over_video"
-        android:visibility="invisible" />
+        android:src="@drawable/play_over_video" />
 
 </RelativeLayout>

@@ -39,22 +39,20 @@ public class Intro extends Activity {
       @Override
       public void onConnectionReady(SmartLampAPI api) {
         mApiHolder.setAPI(api);
-        Intent intent = new Intent(Intro.this, BaseMenuActivity.class);
-        startActivity(intent);
 
       }
     });
 
     mImageStart = (ImageView) findViewById(R.id.image_start);
-    mVideoIntro = (VideoView) findViewById(R.id.video_intro);
-    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.huh_1);
-    mVideoIntro.setVideoURI(uri);
-    mVideoIntro.setOnCompletionListener(new OnCompletionListener() {
-      @Override
-      public void onCompletion(MediaPlayer mp) {
-
-      }
-    });
+    // mVideoIntro = (VideoView) findViewById(R.id.video_intro);
+    // Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.huh_1);
+    // mVideoIntro.setVideoURI(uri);
+    // mVideoIntro.setOnCompletionListener(new OnCompletionListener() {
+    // @Override
+    // public void onCompletion(MediaPlayer mp) {
+    //
+    // }
+    // });
 
     mButtonPlay = (ImageButton) findViewById(R.id.ImageButton_paly);
     mButtonPlay.setOnClickListener(new OnClickListener() {
@@ -62,26 +60,23 @@ public class Intro extends Activity {
       @Override
       public void onClick(View v) {
 
-        // mImageStart.setVisibility(View.INVISIBLE);
-        // mVideoIntro.start();
-
-        // Intent intent = new Intent(Intro.this,
-        // BaseMenuActivity.class);
-        // startActivity(intent);
-
-        // Intent intent = new Intent(Intro.this, BaseMenuActivity.class);
-        // startActivity(intent);
+        startBaseActivity();
 
       }
     });
 
   }
 
+  public void startBaseActivity() {
+    Intent intent = new Intent(Intro.this, BaseMenuActivity.class);
+    startActivity(intent);
+  }
+
   @Override
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    mImageStart.setVisibility(View.INVISIBLE);
-    mVideoIntro.start();
+    // mImageStart.setVisibility(View.INVISIBLE);
+    // mVideoIntro.start();
   }
 
   @Override

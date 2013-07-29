@@ -27,12 +27,11 @@ public class BluetoothConnectionControl {
   private BluetoothDeviceFinder mDeviceFinder = null;
   public BluetoothConnectionService mConnectionService = null;
   public BluetoothAdapter mBluetoothAdapter = null;
-  private ConnectionStatusListener mList = null;
+  private ConnectionStatusListener mListener = null;
 
-  public BluetoothConnectionControl(Context context, ConnectionStatusListener list) {
+  public BluetoothConnectionControl(Context context, ConnectionStatusListener listener) {
     this.mContext = context;
-    this.mList = list;
-    makeConnection();
+    this.mListener = listener;
   }
 
   public void makeConnection() {
@@ -68,7 +67,7 @@ public class BluetoothConnectionControl {
           BluetoothConnectionHolder connectionHolder = new BluetoothConnectionHolder();
           connectionHolder.setConnection(mConnectionService);
 
-          mList.onConnectionReady(new SmartLampAPI(new BluetoothCommunicationBridge()));
+          mListener.onConnectionReady(new SmartLampAPI(new BluetoothCommunicationBridge()));
 
           Toast.makeText(mContext, "Connected to SmartLamp", Toast.LENGTH_SHORT).show();
           break;

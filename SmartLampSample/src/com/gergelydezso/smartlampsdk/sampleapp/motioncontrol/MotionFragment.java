@@ -203,7 +203,7 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       // mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
       // mTextPart4.setText("lamp rotate by X (" + progress + ")");
 
-      mApi.setServoPosition(ServoMotorEntities.SERVO1, progress, new CommandCallback() {
+      mApi.setServoPosition(ServoMotorEntities.SERVO3, progress, new CommandCallback() {
 
         @Override
         public void onSuccess() {
