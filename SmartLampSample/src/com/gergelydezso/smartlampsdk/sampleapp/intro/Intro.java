@@ -14,6 +14,7 @@ import android.widget.VideoView;
 
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 import com.gergelydezso.smartlampsdk.connection.ConnectionStatusListener;
+import com.gergelydezso.smartlampsdk.connection.ConnectionType;
 import com.gergelydezso.smartlampsdk.connection.SmartLampConnectionManager;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
@@ -34,12 +35,11 @@ public class Intro extends Activity {
     // *** Make the SmartLamp connection and get the SmartLamp API ***
 
     SmartLampConnectionManager manager = new SmartLampConnectionManager(Intro.this);
-    manager.makeConnection(new ConnectionStatusListener() {
+    manager.makeConnection(ConnectionType.BLUETOOTH, new ConnectionStatusListener() {
 
       @Override
       public void onConnectionReady(SmartLampAPI api) {
         mApiHolder.setAPI(api);
-
       }
     });
 

@@ -1,25 +1,29 @@
 package com.gergelydezso.smartlampsdk.connection;
 
-import android.content.Context;
+import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothConnectionControl;
+import android.content.Context;
 
 public class SmartLampConnectionManager {
 
-  private Context mContext;
+  private ConnectionFactory mFactory = new ConnectionFactory();
+  private UserAppContextHolder mConext = new UserAppContextHolder();
+  private ConnectionStatusListener mListener;
 
   public SmartLampConnectionManager(Context context) {
-    this.mContext = context;
+    mConext.setContext(context);
   }
 
-  public void makeConnection(ConnectionStatusListener connectionListener) {
+  public void makeConnection(ConnectionType type, ConnectionStatusListener listener) {
+    this.mListener = listener;
+    mFactory.bulidBridge(type, new BridgeBuildCallback() {
 
-    BluetoothConnectionControl connectionControl = new BluetoothConnectionControl(mContext, connectionListener);
-    connectionControl.makeConnection();
-  }
+      @Override
+      public void onConnected(SmartLampCommunicationBridge bridge) {
+        mListener.onConnectionReady(new SmartLampAPI(bridge));
 
-  public void breakConnection() {
-
+      }
+    });
   }
 
 }

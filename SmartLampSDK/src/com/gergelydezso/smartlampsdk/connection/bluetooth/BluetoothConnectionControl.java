@@ -1,8 +1,5 @@
 package com.gergelydezso.smartlampsdk.connection.bluetooth;
 
-import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
-import com.gergelydezso.smartlampsdk.connection.ConnectionStatusListener;
-
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Context;
@@ -27,14 +24,15 @@ public class BluetoothConnectionControl {
   private BluetoothDeviceFinder mDeviceFinder = null;
   public BluetoothConnectionService mConnectionService = null;
   public BluetoothAdapter mBluetoothAdapter = null;
-  private ConnectionStatusListener mListener = null;
+  private ConnectedListener mListener = null;
 
-  public BluetoothConnectionControl(Context context, ConnectionStatusListener listener) {
+  public BluetoothConnectionControl(Context context) {
     this.mContext = context;
-    this.mListener = listener;
   }
 
-  public void makeConnection() {
+  public void makeConnection(ConnectedListener listener) {
+
+    this.mListener = listener;
 
     mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
     mConnectionService = new BluetoothConnectionService(mHandler);
@@ -67,7 +65,7 @@ public class BluetoothConnectionControl {
           BluetoothConnectionHolder connectionHolder = new BluetoothConnectionHolder();
           connectionHolder.setConnection(mConnectionService);
 
-          mListener.onConnectionReady(new SmartLampAPI(new BluetoothCommunicationBridge()));
+          mListener.onConnected();
 
           Toast.makeText(mContext, "Connected to SmartLamp", Toast.LENGTH_SHORT).show();
           break;

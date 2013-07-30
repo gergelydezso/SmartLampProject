@@ -2,16 +2,35 @@ package com.gergelydezso.smartlampsdk.connection.bluetooth;
 
 import android.util.Log;
 
-import com.gergelydezso.smartlampsdk.ServoMotorEntities;
+import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
+import com.gergelydezso.smartlampsdk.connection.UserAppContextHolder;
 
 public class BluetoothCommunicationBridge implements SmartLampCommunicationBridge {
 
   private BluetoothConnectionService mConnectionService;
+  private ConnectedListener mListener;
 
   public BluetoothCommunicationBridge() {
-    mConnectionService = BluetoothConnectionHolder.getConnection();
+  }
+
+  @Override
+  public void connect(ConnectedListener listener) {
+
+    this.mListener = listener;
+
+    BluetoothConnectionControl connectionControl = new BluetoothConnectionControl(UserAppContextHolder.getContext());
+    connectionControl.makeConnection(new ConnectedListener() {
+
+      @Override
+      public void onConnected() {
+        mConnectionService = BluetoothConnectionHolder.getConnection();
+        mListener.onConnected();
+
+      }
+    });
+
   }
 
   @Override
@@ -22,7 +41,7 @@ public class BluetoothCommunicationBridge implements SmartLampCommunicationBridg
   }
 
   @Override
-  public void sendSetServoCommand(ServoMotorEntities id, int value, CommandCallback callback) {
+  public void sendSetServoCommand(ServoMotorEntity id, int value, CommandCallback callback) {
     mConnectionService.write("S" + Integer.toString(id.getValue()) + fillWithZero(value), callback);
   }
 

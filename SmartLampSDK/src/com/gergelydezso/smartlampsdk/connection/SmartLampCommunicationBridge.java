@@ -1,12 +1,15 @@
 package com.gergelydezso.smartlampsdk.connection;
 
-import com.gergelydezso.smartlampsdk.ServoMotorEntities;
+import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectedListener;
 
 /**
  * Interface for specific communications.
  */
 public interface SmartLampCommunicationBridge {
+
+  public void connect(ConnectedListener listener);
 
   /**
    * Send servo command.
@@ -16,7 +19,7 @@ public interface SmartLampCommunicationBridge {
    * @param callback - retrieve the result of command (onSuccess/onError).
    * 
    */
-  public void sendSetServoCommand(ServoMotorEntities id, int value, CommandCallback callback);
+  public void sendSetServoCommand(ServoMotorEntity id, int value, CommandCallback callback);
 
   /**
    * Send led command.

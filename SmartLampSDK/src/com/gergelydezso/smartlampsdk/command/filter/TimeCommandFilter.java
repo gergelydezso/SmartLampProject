@@ -4,19 +4,19 @@ import java.util.HashMap;
 
 import android.util.Log;
 
-import com.gergelydezso.smartlampsdk.ServoMotorEntities;
+import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
 
 public class TimeCommandFilter implements CommandFilter {
 
   private static final String TAG = "TimeCommandFilter";
-  private HashMap<ServoMotorEntities, Long> mMap;
+  private HashMap<ServoMotorEntity, Long> mMap;
   private long mPreviousTime;
 
   public TimeCommandFilter() {
-    mMap = new HashMap<ServoMotorEntities, Long>();
-    for (ServoMotorEntities servoID : ServoMotorEntities.values()) {
+    mMap = new HashMap<ServoMotorEntity, Long>();
+    for (ServoMotorEntity servoID : ServoMotorEntity.values()) {
       mMap.put(servoID, 0l);
     }
   }
@@ -27,7 +27,7 @@ public class TimeCommandFilter implements CommandFilter {
     if (commandToBeFiltered instanceof ServoSetCommand) {
       ServoSetCommand servoSet = (ServoSetCommand) commandToBeFiltered;
 
-      ServoMotorEntities servoID = servoSet.getServoID();
+      ServoMotorEntity servoID = servoSet.getServoID();
       long previousTime = mMap.get(servoID);
       long actualTime = servoSet.getTimeTicket();
       long diffTime = actualTime - previousTime;

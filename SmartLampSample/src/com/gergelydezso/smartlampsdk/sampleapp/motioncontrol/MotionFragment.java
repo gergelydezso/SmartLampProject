@@ -15,7 +15,7 @@ import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 
-import com.gergelydezso.smartlampsdk.ServoMotorEntities;
+import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
@@ -155,7 +155,7 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_y);
       // mTextPart0.setText("lamp rotate by Y (" + progress + ")");
 
-      mApi.setServoPosition(ServoMotorEntities.SERVO1, progress, new CommandCallback() {
+      mApi.setServoPosition(ServoMotorEntity.SERVO1, progress, new CommandCallback() {
 
         @Override
         public void onSuccess() {
@@ -179,21 +179,21 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
       // mTextPart4.setText("lamp rotate by X (" + progress + ")");
 
-      mApi.setServoPosition(ServoMotorEntities.SERVO5, progress, new CommandCallback() {
+      mApi.setServoPosition(ServoMotorEntity.SERVO5, progress, new CommandCallback() {
 
         @Override
         public void onSuccess() {
-     
+
         }
 
         @Override
         public void onResult(String state) {
-     
+
         }
 
         @Override
         public void onError() {
-   
+
         }
       });
 
@@ -203,11 +203,11 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       // mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
       // mTextPart4.setText("lamp rotate by X (" + progress + ")");
 
-      mApi.setServoPosition(ServoMotorEntities.SERVO3, progress, new CommandCallback() {
+      mApi.setServoPosition(ServoMotorEntity.SERVO3, progress, new CommandCallback() {
 
         @Override
         public void onSuccess() {
-   
+
         }
 
         @Override
@@ -217,7 +217,7 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
         @Override
         public void onError() {
-       
+
         }
       });
 

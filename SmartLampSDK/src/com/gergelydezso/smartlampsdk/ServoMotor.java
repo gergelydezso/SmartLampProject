@@ -14,7 +14,7 @@ public class ServoMotor {
     mBridge = bridge;
   }
 
-  public void setServoPosition(ServoMotorEntities id, int degree, CommandCallback callback) {
+  public void setServoPosition(ServoMotorEntity id, int degree, CommandCallback callback) {
     mBridge.sendSetServoCommand(id, degree, callback);
     Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
   }

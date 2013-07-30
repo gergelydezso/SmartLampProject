@@ -1,6 +1,6 @@
 package com.gergelydezso.smartlampsdk;
 
-public enum SmartLampGestures {
+public enum SmartLampGesture {
 
   /**
    * SmartLamp gesture 1.

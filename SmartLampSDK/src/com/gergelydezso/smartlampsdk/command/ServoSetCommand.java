@@ -1,26 +1,26 @@
 package com.gergelydezso.smartlampsdk.command;
 
 import com.gergelydezso.smartlampsdk.ServoMotor;
-import com.gergelydezso.smartlampsdk.ServoMotorEntities;
+import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 
 public class ServoSetCommand implements Command {
 
   private SmartLamp mLamp;
-  private ServoMotorEntities mId;
+  private ServoMotorEntity mId;
   private int mDegree;
   private CommandCallback mCallback;
   private ServoMotor mServo;
   private long mTimeTicket;
 
-  public ServoSetCommand(SmartLamp lamp, ServoMotorEntities id, int degree, CommandCallback callback) {
+  public ServoSetCommand(SmartLamp lamp, ServoMotorEntity id, int degree, CommandCallback callback) {
     this.mLamp = lamp;
     this.mId = id;
     this.mDegree = degree;
     this.mCallback = callback;
   }
 
-  public ServoMotorEntities getServoID() {
+  public ServoMotorEntity getServoID() {
     return mId;
   }
 

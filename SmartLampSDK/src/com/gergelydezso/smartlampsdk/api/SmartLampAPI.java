@@ -1,8 +1,8 @@
 package com.gergelydezso.smartlampsdk.api;
 
-import com.gergelydezso.smartlampsdk.ServoMotorEntities;
+import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.SmartLamp;
-import com.gergelydezso.smartlampsdk.SmartLampGestures;
+import com.gergelydezso.smartlampsdk.SmartLampGesture;
 import com.gergelydezso.smartlampsdk.command.Command;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.command.LedSetCommand;
@@ -21,7 +21,7 @@ import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
  * <ul>
  * <li>Set SmartLamp - LedRGB color with {@link SmartLampAPI#setLedValue(LedPinTypes, int, CommandCallback)}. Set
  * <li>Set SmartLamp - ServoMotor position with
- * {@link SmartLampAPI#setServoPosition(ServoMotorEntities, int, CommandCallback)}.
+ * {@link SmartLampAPI#setServoPosition(ServoMotorEntity, int, CommandCallback)}.
  * <li>Get SmartLamp - LedRGB state with {@link SmartLampAPI#getLedState(CommandCallback)}.
  * <li>Get SmartLamp - ServoMotor state with {@link SmartLampAPI#getServoState(CommandCallback)}.
  */
@@ -55,14 +55,14 @@ public class SmartLampAPI {
    * 
    */
 
-  public void setServoPosition(ServoMotorEntities servoPin, int value, CommandCallback callback) {
+  public void setServoPosition(ServoMotorEntity servoPin, int value, CommandCallback callback) {
 
     Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
     servoSet.setTimeTicket(System.currentTimeMillis());
     filterManager.sendCommand(servoSet);
   }
 
-  public void setLampGesture(SmartLampGestures gesture) {
+  public void setLampGesture(SmartLampGesture gesture) {
 
   }
 
