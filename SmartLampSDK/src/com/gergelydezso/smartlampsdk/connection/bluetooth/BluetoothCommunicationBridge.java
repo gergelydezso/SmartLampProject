@@ -24,9 +24,19 @@ public class BluetoothCommunicationBridge implements SmartLampCommunicationBridg
     connectionControl.makeConnection(new ConnectedListener() {
 
       @Override
-      public void onConnected() {
+      public void onConnectionReady() {
         mConnectionService = BluetoothConnectionHolder.getConnection();
-        mListener.onConnected();
+        mListener.onConnectionReady();
+
+      }
+
+      @Override
+      public void onConnectionFailed() {
+
+      }
+
+      @Override
+      public void onConnectionLost() {
 
       }
     });

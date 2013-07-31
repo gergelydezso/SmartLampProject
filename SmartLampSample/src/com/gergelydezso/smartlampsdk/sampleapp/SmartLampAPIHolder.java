@@ -4,7 +4,7 @@ import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 
 public class SmartLampAPIHolder {
 
-  private static SmartLampAPI mApi;
+  private static SmartLampAPI mApi = null;
 
   public void setAPI(SmartLampAPI api) {
     SmartLampAPIHolder.mApi = api;

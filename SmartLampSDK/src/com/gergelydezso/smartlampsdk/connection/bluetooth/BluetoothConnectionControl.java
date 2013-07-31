@@ -65,9 +65,9 @@ public class BluetoothConnectionControl {
           BluetoothConnectionHolder connectionHolder = new BluetoothConnectionHolder();
           connectionHolder.setConnection(mConnectionService);
 
-          mListener.onConnected();
+          mListener.onConnectionReady();
 
-          Toast.makeText(mContext, "Connected to SmartLamp", Toast.LENGTH_SHORT).show();
+          Toast.makeText(mContext, "Connected to SmartLamp", Toast.LENGTH_LONG).show();
           break;
         case BluetoothConnectionService.STATE_CONNECTING:
           // TODO
@@ -84,6 +84,7 @@ public class BluetoothConnectionControl {
       case MESSAGE_DEVICE_NAME:
         break;
       case MESSAGE_TOAST:
+        Toast.makeText(mContext, msg.getData().getString(TOAST), Toast.LENGTH_LONG).show();
         break;
       }
     }

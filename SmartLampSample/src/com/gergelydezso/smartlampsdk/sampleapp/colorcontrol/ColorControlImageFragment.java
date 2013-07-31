@@ -25,7 +25,7 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
   private ColorPickerCustomView mColorPicker;
   @SuppressWarnings("unused")
   private int w, h;
-  private SmartLampAPI mApi;
+  private SmartLampAPI mApi = null;
 
   // private HorizontalVariableListView mList;
 

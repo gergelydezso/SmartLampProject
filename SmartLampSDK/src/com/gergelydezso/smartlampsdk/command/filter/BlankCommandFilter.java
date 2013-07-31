@@ -6,7 +6,7 @@ import com.gergelydezso.smartlampsdk.command.Command;
 
 public class BlankCommandFilter implements CommandFilter {
 
-  private static final String TAG = "SplitterCommandFilter";
+  private static final String TAG = "BlankCommandFilter";
 
   @Override
   public boolean execute(Command commandToBeFiltered) {

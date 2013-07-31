@@ -17,8 +17,18 @@ public class ConnectionFactory {
       bridge.connect(new ConnectedListener() {
 
         @Override
-        public void onConnected() {
-          mCallback.onConnected(bridge);
+        public void onConnectionReady() {
+          mCallback.onConnectionReady(bridge);
+
+        }
+
+        @Override
+        public void onConnectionFailed() {
+
+        }
+
+        @Override
+        public void onConnectionLost() {
 
         }
       });

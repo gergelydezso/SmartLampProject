@@ -19,8 +19,18 @@ public class SmartLampConnectionManager {
     mFactory.bulidBridge(type, new BridgeBuildCallback() {
 
       @Override
-      public void onConnected(SmartLampCommunicationBridge bridge) {
+      public void onConnectionReady(SmartLampCommunicationBridge bridge) {
         mListener.onConnectionReady(new SmartLampAPI(bridge));
+
+      }
+
+      @Override
+      public void onConnectionFailed() {
+
+      }
+
+      @Override
+      public void onConnectionLost() {
 
       }
     });

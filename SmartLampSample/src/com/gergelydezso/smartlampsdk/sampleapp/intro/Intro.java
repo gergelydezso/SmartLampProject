@@ -41,6 +41,16 @@ public class Intro extends Activity {
       public void onConnectionReady(SmartLampAPI api) {
         mApiHolder.setAPI(api);
       }
+
+      @Override
+      public void onConnectionFaild() {
+
+      }
+
+      @Override
+      public void onConnectionLost() {
+
+      }
     });
 
     mImageStart = (ImageView) findViewById(R.id.image_start);
