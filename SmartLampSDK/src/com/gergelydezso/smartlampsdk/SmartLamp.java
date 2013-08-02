@@ -22,4 +22,12 @@ public class SmartLamp {
     return mServo;
   }
 
+  public SmartLampCommunicationBridge getBridge() {
+    return mBridge;
+  }
+
+  public void setAllParameters() {
+
+  }
+
 }

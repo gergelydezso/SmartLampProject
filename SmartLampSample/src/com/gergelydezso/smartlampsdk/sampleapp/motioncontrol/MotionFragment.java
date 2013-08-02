@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.command.AllCommandConfiguration;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
@@ -179,7 +180,7 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
       // mTextPart4.setText("lamp rotate by X (" + progress + ")");
 
-      mApi.setServoPosition(ServoMotorEntity.SERVO5, progress, new CommandCallback() {
+      mApi.setServoPosition(ServoMotorEntity.SERVO2, progress, new CommandCallback() {
 
         @Override
         public void onSuccess() {
@@ -203,7 +204,10 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       // mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
       // mTextPart4.setText("lamp rotate by X (" + progress + ")");
 
-      mApi.setServoPosition(ServoMotorEntity.SERVO3, progress, new CommandCallback() {
+      AllCommandConfiguration config = new AllCommandConfiguration();
+      config.setServoValue(ServoMotorEntity.SERVO1, 10);
+
+      mApi.setAllParameters(config, new CommandCallback() {
 
         @Override
         public void onSuccess() {

@@ -60,6 +60,12 @@ public class BluetoothCommunicationBridge implements SmartLampCommunicationBridg
     mConnectionService.write("R" + id, callback);
   }
 
+  @Override
+  public void sendSetAllCommand(String command, CommandCallback callback) {
+    mConnectionService.write(command, callback);
+    Log.d("BluetoothCommunicationBridge", command);
+  }
+
   public String fillWithZero(int value) {
 
     String result = String.format("%03d", value);

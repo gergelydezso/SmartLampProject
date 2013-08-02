@@ -32,6 +32,8 @@ public interface SmartLampCommunicationBridge {
    */
   public void sendSetLedCommand(int reg, int green, int blue, CommandCallback callback);
 
+  public void sendSetAllCommand(String command, CommandCallback callback);
+
   /**
    * State request command.
    * 

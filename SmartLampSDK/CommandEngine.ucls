@@ -4,7 +4,7 @@
   <class id="1" language="java" name="com.gergelydezso.smartlampsdk.command.CommandConsumer" project="SmartLampSDK" 
     file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/CommandConsumer.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="153" width="353" x="363" y="1128"/>    
+    <position height="153" width="353" x="536" y="1128"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <class id="2" language="java" name="com.gergelydezso.smartlampsdk.command.CommandEngine" project="SmartLampSDK" 
     file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/CommandEngine.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="153" width="436" x="363" y="935"/>    
+    <position height="153" width="436" x="536" y="935"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -24,7 +24,7 @@
   <class id="3" language="java" name="com.gergelydezso.smartlampsdk.command.LedSetCommand" project="SmartLampSDK" 
     file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/LedSetCommand.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="261" width="301" x="62" y="284"/>    
+    <position height="261" width="301" x="308" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -33,7 +33,7 @@
   </class>  
   <class id="4" language="java" name="com.gergelydezso.smartlampsdk.api.SmartLampAPI" project="SmartLampSDK" 
     file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/api/SmartLampAPI.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="207" width="332" x="62" y="37"/>    
+    <position height="207" width="323" x="649" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -43,7 +43,7 @@
   <interface id="5" language="java" name="com.gergelydezso.smartlampsdk.command.filter.CommandFilter" 
     project="SmartLampSDK" file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/filter/CommandFilter.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="81" width="214" x="638" y="778"/>    
+    <position height="81" width="214" x="467" y="778"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -53,7 +53,7 @@
   <class id="6" language="java" name="com.gergelydezso.smartlampsdk.command.filter.CommandFilterChain" 
     project="SmartLampSDK" file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/filter/CommandFilterChain.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="214" x="403" y="585"/>    
+    <position height="153" width="214" x="507" y="585"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -64,7 +64,7 @@
     project="SmartLampSDK" 
     file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/filter/CommandFilterManager.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="117" width="223" x="403" y="284"/>    
+    <position height="117" width="223" x="649" y="284"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -74,7 +74,7 @@
   <class id="8" language="java" name="com.gergelydezso.smartlampsdk.command.filter.CommandTarget" project="SmartLampSDK" 
     file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/filter/CommandTarget.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="117" width="214" x="363" y="778"/>    
+    <position height="117" width="214" x="742" y="778"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   <class id="9" language="java" name="com.gergelydezso.smartlampsdk.command.filter.TimeCommandFilter" 
     project="SmartLampSDK" file="/SmartLampSDK/src/com/gergelydezso/smartlampsdk/command/filter/TimeCommandFilter.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="153" width="214" x="666" y="284"/>    
+    <position height="-1" width="-1" x="156" y="354"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -92,29 +92,37 @@
     </display>  
   </class>  
   <dependency id="10">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="1"/>  
+    <bendpoint x="902" y="284"/>    
+    <bendpoint x="902" y="585"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="8"/>  
   </dependency>  
   <association id="11">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="12" name="filters"/>      
-      <multiplicity id="13" minimum="0" maximum="2147483647"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="12" name="filterManager"/>      
+      <multiplicity id="13" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
+    <end type="TARGET" refId="7" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency id="14">    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="9"/>  
+    <end type="TARGET" refId="3"/>  
   </dependency>  
-  <association id="15">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="16" name="target"/>      
-      <multiplicity id="17" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
+  <realization id="15">    
+    <bendpoint x="264" y="585"/>    
+    <end type="SOURCE" refId="9"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <dependency id="16">    
+    <bendpoint x="476" y="585"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="5"/>  
+  </dependency>  
+  <dependency id="17">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="1"/>  
+  </dependency>  
   <association id="18">    
     <end type="SOURCE" refId="7" navigable="false">      
       <attribute id="19" name="filterChain"/>      
@@ -124,46 +132,38 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <dependency id="21">    
-    <bendpoint x="31" y="284"/>    
-    <bendpoint x="31" y="585"/>    
     <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="8"/>  
+    <end type="TARGET" refId="9"/>  
   </dependency>  
   <association id="22">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="23" name="filterManager"/>      
-      <multiplicity id="24" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="25">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="26" name="mEngine"/>      
-      <multiplicity id="27" minimum="0" maximum="1"/>    
+      <attribute id="23" name="mEngine"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="2" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <dependency id="28">    
-    <bendpoint x="647" y="585"/>    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="5"/>  
-  </dependency>  
-  <realization id="29">    
-    <bendpoint x="668" y="585"/>    
-    <end type="SOURCE" refId="9"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <dependency id="30">    
-    <bendpoint x="372" y="585"/>    
+  <dependency id="25">    
+    <bendpoint x="751" y="585"/>    
     <end type="SOURCE" refId="7"/>    
     <end type="TARGET" refId="8"/>  
   </dependency>  
-  <dependency id="31">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="3"/>  
-  </dependency>  
+  <association id="26">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="27" name="target"/>      
+      <multiplicity id="28" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="29">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="30" name="filters"/>      
+      <multiplicity id="31" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="true" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

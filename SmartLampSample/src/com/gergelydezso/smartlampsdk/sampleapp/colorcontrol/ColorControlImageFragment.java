@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.command.AllCommandConfiguration;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
@@ -92,6 +93,7 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
       // redValue = (int) (redValue * 0.7 * 1.5);
       // greenValue = (int) (greenValue * 1.2 * 1.5);
       // blueValue = (int) (blueValue * 1.5);
+
       mApi.setLedValue(redValue, blueValue, greenValue, new CommandCallback() {
 
         @Override
