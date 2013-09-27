@@ -1,118 +1,204 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg" >
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@drawable/bg">
 
-    <RelativeLayout
-        android:id="@+id/custom_view_container"
+
+  <RelativeLayout
+      android:id="@+id/custom_view_container"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <com.gergelydezso.smartlampsdk.sampleapp.motioncontrol.LampMotion
+        android:id="@+id/lamp_motion"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"/>
 
-        <com.gergelydezso.smartlampsdk.sampleapp.motioncontrol.LampMotion
-            android:id="@+id/lamp_motion"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+    <ImageView
+        android:id="@+id/imageView_coordinate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:alpha="80"
+        android:padding="10dp"
+        android:src="@drawable/coordinate_syztem"/>
 
-        <ImageView
-            android:id="@+id/imageView_coordinate"
-            android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/lamp_motion"
+        android:orientation="vertical">
+
+      <ImageView
+          android:id="@+id/header_line"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:paddingLeft="35dp"
+          android:paddingRight="35dp"
+          android:paddingBottom="8dp"
+          android:src="@drawable/alarm_line"/>
+
+      <!--<LinearLayout-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:orientation="horizontal"-->
+      <!--android:paddingBottom="10dp"-->
+      <!--android:gravity="center"-->
+      <!--android:layout_gravity="center_horizontal">-->
+
+      <!--<ImageView-->
+      <!--android:id="@+id/header_line"-->
+      <!--android:layout_width="170dp"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_alignParentLeft="true"-->
+      <!--android:paddingLeft="15dp"-->
+      <!--android:paddingRight="15dp"-->
+      <!--android:paddingBottom="8dp"-->
+      <!--android:layout_gravity="center"-->
+      <!--android:src="@drawable/alarm_line"/>-->
+
+      <!--&lt;!&ndash;<ImageView&ndash;&gt;-->
+      <!--&lt;!&ndash;android:id="@+id/header_line"&ndash;&gt;-->
+      <!--&lt;!&ndash;android:layout_width="20dp"&ndash;&gt;-->
+      <!--&lt;!&ndash;android:layout_height="20dp"&ndash;&gt;-->
+      <!--&lt;!&ndash;android:src="@drawable/alarm_bg_icon"/>&ndash;&gt;-->
+
+      <!--<ImageView-->
+      <!--android:id="@+id/header_line"-->
+      <!--android:layout_width="170dp"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_alignParentLeft="true"-->
+      <!--android:paddingLeft="15dp"-->
+      <!--android:paddingRight="15dp"-->
+      <!--android:paddingBottom="8dp"-->
+      <!--android:layout_gravity="center"-->
+      <!--android:src="@drawable/alarm_line"/>-->
+
+      <!--</LinearLayout>-->
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_horizontal"
+          android:paddingBottom="8dp">
+
+        <SeekBar
+            android:id="@+id/seekBar_part0"
+            android:layout_width="320dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:alpha="50"
-            android:padding="10dp"
-            android:src="@drawable/coordinate_syztem" />
+            android:layout_gravity="center_horizontal"
+            android:max="180"
+            android:progress="90"
+            android:indeterminate="false"/>
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="center_horizontal"
+          android:paddingBottom="8dp">
+
+        <SeekBar
+            android:id="@+id/seekBar_part4"
+            android:layout_width="320dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|right"
+            android:max="180"
+            android:progress="90"
+            android:indeterminate="false"/>
+      </LinearLayout>
+
+      <ImageView
+          android:id="@+id/header_line"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_alignParentLeft="true"
+          android:paddingLeft="35dp"
+          android:paddingRight="35dp"
+          android:paddingBottom="8dp"
+          android:src="@drawable/alarm_line"/>
+
+      <!--<LinearLayout-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:orientation="horizontal"-->
+      <!--android:layout_gravity="center_horizontal">-->
+
+      <!--<ImageView-->
+      <!--android:id="@+id/header_line"-->
+      <!--android:layout_width="170dp"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_alignParentLeft="true"-->
+      <!--android:paddingLeft="15dp"-->
+      <!--android:paddingRight="15dp"-->
+      <!--android:paddingBottom="8dp"-->
+      <!--android:src="@drawable/alarm_line"/>-->
+
+      <!--<ImageView-->
+      <!--android:id="@+id/header_line"-->
+      <!--android:layout_width="170dp"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_alignParentLeft="true"-->
+      <!--android:paddingLeft="15dp"-->
+      <!--android:paddingRight="15dp"-->
+      <!--android:paddingBottom="8dp"-->
+      <!--android:src="@drawable/alarm_line"/>-->
+
+      <!--</LinearLayout>-->
+
+      <HorizontalScrollView
+          android:paddingTop="15dp"
+          android:paddingLeft="15dp"
+          android:paddingRight="15dp"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:id="@+id/horizontalScrollView"
+          android:layout_gravity="center"
+          android:scrollbars="none">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:id="@+id/horizontal_layout"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/lamp_motion"
-            android:layout_marginTop="54dp"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/textView_part0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="part0"
-                    android:textColor="#a8a1a1" />
-
-                <SeekBar
-                    android:id="@+id/seekBar_part0"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:max="180"
-                    android:progress="90" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/textView_part4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="part4"
-                    android:textColor="#a8a1a1" />
-
-                <SeekBar
-                    android:id="@+id/seekBar_part4"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:max="180"
-                    android:progress="90" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <TextView
-                    android:id="@+id/textView_part0"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:padding="10dp"
-                    android:text="part3"
-                    android:textColor="#a8a1a1" />
-
-                <SeekBar
-                    android:id="@+id/seekBar_part3"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:max="180"
-                    android:progress="90" />
-            </LinearLayout>
+            android:orientation="horizontal">
         </LinearLayout>
-    </RelativeLayout>
 
-    <!-- <it.sephiroth.android.library.widget.HorizontalVariableListView -->
-    <!-- android:id="@+id/list" -->
-    <!-- android:layout_width="match_parent" -->
-    <!-- android:layout_height="150dp" -->
-    <!-- android:layout_gravity="bottom" -->
-    <!-- android:background="#222222" -->
-    <!-- android:gravity="bottom|center_vertical" -->
-    <!-- android:paddingBottom="0dp" -->
-    <!-- android:paddingTop="0dp" > -->
-    <!-- </it.sephiroth.android.library.widget.HorizontalVariableListView> -->
+      </HorizontalScrollView>
+
+
+    </LinearLayout>
+  </RelativeLayout>
+
+  <AbsoluteLayout
+      android:layout_width="match_parent"
+      android:layout_height="match_parent">
+
+    <!--<ImageView-->
+        <!--android:id="@+id/parttt1"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:src="@drawable/alarm_bg_icon"-->
+        <!--android:layout_x="220px"-->
+        <!--android:layout_y="220px"/>-->
+
+  </AbsoluteLayout>
+
+
+
+  <!-- <it.sephiroth.android.library.widget.HorizontalVariableListView -->
+  <!-- android:id="@+id/list" -->
+  <!-- android:layout_width="match_parent" -->
+  <!-- android:layout_height="150dp" -->
+  <!-- android:layout_gravity="bottom" -->
+  <!-- android:background="#222222" -->
+  <!-- android:gravity="bottom|center_vertical" -->
+  <!-- android:paddingBottom="0dp" -->
+  <!-- android:paddingTop="0dp" > -->
+  <!-- </it.sephiroth.android.library.widget.HorizontalVariableListView> -->
 
 </FrameLayout>

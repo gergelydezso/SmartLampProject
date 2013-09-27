@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
-import com.larswerkman.colorpicker.ColorPicker;
+import com.larswerkman.colorpicker .ColorPicker;
 import com.larswerkman.colorpicker.ColorPicker.OnColorChangedListener;
 import com.larswerkman.colorpicker.OpacityBar;
 import com.larswerkman.colorpicker.SaturationBar;

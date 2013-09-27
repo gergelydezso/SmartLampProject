@@ -1,6 +1,82 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@drawable/bg">
+
+
+  <HorizontalScrollView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:id="@+id/horizontalScrollView"
+      android:layout_gravity="center"
+      android:scrollbars="none"
+      android:overScrollMode="never">
+
+    <LinearLayout
+        android:id="@+id/horizontal_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+      <!--<ImageView-->
+          <!--android:layout_width="wrap_content"-->
+          <!--android:layout_height="wrap_content"-->
+          <!--android:padding="10dp"-->
+          <!--android:src="@drawable/alarm_bg_icon"/>-->
+
+    </LinearLayout>
+
+  </HorizontalScrollView>
 
 </FrameLayout>

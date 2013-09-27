@@ -25,6 +25,7 @@ import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.MusicVisualiza
 import com.gergelydezso.smartlampsdk.sampleapp.notifications.NotificationsFragment;
 
 public class BaseMenuActivity extends FragmentActivity {
+
   private DrawerLayout mDrawerLayout;
   private ListView mDrawerList;
   private ActionBarDrawerToggle mDrawerToggle;
@@ -34,6 +35,9 @@ public class BaseMenuActivity extends FragmentActivity {
   private String[] mTitles;
   private static final String TAG = "BaseMenuActivity";
   private FragmentManager fragmentManager;
+  private Fragment fragmentMotion;
+  private static final String MOTION_FRAGMENT_TAG = "motionFragment";
+  private static final String MUSIC_FRAGMENT_TAG = "musicFragment";
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -60,10 +64,10 @@ public class BaseMenuActivity extends FragmentActivity {
     // ActionBarDrawerToggle ties together the the proper interactions
     // between the sliding drawer and the action bar app icon
     mDrawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
-    mDrawerLayout, /* DrawerLayout object */
-    R.drawable.ic_drawer, /* nav drawer image to replace 'Up' caret */
-    R.string.drawer_open, /* "open drawer" description for accessibility */
-    R.string.drawer_close /* "close drawer" description for accessibility */
+        mDrawerLayout, /* DrawerLayout object */
+        R.drawable.ic_drawer, /* nav drawer image to replace 'Up' caret */
+        R.string.drawer_open, /* "open drawer" description for accessibility */
+        R.string.drawer_close /* "close drawer" description for accessibility */
     ) {
       public void onDrawerClosed(View view) {
         getActionBar().setTitle(mTitle);
@@ -105,18 +109,29 @@ public class BaseMenuActivity extends FragmentActivity {
     if (mDrawerToggle.onOptionsItemSelected(item)) {
       return true;
     }
+
+
+    MotionFragment motionF = (MotionFragment) getSupportFragmentManager()
+        .findFragmentByTag(MOTION_FRAGMENT_TAG);
+
     // Handle action buttons
     switch (item.getItemId()) {
-    case R.id.action_settings:
-
-      return true;
-    default:
-      return super.onOptionsItemSelected(item);
+      case R.id.action_settings:
+        return true;
+      case R.id.menu_save:
+        motionF.addListElement();
+        return true;
+      case R.id.play:
+        motionF.play();
+        return true;
+      default:
+        return super.onOptionsItemSelected(item);
     }
   }
 
   /* The click listner for ListView in the navigation drawer */
   private class DrawerItemClickListener implements ListView.OnItemClickListener {
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
       selectItem(position);
@@ -137,32 +152,32 @@ public class BaseMenuActivity extends FragmentActivity {
     // fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
     switch (position) {
-    case 0:
-      Fragment fragmentAlarmClock = new AlarmClockFragment();
-      fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentAlarmClock).commit();
-      break;
-    case 1:
+      case 0:
+        Fragment fragmentAlarmClock = new AlarmClockFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentAlarmClock).commit();
+        break;
+      case 1:
 
-      Fragment fragmentColorControl = new ColorControlImageFragment();
-      fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentColorControl).commit();
+        Fragment fragmentColorControl = new ColorControlImageFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentColorControl).commit();
 
-      break;
-    case 2:
+        break;
+      case 2:
 
-      Fragment fragmentMotion = new MotionFragment();
-      fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMotion).commit();
+        fragmentMotion = new MotionFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMotion, MOTION_FRAGMENT_TAG).commit();
 
-      break;
-    case 3:
+        break;
+      case 3:
 
-      Fragment fragmentMusicV = new MusicVisualizationFragment();
-      fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMusicV).commit();
-      break;
-    case 4:
+        Fragment fragmentMusicV = new MusicVisualizationFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMusicV, MUSIC_FRAGMENT_TAG).commit();
+        break;
+      case 4:
 
-      Fragment fragmentNotifications = new NotificationsFragment();
-      fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentNotifications).commit();
-      break;
+        Fragment fragmentNotifications = new NotificationsFragment();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentNotifications).commit();
+        break;
     }
 
     // update selected item and title, then close the drawer

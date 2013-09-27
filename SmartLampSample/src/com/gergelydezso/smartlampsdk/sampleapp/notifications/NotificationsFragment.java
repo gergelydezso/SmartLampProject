@@ -110,7 +110,8 @@ public class NotificationsFragment extends Fragment {
           currentColor = color;
         }
       });
-      FrameLayout.LayoutParams plLp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
+      FrameLayout.LayoutParams plLp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+          LayoutParams.MATCH_PARENT);
       contentView.addView(pickerLayout, plLp);
 
       RelativeLayout.LayoutParams pLp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,

@@ -27,7 +27,6 @@ public class LampMotion extends View {
   private int mDistanceArm3;
   private int mRampDistance1;
   private int mRampDistance2;
-  @SuppressWarnings("unused")
   private int mRampDistance3;
   private int[] mFixPoint;
   private int[] mMovingPointArm1;
@@ -52,9 +51,10 @@ public class LampMotion extends View {
   private Rect mRect1;
   private Rect mRect2;
   private Rect mRect3;
-  @SuppressWarnings("unused")
   private boolean mTest;
   private MotionFragment mMotionFragment;
+
+  public double globalDegree;
 
   public LampMotion(Context context, AttributeSet attrs) {
     super(context, attrs);
@@ -79,7 +79,7 @@ public class LampMotion extends View {
     mBaseLinePaint.setStyle(Style.STROKE);
     mBaseLinePaint.setStrokeJoin(Paint.Join.ROUND);
     mBaseLinePaint.setStrokeCap(Paint.Cap.ROUND);
-    mBaseLinePaint.setPathEffect(new DashPathEffect(new float[] { 10, 10 }, 0));
+    mBaseLinePaint.setPathEffect(new DashPathEffect(new float[]{10, 10}, 0));
 
     mCirclePathPaint = new Paint();
     mCirclePathPaint.setAntiAlias(true);
@@ -88,7 +88,7 @@ public class LampMotion extends View {
     mCirclePathPaint.setStyle(Style.STROKE);
     mCirclePathPaint.setStrokeJoin(Paint.Join.ROUND);
     mCirclePathPaint.setStrokeCap(Paint.Cap.ROUND);
-    mCirclePathPaint.setPathEffect(new DashPathEffect(new float[] { 10, 10 }, 0));
+    mCirclePathPaint.setPathEffect(new DashPathEffect(new float[]{10, 10}, 0));
 
     mRectangleBalck = new Paint();
     mRectangleBalck.setColor(Color.DKGRAY);
@@ -192,23 +192,22 @@ public class LampMotion extends View {
 
   public void setActivePart(int part) {
     switch (part) {
-    case 0:
-      mLinePaint0.setColor(Color.rgb(118, 155, 47));
-      mLinePaint1.setColor(Color.rgb(202, 202, 202));
-      mLinePaint2.setColor(Color.rgb(202, 202, 202));
-      mLinePaint3.setColor(Color.rgb(202, 202, 202));
-      mLinePaint4.setColor(Color.rgb(202, 202, 202));
-      invalidate();
-      break;
-    case 4:
-      mLinePaint4.setColor(Color.rgb(118, 155, 47));
-      mLinePaint0.setColor(Color.rgb(202, 202, 202));
-      mLinePaint1.setColor(Color.rgb(202, 202, 202));
-      mLinePaint2.setColor(Color.rgb(202, 202, 202));
-      mLinePaint3.setColor(Color.rgb(202, 202, 202));
-      invalidate();
-      break;
-
+      case 0:
+        mLinePaint0.setColor(Color.rgb(118, 155, 47));
+        mLinePaint1.setColor(Color.rgb(202, 202, 202));
+        mLinePaint2.setColor(Color.rgb(202, 202, 202));
+        mLinePaint3.setColor(Color.rgb(202, 202, 202));
+        mLinePaint4.setColor(Color.rgb(202, 202, 202));
+        invalidate();
+        break;
+      case 4:
+        mLinePaint4.setColor(Color.rgb(118, 155, 47));
+        mLinePaint0.setColor(Color.rgb(202, 202, 202));
+        mLinePaint1.setColor(Color.rgb(202, 202, 202));
+        mLinePaint2.setColor(Color.rgb(202, 202, 202));
+        mLinePaint3.setColor(Color.rgb(202, 202, 202));
+        invalidate();
+        break;
     }
   }
 
@@ -219,95 +218,108 @@ public class LampMotion extends View {
     int y = (int) event.getY();
 
     double radian = Math.atan2(x - 720 / 2, 1280 / 2 - y);
+    globalDegree = Math.toDegrees(radian);
 
     switch (event.getAction()) {
 
-    case MotionEvent.ACTION_DOWN:
-      if (mRect1.contains(x, y)) {
-        mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
-        mActiveArm = MovingArm.ARM1;
-        mLinePaint1.setColor(Color.rgb(118, 155, 47));
-        mLinePaint0.setColor(Color.rgb(202, 202, 202));
-        mLinePaint2.setColor(Color.rgb(202, 202, 202));
-        mLinePaint3.setColor(Color.rgb(202, 202, 202));
-        mLinePaint4.setColor(Color.rgb(202, 202, 202));
-      }
-      else if (mRect2.contains(x, y)) {
-        mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
-        mActiveArm = MovingArm.ARM2;
-        mLinePaint2.setColor(Color.rgb(118, 155, 47));
-        mLinePaint0.setColor(Color.rgb(202, 202, 202));
-        mLinePaint1.setColor(Color.rgb(202, 202, 202));
-        mLinePaint3.setColor(Color.rgb(202, 202, 202));
-        mLinePaint4.setColor(Color.rgb(202, 202, 202));
-      }
-      else if (mRect3.contains(x, y)) {
-        mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
-        mActiveArm = MovingArm.ARM3;
-        mLinePaint3.setColor(Color.rgb(118, 155, 47));
-        mLinePaint0.setColor(Color.rgb(202, 202, 202));
-        mLinePaint1.setColor(Color.rgb(202, 202, 202));
-        mLinePaint2.setColor(Color.rgb(202, 202, 202));
-        mLinePaint4.setColor(Color.rgb(202, 202, 202));
-      }
-      else
-        mActiveArm = MovingArm.NONE;
-      break;
-
-    case MotionEvent.ACTION_MOVE:
-
-      switch (mActiveArm) {
-      case ARM1:
-        mMovingPointArm1 = calculatePoint(mFixPoint, 200, radian);
-        mRect1.set(mMovingPointArm1[0], mMovingPointArm1[1], mFixPoint[0], mFixPoint[1]);
-        mRect2.set(mMovingPointArm1[0], mMovingPointArm1[1] - mRampDistance2, mMovingPointArm2[0], mMovingPointArm2[1]
-            + mRampDistance2);
-        mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45));
-        mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150, mMovingPointArm2[1] + 80);
-        mMovingPointArm3[0] = mMovingPointArm2[0] + 60;
-        mMovingPointArm3[1] = mMovingPointArm2[1];
-        mMovingPointArm3_1[0] = mMovingPointArm3[0] + 50;
-        mMovingPointArm3_1[1] = mMovingPointArm3[1];
-
-        mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
-        mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
-        mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
-        mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
-
-        break;
-      case ARM2:
-        if ((radian < 1) && (radian > -0.1)) {
-          Log.d(TAG, "radian value: " + radian);
-          mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45) + radian);
-          mRect2.set(mMovingPointArm1[0], mMovingPointArm1[1], mMovingPointArm2[0], mMovingPointArm2[1]);
-          mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150, mMovingPointArm2[1] + 80);
-          mMovingPointArm3[0] = mMovingPointArm2[0] + 60;
-          mMovingPointArm3[1] = mMovingPointArm2[1];
-          mMovingPointArm3_1[0] = mMovingPointArm3[0] + 50;
-          mMovingPointArm3_1[1] = mMovingPointArm3[1];
-
-          mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
-          mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
-          mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
-          mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
+      case MotionEvent.ACTION_DOWN:
+        if (mRect1.contains(x, y)) {
+          mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
+          mActiveArm = MovingArm.ARM1;
+          mLinePaint1.setColor(Color.rgb(118, 155, 47));
+          mLinePaint0.setColor(Color.rgb(202, 202, 202));
+          mLinePaint2.setColor(Color.rgb(202, 202, 202));
+          mLinePaint3.setColor(Color.rgb(202, 202, 202));
+          mLinePaint4.setColor(Color.rgb(202, 202, 202));
+        }
+        else if (mRect2.contains(x, y)) {
+          mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
+          mActiveArm = MovingArm.ARM2;
+          mLinePaint2.setColor(Color.rgb(118, 155, 47));
+          mLinePaint0.setColor(Color.rgb(202, 202, 202));
+          mLinePaint1.setColor(Color.rgb(202, 202, 202));
+          mLinePaint3.setColor(Color.rgb(202, 202, 202));
+          mLinePaint4.setColor(Color.rgb(202, 202, 202));
+        }
+        else if (mRect3.contains(x, y)) {
+          mMotionFragment.mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_z);
+          mActiveArm = MovingArm.ARM3;
+          mLinePaint3.setColor(Color.rgb(118, 155, 47));
+          mLinePaint0.setColor(Color.rgb(202, 202, 202));
+          mLinePaint1.setColor(Color.rgb(202, 202, 202));
+          mLinePaint2.setColor(Color.rgb(202, 202, 202));
+          mLinePaint4.setColor(Color.rgb(202, 202, 202));
+        }
+        else {
+          mActiveArm = MovingArm.NONE;
         }
         break;
-      case ARM3:
-        mMovingPointArm3 = calculatePoint(mMovingPointArm2, 60, Math.toRadians(90) + radian);
-        mMovingPointArm3_1 = calculatePoint(mMovingPointArm3, 50, Math.toRadians(90) + radian);
-        mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150, mMovingPointArm2[1] + 80);
-        mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
-        mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
-        mMovingPointArm3_2_2 = calculatePoint(mMovingPointArm3_2_1, 110, Math.toRadians(90) + radian);
-        break;
-      case NONE:
-        break;
 
-      }
-      break;
+      case MotionEvent.ACTION_MOVE:
+
+        switch (mActiveArm) {
+          case ARM1:
+            mMovingPointArm1 = calculatePoint(mFixPoint, 200, radian);
+            mRect1.set(mMovingPointArm1[0], mMovingPointArm1[1], mFixPoint[0], mFixPoint[1]);
+            mRect2
+                .set(mMovingPointArm1[0], mMovingPointArm1[1] - mRampDistance2, mMovingPointArm2[0], mMovingPointArm2[1]
+                    + mRampDistance2);
+            mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45));
+            mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150,
+                mMovingPointArm2[1] + 80);
+
+            mMovingPointArm3[0] = mMovingPointArm2[0] + 60;
+            mMovingPointArm3[1] = mMovingPointArm2[1];
+            mMovingPointArm3_1[0] = mMovingPointArm3[0] + 50;
+            mMovingPointArm3_1[1] = mMovingPointArm3[1];
+
+            mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
+            mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
+            mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
+            mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
+
+
+            break;
+          case ARM2:
+//            if ((radian < 1) && (radian > -0.1)) {
+
+            mMotionFragment.setAngle((int) Math.toDegrees(radian));
+
+            Log.d(TAG, "radian value: " + radian);
+            mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45) + radian);
+            mRect2.set(mMovingPointArm1[0], mMovingPointArm1[1], mMovingPointArm2[0], mMovingPointArm2[1]);
+            mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150,
+                mMovingPointArm2[1] + 80);
+            mMovingPointArm3[0] = mMovingPointArm2[0] + 60;
+            mMovingPointArm3[1] = mMovingPointArm2[1];
+            mMovingPointArm3_1[0] = mMovingPointArm3[0] + 50;
+            mMovingPointArm3_1[1] = mMovingPointArm3[1];
+
+            mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
+            mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
+            mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
+            mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
+//            }
+            break;
+          case ARM3:
+            mMovingPointArm3 = calculatePoint(mMovingPointArm2, 60, Math.toRadians(90) + radian);
+            mMovingPointArm3_1 = calculatePoint(mMovingPointArm3, 50, Math.toRadians(90) + radian);
+            mRect3.set(mMovingPointArm2[0], mMovingPointArm2[1] - 30, mMovingPointArm2[0] + 150,
+                mMovingPointArm2[1] + 80);
+            mMovingPointArm3_2_1[0] = mMovingPointArm3[0] - 30;
+            mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
+            mMovingPointArm3_2_2 = calculatePoint(mMovingPointArm3_2_1, 110, Math.toRadians(90) + radian);
+            break;
+          case NONE:
+            break;
+
+        }
+        break;
     }
+
     invalidate();
-    // setDrawingCacheEnabled(false);
+    setDrawingCacheEnabled(false);
+
 
     return true;
   }
@@ -327,20 +339,25 @@ public class LampMotion extends View {
     super.onDraw(canvas);
 
     canvas.drawLine(350, 500, 350, 570, mLinePaint0);
-    canvas.drawLine(280, 580, 420, 580, mLinePaintBold);
+    canvas.drawLine(280, 560, 420, 560, mLinePaintBold);
 
-    canvas.drawCircle(mFixPoint[0], mFixPoint[1], 200, mCirclePathPaint);
-    canvas.drawCircle(mMovingPointArm1[0], mMovingPointArm1[1], 200, mCirclePathPaint);
-    canvas.drawCircle(mMovingPointArm3[0], mMovingPointArm3[1], 60, mCirclePathPaint);
+//    canvas.drawCircle(mFixPoint[0], mFixPoint[1], 200, mCirclePathPaint);
+//    canvas.drawCircle(mMovingPointArm1[0], mMovingPointArm1[1], 200, mCirclePathPaint);
+//    canvas.drawCircle(mMovingPointArm3[0], mMovingPointArm3[1], 60, mCirclePathPaint);
 
     // canvas.drawRect(mRect1, mRectanglePaint);
     // canvas.drawRect(mRect2, mRectanglePaint);
     // canvas.drawRect(mRect3, mRectanglePaint);
 
+    if (mMotionFragment != null) {
+      mMotionFragment.setPositions(mMovingPointArm1[0], mMovingPointArm1[1] - 126);
+    }
+
     canvas.drawLine(mFixPoint[0], mFixPoint[1], mMovingPointArm1[0], mMovingPointArm1[1], mLinePaint1);
     canvas.drawLine(mMovingPointArm1[0], mMovingPointArm1[1], mMovingPointArm2[0], mMovingPointArm2[1], mLinePaint2);
     canvas.drawLine(mMovingPointArm2[0], mMovingPointArm2[1], mMovingPointArm3[0], mMovingPointArm3[1], mLinePaint3);
-    canvas.drawLine(mMovingPointArm3[0], mMovingPointArm3[1], mMovingPointArm3_1[0], mMovingPointArm3_1[1], mLinePaint4);
+    canvas
+        .drawLine(mMovingPointArm3[0], mMovingPointArm3[1], mMovingPointArm3_1[0], mMovingPointArm3_1[1], mLinePaint4);
     canvas.drawLine(mMovingPointArm3_2_1[0], mMovingPointArm3_2_1[1], mMovingPointArm3_2_2[0], mMovingPointArm3_2_2[1],
         mLinePaintBold);
 
@@ -350,7 +367,7 @@ public class LampMotion extends View {
     // mMovingPointArm3[1],
     // mLinePaintBold);
 
-    canvas.drawLine(0, 600, 720, 600, mBaseLinePaint);
+//    canvas.drawLine(0, 600, 720, 600, mBaseLinePaint);
 
     canvas.drawCircle(mMovingPointArm1[0], mMovingPointArm1[1], 20, mCireclePaint);
     canvas.drawCircle(mMovingPointArm2[0], mMovingPointArm2[1], 20, mCireclePaint);
@@ -362,7 +379,7 @@ public class LampMotion extends View {
     // canvas.drawRect(mMovingPointArm3[0] - 40, mMovingPointArm3[1] + 30, mMovingPointArm3[0] + 50 + 40,
     // mMovingPointArm3[1] + 80, mRectangleBalck);
 
-    // setDrawingCacheEnabled(true);
+    setDrawingCacheEnabled(true);
 
   }
 }
