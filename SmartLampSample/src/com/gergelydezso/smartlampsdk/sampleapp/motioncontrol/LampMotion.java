@@ -220,6 +220,8 @@ public class LampMotion extends View {
     double radian = Math.atan2(x - 720 / 2, 1280 / 2 - y);
     globalDegree = Math.toDegrees(radian);
 
+//    mMotionFragment.setAngle((int) Math.toDegrees(radian));
+
     switch (event.getAction()) {
 
       case MotionEvent.ACTION_DOWN:
@@ -282,8 +284,6 @@ public class LampMotion extends View {
             break;
           case ARM2:
 //            if ((radian < 1) && (radian > -0.1)) {
-
-            mMotionFragment.setAngle((int) Math.toDegrees(radian));
 
             Log.d(TAG, "radian value: " + radian);
             mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45) + radian);
@@ -350,7 +350,7 @@ public class LampMotion extends View {
     // canvas.drawRect(mRect3, mRectanglePaint);
 
     if (mMotionFragment != null) {
-      mMotionFragment.setPositions(mMovingPointArm1[0], mMovingPointArm1[1] - 126);
+      mMotionFragment.setPositions(mMovingPointArm2[0]+60, mMovingPointArm2[1]-80);
     }
 
     canvas.drawLine(mFixPoint[0], mFixPoint[1], mMovingPointArm1[0], mMovingPointArm1[1], mLinePaint1);

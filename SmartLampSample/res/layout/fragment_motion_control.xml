@@ -3,11 +3,10 @@
              android:layout_height="match_parent"
              android:background="@drawable/bg">
 
-
   <RelativeLayout
       android:id="@+id/custom_view_container"
       android:layout_width="match_parent"
-      android:layout_height="match_parent">
+      android:layout_height="wrap_content">
 
     <com.gergelydezso.smartlampsdk.sampleapp.motioncontrol.LampMotion
         android:id="@+id/lamp_motion"
@@ -22,6 +21,7 @@
         android:layout_alignParentTop="true"
         android:alpha="80"
         android:padding="10dp"
+        android:visibility="invisible"
         android:src="@drawable/coordinate_syztem"/>
 
     <LinearLayout
@@ -79,45 +79,73 @@
 
       <!--</LinearLayout>-->
 
+      <!--<LinearLayout-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:orientation="horizontal"-->
+      <!--android:gravity="center_horizontal"-->
+      <!--android:paddingBottom="8dp">-->
+
+      <!--<SeekBar-->
+      <!--android:id="@+id/seekBar_part0"-->
+      <!--android:layout_width="320dp"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_gravity="center_horizontal"-->
+      <!--android:max="180"-->
+      <!--android:progress="90"-->
+      <!--android:indeterminate="false"/>-->
+      <!--</LinearLayout>-->
+
+      <!--<LinearLayout-->
+      <!--android:layout_width="match_parent"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:orientation="horizontal"-->
+      <!--android:gravity="center_horizontal"-->
+      <!--android:paddingBottom="8dp">-->
+
+      <!--<SeekBar-->
+      <!--android:id="@+id/seekBar_part4"-->
+      <!--android:layout_width="320dp"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:layout_gravity="center_horizontal|right"-->
+      <!--android:max="180"-->
+      <!--android:progress="90"-->
+      <!--android:indeterminate="false"/>-->
+      <!--</LinearLayout>-->
+
       <LinearLayout
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center_horizontal"
-          android:paddingBottom="8dp">
+          android:layout_gravity="center_horizontal"
+          android:orientation="horizontal">
 
-        <SeekBar
-            android:id="@+id/seekBar_part0"
-            android:layout_width="320dp"
+        <ImageView
+            android:id="@+id/base"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:max="180"
-            android:progress="90"
-            android:indeterminate="false"/>
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/motion_control"/>
+
+        <ImageView
+            android:id="@+id/lamp_head"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:layout_weight="1"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/motion_control"/>
+
       </LinearLayout>
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          android:orientation="horizontal"
-          android:gravity="center_horizontal"
-          android:paddingBottom="8dp">
-
-        <SeekBar
-            android:id="@+id/seekBar_part4"
-            android:layout_width="320dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal|right"
-            android:max="180"
-            android:progress="90"
-            android:indeterminate="false"/>
-      </LinearLayout>
 
       <ImageView
           android:id="@+id/header_line"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_alignParentLeft="true"
+          android:paddingTop="8dp"
           android:paddingLeft="35dp"
           android:paddingRight="35dp"
           android:paddingBottom="8dp"
@@ -179,26 +207,29 @@
       android:layout_height="match_parent">
 
     <!--<ImageView-->
-        <!--android:id="@+id/parttt1"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:src="@drawable/alarm_bg_icon"-->
-        <!--android:layout_x="220px"-->
-        <!--android:layout_y="220px"/>-->
+    <!--android:id="@+id/parttt1"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:src="@drawable/alarm_bg_icon"-->
+    <!--android:layout_x="220px"-->
+    <!--android:layout_y="220px"/>-->
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="60"
+        android:textColor="@color/green"
+        android:id="@+id/lamp_head_text"
+        android:layout_x="187dp"
+        android:layout_y="64dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="90"
+        android:textColor="@color/green"
+        android:id="@+id/textView2" android:layout_x="189dp" android:layout_y="242dp"/>
   </AbsoluteLayout>
-
-
-
-  <!-- <it.sephiroth.android.library.widget.HorizontalVariableListView -->
-  <!-- android:id="@+id/list" -->
-  <!-- android:layout_width="match_parent" -->
-  <!-- android:layout_height="150dp" -->
-  <!-- android:layout_gravity="bottom" -->
-  <!-- android:background="#222222" -->
-  <!-- android:gravity="bottom|center_vertical" -->
-  <!-- android:paddingBottom="0dp" -->
-  <!-- android:paddingTop="0dp" > -->
-  <!-- </it.sephiroth.android.library.widget.HorizontalVariableListView> -->
 
 </FrameLayout>

@@ -17,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
@@ -33,8 +34,8 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
   private LampMotion mLampMotion;
   //  private ImageView mImageFirst;
   public ImageView mImageCoordonate;
-  private SeekBar mSeekBarPart0;
-  private SeekBar mSeekBarPart4;
+  //  private SeekBar mSeekBarPart0;
+  //  private SeekBar mSeekBarPart4;
   private SmartLampAPI mApi;
   private LinearLayout lLayout;
   private List<LampModel> positionList;
@@ -43,10 +44,17 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
   private RelativeLayout selectedElem;
   //  it is ok
   private AbsoluteLayout.LayoutParams layoutParams;
+  private RelativeLayout rLayout;
+  private ImageView lampHead;
+  private ImageView lampBase;
+  private TextView lampHeadText;
+
+  private List<RelativeLayout> elements;
 
   public MotionFragment() {
 
     positionList = new ArrayList<LampModel>();
+    elements = new ArrayList<RelativeLayout>();
 
   }
 
@@ -58,7 +66,16 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
     View rootView = inflater.inflate(R.layout.fragment_motion_control, container, false);
 
+    lampHead = (ImageView) rootView.findViewById(R.id.lamp_head);
+    lampHead.setOnTouchListener(this);
 
+    lampBase = (ImageView) rootView.findViewById(R.id.base);
+    lampBase.setOnTouchListener(this);
+
+    lampHeadText = (TextView) rootView.findViewById(R.id.lamp_head_text);
+
+    rLayout = (RelativeLayout) rootView.findViewById(R.id.custom_view_container);
+//    rLayout.setDrawingCacheEnabled(true);
     hScroll = (HorizontalScrollView) rootView.findViewById(R.id.horizontalScrollView);
 
     lLayout = (LinearLayout) rootView.findViewById(R.id.horizontal_layout);
@@ -66,14 +83,15 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 //    mImageFirst = (ImageView) rootView.findViewById(R.id.parttt1);
 //    mImageFirst.setPivotX(100);
 //    mImageFirst.setPivotY(100);
-//    layoutParams = (AbsoluteLayout.LayoutParams) mImageFirst.getLayoutParams();
+
+    layoutParams = (AbsoluteLayout.LayoutParams) lampHeadText.getLayoutParams();
 
     mImageCoordonate = (ImageView) rootView.findViewById(R.id.imageView_coordinate);
     mLampMotion = (LampMotion) rootView.findViewById(R.id.lamp_motion);
-    mSeekBarPart0 = (SeekBar) rootView.findViewById(R.id.seekBar_part0);
-    mSeekBarPart4 = (SeekBar) rootView.findViewById(R.id.seekBar_part4);
-    mSeekBarPart0.setOnSeekBarChangeListener(this);
-    mSeekBarPart4.setOnSeekBarChangeListener(this);
+//    mSeekBarPart0 = (SeekBar) rootView.findViewById(R.id.seekBar_part0);
+//    mSeekBarPart4 = (SeekBar) rootView.findViewById(R.id.seekBar_part4);
+//    mSeekBarPart0.setOnSeekBarChangeListener(this);
+//    mSeekBarPart4.setOnSeekBarChangeListener(this);
 
     mLampMotion.setOwnerObejct(this);
 
@@ -88,11 +106,13 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
   }
 
 
-  public void updateLampModel(){
+  public void updateLampModel() {
 
   }
 
   public void setAngle(int r) {
+
+    lampHead.setRotation(r);
 
 //    mImageFirst.setRotation(r);
 
@@ -100,23 +120,35 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
   public void setPositions(int x, int y) {
 
-//    layoutParams.x = x;
-//    layoutParams.y = y;
-//    mImageFirst.setLayoutParams(layoutParams);
+    layoutParams.x = x;
+    layoutParams.y = y;
+    lampHeadText.setLayoutParams(layoutParams);
 
   }
 
   public void play() {
 
     for (LampModel lamp : positionList) {
-      Log.d("!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", "alma: " + lamp.getPart0());
+      Log.d("MotionFragment", "Angle value: " + lamp.getPart0());
     }
+
+//    for (RelativeLayout element : elements) {
+//      element.setAlpha(0.2f);
+//    }
+
+    hScroll.post(new Runnable() {
+      public void run() {
+        hScroll.fullScroll(ScrollView.FOCUS_LEFT);
+      }
+    });
+
 
   }
 
   public void addListElement() {
 
     Bitmap resize = Bitmap.createScaledBitmap(mLampMotion.getDrawingCache(), 200, 166, true);
+//    Bitmap resize = Bitmap.createScaledBitmap(rLayout.getDrawingCache(), 200, 166, true);
 
     RelativeLayout rLayout = (RelativeLayout) View.inflate(getActivity(), R.layout.list_elem, null);
     rLayout.setOnLongClickListener(this);
@@ -132,6 +164,8 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
     positionList.add(model);
 
     lLayout.addView(rLayout);
+    elements.add(rLayout);
+
 
     hScroll.post(new Runnable() {
       public void run() {
@@ -159,56 +193,56 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
   @Override
   public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-    switch (seekBar.getId()) {
-      case R.id.seekBar_part0:
-        mLampMotion.setActivePart(0);
-        mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_y);
-        // mTextPart0.setText("lamp rotate by Y (" + progress + ")");
-
-//        mApi.setServoPosition(ServoMotorEntity.SERVO1, progress, new CommandCallback() {
+//    switch (seekBar.getId()) {
+//      case R.id.seekBar_part0:
+//        mLampMotion.setActivePart(0);
+//        mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_y);
+//        // mTextPart0.setText("lamp rotate by Y (" + progress + ")");
 //
-//          @Override
-//          public void onSuccess() {
+////        mApi.setServoPosition(ServoMotorEntity.SERVO1, progress, new CommandCallback() {
+////
+////          @Override
+////          public void onSuccess() {
+////
+////          }
+////
+////          @Override
+////          public void onResult(String state) {
+////
+////          }
+////
+////          @Override
+////          public void onError() {
+////
+////          }
+////        });
 //
-//          }
+//        break;
+//      case R.id.seekBar_part4:
+//        mLampMotion.setActivePart(4);
+//        mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
+//        // mTextPart4.setText("lamp rotate by X (" + progress + ")");
 //
-//          @Override
-//          public void onResult(String state) {
+////        mApi.setServoPosition(ServoMotorEntity.SERVO2, progress, new CommandCallback() {
+////
+////        @Override
+////        public void onSuccess() {
+////
+////        }
+////
+////        @Override
+////        public void onResult(String state) {
+////
+////        }
+////
+////        @Override
+////        public void onError() {
+////
+////        }
+////      });
 //
-//          }
-//
-//          @Override
-//          public void onError() {
-//
-//          }
-//        });
-
-        break;
-      case R.id.seekBar_part4:
-        mLampMotion.setActivePart(4);
-        mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
-        // mTextPart4.setText("lamp rotate by X (" + progress + ")");
-
-//        mApi.setServoPosition(ServoMotorEntity.SERVO2, progress, new CommandCallback() {
-//
-//        @Override
-//        public void onSuccess() {
-//
-//        }
-//
-//        @Override
-//        public void onResult(String state) {
-//
-//        }
-//
-//        @Override
-//        public void onError() {
-//
-//        }
-//      });
-
-        break;
-    }
+//        break;
+//    }
   }
 
   @Override
@@ -222,7 +256,24 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
   @Override
   public boolean onTouch(View v, MotionEvent event) {
 
+    int x = (int) event.getX();
+    int y = (int) event.getY();
+    double radian = Math.atan2(x - v.getWidth() / 2, v.getHeight() / 2 - y);
+    double lDegree = Math.toDegrees(radian);
 
+    if (event.getAction() == MotionEvent.ACTION_MOVE) {
+
+      switch (v.getId()) {
+        case R.id.lamp_head:
+//        setAngle((int) lDegree);
+          lampHead.setRotation((int) lDegree);
+          lampHeadText.setText("" + (int) lDegree);
+          break;
+        case R.id.base:
+          lampBase.setRotation((int) lDegree);
+          break;
+      }
+    }
     return true;
   }
 
