@@ -220,7 +220,7 @@ public class LampMotion extends View {
     double radian = Math.atan2(x - 720 / 2, 1280 / 2 - y);
     globalDegree = Math.toDegrees(radian);
 
-//    mMotionFragment.setAngle((int) Math.toDegrees(radian));
+
 
     switch (event.getAction()) {
 
@@ -280,10 +280,13 @@ public class LampMotion extends View {
             mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
             mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
 
+            mMotionFragment.setPositions(mMovingPointArm2[0], mMovingPointArm2[1]);
 
             break;
           case ARM2:
 //            if ((radian < 1) && (radian > -0.1)) {
+
+
 
             Log.d(TAG, "radian value: " + radian);
             mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45) + radian);
@@ -299,6 +302,8 @@ public class LampMotion extends View {
             mMovingPointArm3_2_1[1] = mMovingPointArm3[1] + 50;
             mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
             mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
+
+//            mMotionFragment.setAngle((int) Math.toDegrees(radian));
 //            }
             break;
           case ARM3:
@@ -349,17 +354,21 @@ public class LampMotion extends View {
     // canvas.drawRect(mRect2, mRectanglePaint);
     // canvas.drawRect(mRect3, mRectanglePaint);
 
+//    if (mMotionFragment != null) {
+//      mMotionFragment.setPositions(mMovingPointArm2[0]+60, mMovingPointArm2[1]-80);
+//    }
+
     if (mMotionFragment != null) {
-      mMotionFragment.setPositions(mMovingPointArm2[0]+60, mMovingPointArm2[1]-80);
+//      mMotionFragment.setPositions(mMovingPointArm2[0], mMovingPointArm2[1]);
     }
 
-    canvas.drawLine(mFixPoint[0], mFixPoint[1], mMovingPointArm1[0], mMovingPointArm1[1], mLinePaint1);
-    canvas.drawLine(mMovingPointArm1[0], mMovingPointArm1[1], mMovingPointArm2[0], mMovingPointArm2[1], mLinePaint2);
-    canvas.drawLine(mMovingPointArm2[0], mMovingPointArm2[1], mMovingPointArm3[0], mMovingPointArm3[1], mLinePaint3);
-    canvas
-        .drawLine(mMovingPointArm3[0], mMovingPointArm3[1], mMovingPointArm3_1[0], mMovingPointArm3_1[1], mLinePaint4);
-    canvas.drawLine(mMovingPointArm3_2_1[0], mMovingPointArm3_2_1[1], mMovingPointArm3_2_2[0], mMovingPointArm3_2_2[1],
-        mLinePaintBold);
+//    canvas.drawLine(mFixPoint[0], mFixPoint[1], mMovingPointArm1[0], mMovingPointArm1[1], mLinePaint1);
+//    canvas.drawLine(mMovingPointArm1[0], mMovingPointArm1[1], mMovingPointArm2[0], mMovingPointArm2[1], mLinePaint2);
+//    canvas.drawLine(mMovingPointArm2[0], mMovingPointArm2[1], mMovingPointArm3[0], mMovingPointArm3[1], mLinePaint3);
+//    canvas
+//        .drawLine(mMovingPointArm3[0], mMovingPointArm3[1], mMovingPointArm3_1[0], mMovingPointArm3_1[1], mLinePaint4);
+//    canvas.drawLine(mMovingPointArm3_2_1[0], mMovingPointArm3_2_1[1], mMovingPointArm3_2_2[0], mMovingPointArm3_2_2[1],
+//        mLinePaintBold);
 
     // canvas.drawLine(mMovingPointArm2[0] + 60, mMovingPointArm2[1], mMovingPointArm3[0] + 110, mMovingPointArm3[1],
     // mLinePaintBold);

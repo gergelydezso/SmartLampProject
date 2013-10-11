@@ -117,6 +117,7 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="center_horizontal"
+
           android:orientation="horizontal">
 
         <ImageView
@@ -129,7 +130,7 @@
             android:src="@drawable/motion_control"/>
 
         <ImageView
-            android:id="@+id/lamp_head"
+            android:id="@+id/lamp_head_control"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="5dp"
@@ -180,7 +181,7 @@
       <!--</LinearLayout>-->
 
       <HorizontalScrollView
-          android:paddingTop="15dp"
+          android:paddingTop="25dp"
           android:paddingLeft="15dp"
           android:paddingRight="15dp"
           android:layout_width="wrap_content"
@@ -206,19 +207,39 @@
       android:layout_width="match_parent"
       android:layout_height="match_parent">
 
-    <!--<ImageView-->
-    <!--android:id="@+id/parttt1"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:src="@drawable/alarm_bg_icon"-->
-    <!--android:layout_x="220px"-->
-    <!--android:layout_y="220px"/>-->
+
+
+    <ImageView
+        android:id="@+id/parttt0"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/part1"
+        android:layout_x="215px"
+        android:layout_y="215px"/>
+
+    <ImageView
+        android:id="@+id/lamp_head_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/lamp_headd"
+        android:layout_x="178dp"
+        android:layout_y="94dp"/>
+
+
+    <ImageView
+        android:id="@+id/parttt00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/part0"
+        android:layout_x="102dp"
+        android:layout_y="178dp"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="60"
+        android:visibility="invisible"
         android:textColor="@color/green"
         android:id="@+id/lamp_head_text"
         android:layout_x="187dp"
@@ -228,8 +249,16 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="90"
+        android:visibility="invisible"
         android:textColor="@color/green"
         android:id="@+id/textView2" android:layout_x="189dp" android:layout_y="242dp"/>
   </AbsoluteLayout>
+
+
+  <ImageView
+      android:id="@+id/over_layer"
+      android:layout_gravity="center_horizontal"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"/>
 
 </FrameLayout>
