@@ -16,21 +16,21 @@ public class AllCommandConfiguration {
   public void setServoValue(ServoMotorEntity id, int value) {
 
     switch (id.getValue()) {
-    case 1:
-      this.mServo1Value = value;
-      break;
-    case 2:
-      this.mServo2Value = value;
-      break;
-    case 3:
-      this.mServo3Value = value;
-      break;
-    case 4:
-      this.mServo4Value = value;
-      break;
-    case 5:
-      this.mServo5Value = value;
-      break;
+      case 1:
+        this.mServo1Value = value;
+        break;
+      case 2:
+        this.mServo2Value = value;
+        break;
+      case 3:
+        this.mServo3Value = value;
+        break;
+      case 4:
+        this.mServo4Value = value;
+        break;
+      case 5:
+        this.mServo5Value = value;
+        break;
     }
 
   }

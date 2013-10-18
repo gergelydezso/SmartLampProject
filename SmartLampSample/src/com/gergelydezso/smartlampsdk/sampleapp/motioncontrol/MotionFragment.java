@@ -1,6 +1,7 @@
 package com.gergelydezso.smartlampsdk.sampleapp.motioncontrol;
 
 import android.graphics.Bitmap;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -21,7 +22,9 @@ import android.widget.ScrollView;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
+import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
 
@@ -29,52 +32,87 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class MotionFragment extends Fragment implements OnClickListener, OnSeekBarChangeListener, View.OnTouchListener,
+public class MotionFragment extends Fragment implements OnClickListener, View.OnTouchListener,
     View.OnLongClickListener {
 
   private final static String TAG = "MotionFragment";
-  private LampMotion mLampMotion;
   public ImageView mImageCoordonate;
   private SmartLampAPI mApi;
   private LinearLayout lLayout;
   private List<LampModel> positionList;
   private HorizontalScrollView hScroll;
-  private int objectNameIndicator;
   private RelativeLayout selectedElem;
-  //  it is oke
-  private AbsoluteLayout.LayoutParams layoutParams1;
-  private AbsoluteLayout.LayoutParams layoutParams2;
-  private AbsoluteLayout.LayoutParams layoutParams3;
-  private AbsoluteLayout.LayoutParams layoutParams4;
-  //  private RelativeLayout rLayout;
-  private ImageView lampHeadControl;
-  private ImageView lampBase;
-  private TextView lampHeadText;
   private List<RelativeLayout> elements;
-  private ImageView mImageFirst;
-  private ImageView testImage;
-  private ImageView testImage2;
   private ImageView overLayer;
   private List<Bitmap> overImages;
-  private ImageView lampHead;
-  private Iterator it;
   private Animation alphaIn;
   private Animation alphaOut;
   private Animation alphaOutLong;
+
+
+  private ImageView imageLampArm1;
+  private ImageView imageLampArm2;
+  private ImageView imageLampHead;
+  private ImageView imageLampHeadContol;
+  private ImageView imageLampBaseContol;
+
+  private AbsoluteLayout.LayoutParams paramsImageLampArm1;
+  private AbsoluteLayout.LayoutParams paramsImageLampArm2;
+  private AbsoluteLayout.LayoutParams paramsImageLampHead;
+  private AbsoluteLayout.LayoutParams paramsImageLampBaseControl;
+  private AbsoluteLayout.LayoutParams paramsImageLampHeadControl;
+
+
+  private double RADIAN;
+
+  private int[] mFixPoint;
+  private int[] mMovingPointArm1;
+  private int[] mMovingPointArm2;
+  private int mRampDistance1;
+  private int mDistanceArm1;
+  private double startAngle;
+
+  private AbsoluteLayout mainLayout;
+
+  private int servo1Angle;
+  private int servo2Angle;
+  private int servo3Angle;
+  private int servo4Angle;
+  private int servo5Angle;
+
 
   public MotionFragment() {
     positionList = new ArrayList<LampModel>();
     elements = new ArrayList<RelativeLayout>();
     overImages = new ArrayList<Bitmap>();
+
+
+    mFixPoint = new int[2];
+    mMovingPointArm1 = new int[2];
+    mMovingPointArm2 = new int[2];
+
+    startAngle = Math.toRadians(45);
+    mDistanceArm1 = 200;
+    mFixPoint[0] = 350;
+    mFixPoint[1] = 500;
+
+    mRampDistance1 = (int) (mDistanceArm1 * 0.7071);
+
+    mMovingPointArm1[0] = mFixPoint[0] - mRampDistance1;
+    mMovingPointArm1[1] = mFixPoint[1] - mRampDistance1;
+
   }
 
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-    mApi = SmartLampAPIHolder.getApi();
 
     View rootView = inflater.inflate(R.layout.fragment_motion_control, container, false);
+    mApi = SmartLampAPIHolder.getApi();
+
+    mainLayout = (AbsoluteLayout) rootView.findViewById(R.id.absolute_layout);
+    mainLayout.setDrawingCacheEnabled(true);
 
     alphaIn = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_alpha_in);
     alphaOut = AnimationUtils.loadAnimation(getActivity(), R.anim.anim_alpha_out);
@@ -82,79 +120,30 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
     overLayer = (ImageView) rootView.findViewById(R.id.over_layer);
 
-    lampHead = (ImageView) rootView.findViewById(R.id.lamp_head_image);
 
-    lampHeadControl = (ImageView) rootView.findViewById(R.id.lamp_head_control);
-    lampHeadControl.setOnTouchListener(this);
+    imageLampArm1 = (ImageView) rootView.findViewById(R.id.image_lamp_arm1);
+    imageLampArm2 = (ImageView) rootView.findViewById(R.id.image_lamp_arm2);
+    imageLampHead = (ImageView) rootView.findViewById(R.id.image_lamp_head);
+    imageLampBaseContol = (ImageView) rootView.findViewById(R.id.image_lamp_base_control);
+    imageLampHeadContol = (ImageView) rootView.findViewById(R.id.image_lamp_head_control);
 
-    testImage = (ImageView) rootView.findViewById(R.id.parttt0);
-    testImage.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
+    imageLampArm1.setOnTouchListener(this);
+    imageLampArm2.setOnTouchListener(this);
+    imageLampHead.setOnTouchListener(this);
+    imageLampBaseContol.setOnTouchListener(this);
+    imageLampHeadContol.setOnTouchListener(this);
 
-        switch (event.getAction()) {
+    paramsImageLampArm1 = (AbsoluteLayout.LayoutParams) imageLampArm1.getLayoutParams();
+    paramsImageLampArm2 = (AbsoluteLayout.LayoutParams) imageLampArm2.getLayoutParams();
+    paramsImageLampHead = (AbsoluteLayout.LayoutParams) imageLampHead.getLayoutParams();
+    paramsImageLampBaseControl = (AbsoluteLayout.LayoutParams) imageLampBaseContol.getLayoutParams();
+    paramsImageLampHeadControl = (AbsoluteLayout.LayoutParams) imageLampHeadContol.getLayoutParams();
 
-          case MotionEvent.ACTION_MOVE:
-            int x = (int) event.getX();
-            int y = (int) event.getY();
-
-            double radian = Math.atan2(1280 / 2 - y, x - 720 / 2);
-            int globalDegree = (int) Math.toDegrees(radian);
-
-
-            if (globalDegree >= 0) {
-              v.setRotation(globalDegree);
-              Log.d("M", "---------------------------------------: " + globalDegree);
-            }
-            else {
-              v.setRotation(360 + globalDegree);
-              Log.d("M", "---------------------------------------: " + (360 + globalDegree));
-            }
-
-//            v.setRotation(globalDegree);
-            break;
-        }
-        return true;
-      }
-    });
-
-    layoutParams3 = (AbsoluteLayout.LayoutParams) testImage.getLayoutParams();
-
-    testImage2 = (ImageView) rootView.findViewById(R.id.parttt00);
-    layoutParams4 = (AbsoluteLayout.LayoutParams) testImage2.getLayoutParams();
-
-    lampBase = (ImageView) rootView.findViewById(R.id.base);
-    lampBase.setOnTouchListener(this);
-
-    lampHeadText = (TextView) rootView.findViewById(R.id.lamp_head_text);
-
-//    rLayout = (RelativeLayout) rootView.findViewById(R.id.custom_view_container);
-//    rLayout.setDrawingCacheEnabled(true);
     hScroll = (HorizontalScrollView) rootView.findViewById(R.id.horizontalScrollView);
-
     lLayout = (LinearLayout) rootView.findViewById(R.id.horizontal_layout);
-
-    mImageFirst = (ImageView) rootView.findViewById(R.id.lamp_head_image);
-    mImageFirst.setPivotX(0);
-    mImageFirst.setPivotY(100);
-
-    testImage.setPivotX(0);
-    testImage.setPivotY(141);
-
-//    layoutParams = (AbsoluteLayout.LayoutParams) lampHeadText.getLayoutParams();
-    layoutParams1 = (AbsoluteLayout.LayoutParams) mImageFirst.getLayoutParams();
-    layoutParams2 = (AbsoluteLayout.LayoutParams) lampHeadText.getLayoutParams();
 
 
     mImageCoordonate = (ImageView) rootView.findViewById(R.id.imageView_coordinate);
-    mLampMotion = (LampMotion) rootView.findViewById(R.id.lamp_motion);
-//    mSeekBarPart0 = (SeekBar) rootView.findViewById(R.id.seekBar_part0);
-//    mSeekBarPart4 = (SeekBar) rootView.findViewById(R.id.seekBar_part4);
-//    mSeekBarPart0.setOnSeekBarChangeListener(this);
-//    mSeekBarPart4.setOnSeekBarChangeListener(this);
-
-    mLampMotion.setOwnerObejct(this);
-
     return rootView;
   }
 
@@ -165,41 +154,10 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
     }
   }
 
-
-  public void updateLampModel() {
-
-  }
-
-  public void setAngle(int r) {
-
-//    lampHead.setRotation(r);
-
-//    mImageFirst.setRotation(r);
-
-    testImage.setRotation(r);
-
-  }
-
-  public void setPositions(int x, int y) {
-
-    layoutParams2.x = x;
-    layoutParams2.y = y - 100;
-    lampHeadText.setLayoutParams(layoutParams2);
-
-    layoutParams1.x = x ;
-    layoutParams1.y = y - 30;
-    mImageFirst.setLayoutParams(layoutParams1);
-
-    layoutParams3.x = x - 141;
-    layoutParams3.y = y;
-    testImage.setLayoutParams(layoutParams3);
-
-  }
-
   public void play() {
 
+    mainLayout.setVisibility(View.INVISIBLE);
     overLayer.setVisibility(View.VISIBLE);
-//    overLayer.setImageBitmap(overImages.get(overImages.size()));
 
     hScroll.post(new Runnable() {
       public void run() {
@@ -207,9 +165,7 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       }
     });
 
-    it = overImages.iterator();
 
-    mLampMotion.setVisibility(View.INVISIBLE);
     final Handler handler = new Handler();
 
     Runnable r = new Runnable() {
@@ -221,63 +177,67 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
 
         overLayer.setImageBitmap(overImages.get(i));
         overLayer.startAnimation(alphaIn);
-
         lLayout.removeView(elements.get(i));
         handler.postDelayed(this, 1000);
+
+        sendCommand(i);
+
         i++;
 
-
         if (i == overImages.size()) {
-          mLampMotion.setVisibility(View.VISIBLE);
           handler.removeCallbacks(this);
           overImages.clear();
           overLayer.setVisibility(View.INVISIBLE);
           lLayout.removeAllViews();
           elements.clear();
+          positionList.clear();
+
+          mainLayout.setVisibility(View.VISIBLE);
         }
       }
     };
 
     handler.post(r);
-
-
   }
 
-  public void setImage(int i) {
-    overLayer.setImageBitmap(overImages.get(i));
+  public void sendCommand(int i) {
+
+
+    Log.d("MotionFragment", "command value: " + positionList.get(i).getServo1Angle());
+
+
+//    mApi.setServoPosition(ServoMotorEntity.SERVO1, positionList.get(i).getServo1Angle(), new CommandCallback() {
+//      @Override
+//      public void onSuccess() {
+//      }
+//
+//      @Override
+//      public void onError() {
+//      }
+//
+//      @Override
+//      public void onResult(String state) {
+//      }
+//    });
+
   }
 
 
   public void addListElement() {
 
-    Bitmap resize = Bitmap.createScaledBitmap(mLampMotion.getDrawingCache(), 200, 166, true);
+    mainLayout.setDrawingCacheEnabled(true);
 
-    Bitmap fullSize = Bitmap.createBitmap(mLampMotion.getDrawingCache());
+    Bitmap resize = Bitmap.createScaledBitmap(mainLayout.getDrawingCache(), 144, 256, true);
+
+    Bitmap fullSize = Bitmap.createBitmap(mainLayout.getDrawingCache());
     overImages.add(fullSize);
-
-//    Bitmap resize = Bitmap.createScaledBitmap(rLayout.getDrawingCache(), 200, 166, true);
-
-//    RelativeLayout layout = new RelativeLayout(getActivity());
-
     RelativeLayout newLayout = (RelativeLayout) View.inflate(getActivity(), R.layout.list_elem, null);
-
-//    View newLayout = getActivity().getLayoutInflater().inflate(R.layout.list_elem, null);
-
-
-//    RelativeLayout rLayout = (RelativeLayout) View.inflate(getActivity(), R.layout.list_elem, null);
-
     newLayout.setOnLongClickListener(this);
     ImageView removeIcon = (ImageView) newLayout.findViewById(R.id.remove_icon);
     removeIcon.setOnClickListener(this);
-
     ImageView image = (ImageView) newLayout.findViewById(R.id.list_image);
     image.setImageBitmap(resize);
 
-
-    LampModel model = new LampModel();
-    model.setPart0(mLampMotion.globalDegree);
-
-    positionList.add(model);
 
     lLayout.addView(newLayout);
     elements.add(newLayout);
@@ -289,108 +249,157 @@ public class MotionFragment extends Fragment implements OnClickListener, OnSeekB
       }
     });
 
-    objectNameIndicator++;
+    mainLayout.setDrawingCacheEnabled(false);
+
+
+    LampModel model = new LampModel();
+    model.setServo1Angle(servo1Angle);
+    positionList.add(model);
+
 
   }
 
-//  public void saveViewToBitmap() {
-//
-//    // Bitmap b = Bitmap.createBitmap(mRelativLayoutContainer.getWidth(),
-//    // mRelativLayoutContainer.getHeight(),
-//    // Bitmap.Config.ARGB_8888);
-//    // Canvas c = new Canvas(b);
-//    // mRelativLayoutContainer.draw(c);
-//    // BitmapDrawable d = new BitmapDrawable(getResources(), b);
-//    // canvasView.setBackgroundDrawable(d);
-//
-//    Bitmap resize = Bitmap.createScaledBitmap(mLampMotion.getDrawingCache(), 400, 400, true);
-//    mImageBitmap.setImageBitmap(resize);
-//  }
+  public void setPositions(View view) {
 
-  @Override
-  public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//    switch (seekBar.getId()) {
-//      case R.id.seekBar_part0:
-//        mLampMotion.setActivePart(0);
-//        mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_y);
-//        // mTextPart0.setText("lamp rotate by Y (" + progress + ")");
-//
-////        mApi.setServoPosition(ServoMotorEntity.SERVO1, progress, new CommandCallback() {
-////
-////          @Override
-////          public void onSuccess() {
-////
-////          }
-////
-////          @Override
-////          public void onResult(String state) {
-////
-////          }
-////
-////          @Override
-////          public void onError() {
-////
-////          }
-////        });
-//
-//        break;
-//      case R.id.seekBar_part4:
-//        mLampMotion.setActivePart(4);
-//        mImageCoordonate.setImageResource(R.drawable.coordinate_syztem_x);
-//        // mTextPart4.setText("lamp rotate by X (" + progress + ")");
-//
-////        mApi.setServoPosition(ServoMotorEntity.SERVO2, progress, new CommandCallback() {
-////
-////        @Override
-////        public void onSuccess() {
-////
-////        }
-////
-////        @Override
-////        public void onResult(String state) {
-////
-////        }
-////
-////        @Override
-////        public void onError() {
-////
-////        }
-////      });
-//
-//        break;
-//    }
-  }
 
-  @Override
-  public void onStartTrackingTouch(SeekBar seekBar) {
-  }
+    switch (view.getId()) {
 
-  @Override
-  public void onStopTrackingTouch(SeekBar seekBar) {
+      case R.id.image_lamp_arm1:
+
+        paramsImageLampArm2.x = mMovingPointArm1[0] - imageLampArm2.getWidth() / 2;
+        paramsImageLampArm2.y = mMovingPointArm1[1] - imageLampArm2.getHeight();
+        imageLampArm2.setLayoutParams(paramsImageLampArm2);
+
+        paramsImageLampHead.x = mMovingPointArm2[0];
+        paramsImageLampHead.y = mMovingPointArm2[1] - 30;
+        imageLampHead.setLayoutParams(paramsImageLampHead);
+
+        break;
+      case R.id.image_lamp_arm2:
+
+        paramsImageLampHead.x = mMovingPointArm2[0];
+        paramsImageLampHead.y = mMovingPointArm2[1] - 30;
+        imageLampHead.setLayoutParams(paramsImageLampHead);
+
+        break;
+      case R.id.image_lamp_head:
+        break;
+    }
   }
 
   @Override
   public boolean onTouch(View v, MotionEvent event) {
 
-    int x = (int) event.getX();
-    int y = (int) event.getY();
-    double radian = Math.atan2( -(141 / 2 - y), -(x -141 / 2));
-    double lDegree = Math.toDegrees(radian) + 180;
+    int x = (int) event.getRawX();
+    int y = (int) event.getRawY();
+
+    double degree = 0;
+    int centerX = 0;
+    int centerY = 0;
+
 
     if (event.getAction() == MotionEvent.ACTION_MOVE) {
 
       switch (v.getId()) {
-        case R.id.lamp_head_control:
-//        setAngle((int) lDegree);
-          lampHeadControl.setRotation((int) lDegree);
-          lampHeadText.setText("" + (int) lDegree);
+        case R.id.image_lamp_arm1:
+
+          centerX = paramsImageLampArm1.x + v.getWidth() / 2;
+          centerY = paramsImageLampArm1.y + 400;
+          degree = calculateAngle(x, y, centerX, centerY, false);
+
+          if ((degree > 315) && (degree < 360)) {
+            imageLampArm1.setRotation((int) degree);
+
+
+            mMovingPointArm1 = calculatePoint(mFixPoint, 200, RADIAN);
+            mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, startAngle);
+            setPositions(v);
+
+
+          }
+
           break;
-        case R.id.base:
-          lampBase.setRotation((int) lDegree);
+        case R.id.image_lamp_arm2:
+          centerX = paramsImageLampArm2.x + v.getWidth() / 2;
+          centerY = paramsImageLampArm2.y + 400;
+          degree = calculateAngle(x, y, centerX, centerY, false);
+
+          if ((degree > 45) && (degree < 110)) {
+
+            imageLampArm2.setRotation((int) degree);
+            startAngle = RADIAN;
+            mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, RADIAN);
+            setPositions(v);
+          }
           break;
+        case R.id.image_lamp_head:
+          centerX = paramsImageLampArm1.x;
+          centerY = paramsImageLampArm1.y + 200;
+          degree = calculateAngle(x, y, centerX, centerY, false);
+
+          if ((degree > 0) && (degree < 135)) {
+            imageLampHead.setRotation((int) (degree - 90));
+          }
+          break;
+
+        case R.id.image_lamp_base_control:
+
+          centerX = paramsImageLampBaseControl.x + v.getWidth() / 2;
+          centerY = paramsImageLampBaseControl.y + 200;
+          degree = calculateAngle(x, y, centerX, centerY, false);
+
+          if ((degree > 0) && (degree < 180)) {
+            imageLampBaseContol.setRotation((int) degree);
+          }
+          break;
+        case R.id.image_lamp_head_control:
+
+          centerX = paramsImageLampHeadControl.x + v.getWidth() / 2;
+          centerY = paramsImageLampBaseControl.y + v.getHeight() / 2 + 50;
+          degree = calculateAngle(x, y, centerX, centerY, false);
+
+          if ((degree > 90) && (degree < 270)) {
+            imageLampHeadContol.setRotation((int) degree - 180);
+
+            servo1Angle = (int) degree - 90;
+
+            Log.d("MotionFragment", "degree: " + degree);
+          }
+          break;
+
+
       }
     }
     return true;
+  }
+
+  public int[] calculatePoint(int[] fixPoint, int distance, double radian) {
+
+    int[] Point = new int[2];
+
+    Point[0] = fixPoint[0] + (int) (Math.sin(radian) * distance);
+    Point[1] = fixPoint[1] - (int) (Math.cos(radian) * distance);
+
+    return Point;
+  }
+
+  public double calculateAngle(int x, int y, int centerX, int centerY, boolean inRadian) {
+
+    double radian = Math.atan2(x - centerX, centerY - y);
+    RADIAN = radian;
+
+    if (inRadian) {
+      return radian;
+    }
+
+    int degree = (int) Math.toDegrees(radian);
+
+    if (degree >= 0) {
+      return degree;
+    }
+    else {
+      return (degree + 360);
+    }
   }
 
   @Override

@@ -217,9 +217,13 @@ public class LampMotion extends View {
     int x = (int) event.getX();
     int y = (int) event.getY();
 
-    double radian = Math.atan2(x - 720 / 2, 1280 / 2 - y);
+    Log.d("LampMotion", "X: " + x);
+    Log.d("LampMotion", "Y: " + y);
+
+    double radian = Math.atan2(x - 720 / 2, 720 / 2 - y);
     globalDegree = Math.toDegrees(radian);
 
+    Log.d("LampMotion", "angle: " + globalDegree);
 
 
     switch (event.getAction()) {
@@ -280,13 +284,11 @@ public class LampMotion extends View {
             mMovingPointArm3_2_2[0] = mMovingPointArm3_2_1[0] + 110;
             mMovingPointArm3_2_2[1] = mMovingPointArm3_2_1[1];
 
-            mMotionFragment.setPositions(mMovingPointArm2[0], mMovingPointArm2[1]);
+//            mMotionFragment.setPositions(mMovingPointArm2[0], mMovingPointArm2[1]);
 
             break;
           case ARM2:
 //            if ((radian < 1) && (radian > -0.1)) {
-
-
 
             Log.d(TAG, "radian value: " + radian);
             mMovingPointArm2 = calculatePoint(mMovingPointArm1, 200, Math.toRadians(45) + radian);

@@ -84,34 +84,34 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
 
     switch (event.getAction()) {
 
-    case MotionEvent.ACTION_MOVE:
-      mColorPicker.setValues(x, y, pixelColor);
+      case MotionEvent.ACTION_MOVE:
+        mColorPicker.setValues(x, y, pixelColor);
 
-      break;
-    case MotionEvent.ACTION_UP:
+        break;
+      case MotionEvent.ACTION_UP:
 
-      // redValue = (int) (redValue * 0.7 * 1.5);
-      // greenValue = (int) (greenValue * 1.2 * 1.5);
-      // blueValue = (int) (blueValue * 1.5);
+        // redValue = (int) (redValue * 0.7 * 1.5);
+        // greenValue = (int) (greenValue * 1.2 * 1.5);
+        // blueValue = (int) (blueValue * 1.5);
 
-//      mApi.setLedValue(redValue, blueValue, greenValue, new CommandCallback() {
-//
-//        @Override
-//        public void onSuccess() {
-//        }
-//
-//        @Override
-//        public void onResult(String state) {
-//        }
-//
-//        @Override
-//        public void onError() {
-//        }
-//      });
-      break;
-    case MotionEvent.ACTION_DOWN:
-      mColorPicker.setValues(x, y, pixelColor);
-      break;
+        mApi.setLedValue(redValue, blueValue, greenValue, new CommandCallback() {
+
+          @Override
+          public void onSuccess() {
+          }
+
+          @Override
+          public void onResult(String state) {
+          }
+
+          @Override
+          public void onError() {
+          }
+        });
+        break;
+      case MotionEvent.ACTION_DOWN:
+        mColorPicker.setValues(x, y, pixelColor);
+        break;
 
     }
 

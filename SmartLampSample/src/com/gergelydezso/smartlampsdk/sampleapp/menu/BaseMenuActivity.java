@@ -39,6 +39,10 @@ public class BaseMenuActivity extends FragmentActivity {
   private static final String MOTION_FRAGMENT_TAG = "motionFragment";
   private static final String MUSIC_FRAGMENT_TAG = "musicFragment";
 
+  private MenuItem mMotionFragmentSave;
+
+
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -88,8 +92,11 @@ public class BaseMenuActivity extends FragmentActivity {
 
   @Override
   public boolean onCreateOptionsMenu(Menu menu) {
+
     MenuInflater inflater = getMenuInflater();
     inflater.inflate(R.menu.main, menu);
+
+    mMotionFragmentSave = menu.findItem(R.id.menu_save);
     return true;
   }
 
@@ -98,7 +105,9 @@ public class BaseMenuActivity extends FragmentActivity {
   public boolean onPrepareOptionsMenu(Menu menu) {
     // If the nav drawer is open, hide action items related to the content view
     boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-    menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+//    menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
+    menu.findItem(R.id.menu_save).setVisible(!drawerOpen);
+    menu.findItem(R.id.play).setVisible(!drawerOpen);
     return super.onPrepareOptionsMenu(menu);
   }
 
@@ -138,6 +147,12 @@ public class BaseMenuActivity extends FragmentActivity {
     }
   }
 
+  private void costumizeActionBarMenuItems(){
+
+    mMotionFragmentSave.setVisible(false);
+
+  }
+
   private void selectItem(int position) {
 
     Log.d(TAG, "position: " + position);
@@ -155,6 +170,7 @@ public class BaseMenuActivity extends FragmentActivity {
       case 0:
         Fragment fragmentAlarmClock = new AlarmClockFragment();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentAlarmClock).commit();
+        costumizeActionBarMenuItems();
         break;
       case 1:
 
