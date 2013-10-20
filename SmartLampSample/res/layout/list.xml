@@ -11,7 +11,7 @@
         android:layout_marginLeft="5px"
         android:layout_marginRight="20px"
         android:layout_marginTop="5px"
-        android:src="@drawable/ic_action_news" >
+        android:src="@drawable/music_v" >
     </ImageView>
 
     <TextView

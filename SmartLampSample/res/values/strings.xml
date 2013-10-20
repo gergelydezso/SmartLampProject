@@ -4,12 +4,19 @@
     <string name="app_name">SmartLamp</string>
 
     <string-array name="menu_items">
-        <item>AlarmClock</item>
-        <item>ColorControl</item>
-        <item>MotionControl</item>
-        <item>MusicVisualization</item>
+        <item>Color Control</item>
+        <item>Motion Control</item>
+        <item>Music Visualization</item>
         <item>Notifications</item>
     </string-array>
+
+    <string name="ns_menu_snippet1">Color Control</string>
+    <string name="ns_menu_snippet2">Motion Control</string>
+    <string name="ns_menu_snippet3">Music Visualization</string>
+    <string name="ns_menu_snippet4">Notifications</string>
+
+    <string name="ns_menu_main_header">Base Functions</string>
+    <string name="ns_menu_main_header2">Next Steps</string>
 
     <string name="initial_text">Initial text.</string>
     <string name="drawer_open">Open navigation drawer</string>

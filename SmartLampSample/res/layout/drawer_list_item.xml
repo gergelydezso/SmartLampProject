@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:attr/activatedBackgroundIndicator"
-    android:drawableLeft="@drawable/ic_action_news"
+    android:drawableLeft="@drawable/music_v"
     android:drawablePadding="10dp"
     android:gravity="center_vertical"
     android:minHeight="?android:attr/listPreferredItemHeightSmall"

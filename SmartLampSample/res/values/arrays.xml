@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="ns_menu_items">
+        <item>ns_menu_snippet1</item>
+        <item>ns_menu_snippet2</item>
+        <item>ns_menu_snippet3</item>
+        <item>ns_menu_snippet4</item>
+    </string-array>
+
+    <array name="ns_menu_items_icon">
+        <item>color_c</item>
+        <item>motion_c</item>
+        <item>music_v</item>
+        <item>notifications</item>
+    </array>
+
+</resources>

@@ -14,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
@@ -40,6 +39,7 @@ public class BaseMenuActivity extends FragmentActivity {
   private static final String MUSIC_FRAGMENT_TAG = "musicFragment";
 
   private MenuItem mMotionFragmentSave;
+  private String[] menuItems;
 
 
 
@@ -53,13 +53,15 @@ public class BaseMenuActivity extends FragmentActivity {
     mTitle = mDrawerTitle = getTitle();
     mTitles = getResources().getStringArray(R.array.menu_items);
     mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-    mDrawerList = (ListView) findViewById(R.id.left_drawer);
+//    mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
     // set a custom shadow that overlays the main content when the drawer opens
     mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
     // set up the drawer's list view with items and click listener
-    mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mTitles));
-    mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+//    mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mTitles));
+//    mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+      initMenu();
 
     // enable ActionBar app icon to behave as action to toggle nav drawer
     getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -90,7 +92,51 @@ public class BaseMenuActivity extends FragmentActivity {
     }
   }
 
-  @Override
+
+    private void initMenu(){
+
+        NsMenuAdapter mAdapter = new NsMenuAdapter(this);
+
+        // Add Header
+        mAdapter.addHeader(R.string.ns_menu_main_header);
+
+        // Add first block
+
+        menuItems = getResources().getStringArray(
+                R.array.ns_menu_items);
+        String[] menuItemsIcon = getResources().getStringArray(
+                R.array.ns_menu_items_icon);
+
+        int res = 0;
+        for (String item : menuItems) {
+
+            int id_title = getResources().getIdentifier(item, "string",
+                    this.getPackageName());
+            int id_icon = getResources().getIdentifier(menuItemsIcon[res],
+                    "drawable", this.getPackageName());
+
+            NsMenuItemModel mItem = new NsMenuItemModel(id_title, id_icon);
+//			if (res==1) mItem.counter=12; //it is just an example...
+            if (res==2) mAdapter.addHeader(R.string.ns_menu_main_header2); //it is just an example...
+//            if (res==3) mItem.counter=3; //it is just an example...
+            mAdapter.addItem(mItem);
+            res++;
+        }
+
+//		mAdapter.addHeader(R.string.ns_menu_main_header2);
+
+        mDrawerList = (ListView) findViewById(R.id.left_drawer);
+        if (mDrawerList != null)
+            mDrawerList.setAdapter(mAdapter);
+
+        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+
+    }
+
+
+
+
+    @Override
   public boolean onCreateOptionsMenu(Menu menu) {
 
     MenuInflater inflater = getMenuInflater();
@@ -119,11 +165,9 @@ public class BaseMenuActivity extends FragmentActivity {
       return true;
     }
 
-
     MotionFragment motionF = (MotionFragment) getSupportFragmentManager()
         .findFragmentByTag(MOTION_FRAGMENT_TAG);
 
-    // Handle action buttons
     switch (item.getItemId()) {
       case R.id.action_settings:
         return true;
@@ -150,6 +194,7 @@ public class BaseMenuActivity extends FragmentActivity {
   private void costumizeActionBarMenuItems(){
 
     mMotionFragmentSave.setVisible(false);
+    invalidateOptionsMenu();
 
   }
 
@@ -167,11 +212,11 @@ public class BaseMenuActivity extends FragmentActivity {
     // fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
     switch (position) {
-      case 0:
-        Fragment fragmentAlarmClock = new AlarmClockFragment();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentAlarmClock).commit();
-        costumizeActionBarMenuItems();
-        break;
+//      case 4:
+//        Fragment fragmentAlarmClock = new AlarmClockFragment();
+//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentAlarmClock).commit();
+//        costumizeActionBarMenuItems();
+//        break;
       case 1:
 
         Fragment fragmentColorControl = new ColorControlImageFragment();
@@ -198,7 +243,7 @@ public class BaseMenuActivity extends FragmentActivity {
 
     // update selected item and title, then close the drawer
     mDrawerList.setItemChecked(position, true);
-    setTitle(mTitles[position]);
+    setTitle(mTitles[position - 1]);
     mDrawerLayout.closeDrawer(mDrawerList);
   }
 
