@@ -19,42 +19,13 @@ public class MusicVisualizationFragment extends Fragment {
 
   private static final String TAG = "MusicVisualizationFrame";
 
-  private ImageView circle;
-  private int globalDegree;
+  private ImageView demo;
 
   @Override
   public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
     View rootView = inflater.inflate(R.layout.fragment_music_visualization, container, false);
 
-    circle = (ImageView) rootView.findViewById(R.id.circle);
-    circle.setOnTouchListener(new View.OnTouchListener() {
-      @Override
-      public boolean onTouch(View v, MotionEvent event) {
-
-        int x = (int) event.getRawX();
-        int y = (int) event.getRawY();
-
-
-        double radian = Math.atan2(x - 720 / 2, 1280 / 2 - y);
-        globalDegree = (int) Math.toDegrees(radian);
-
-        int degree = 0;
-
-
-        if (globalDegree >= 0) {
-          degree = globalDegree;
-        }
-        else {
-          degree = 360 + globalDegree;
-        }
-
-        circle.setRotation(degree);
-
-        Log.d("Test", "angle: " + degree);
-
-        return true;
-      }
-    });
+    demo = (ImageView) rootView.findViewById(R.id.circle);
 
     return rootView;
   }

@@ -15,9 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-
 import com.gergelydezso.smartlampsdk.sampleapp.R;
-import com.gergelydezso.smartlampsdk.sampleapp.alarmclock.AlarmClockFragment;
 import com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorControlImageFragment;
 import com.gergelydezso.smartlampsdk.sampleapp.motioncontrol.MotionFragment;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.MusicVisualizationFragment;
@@ -25,23 +23,23 @@ import com.gergelydezso.smartlampsdk.sampleapp.notifications.NotificationsFragme
 
 public class BaseMenuActivity extends FragmentActivity {
 
-  private DrawerLayout mDrawerLayout;
-  private ListView mDrawerList;
-  private ActionBarDrawerToggle mDrawerToggle;
 
-  private CharSequence mDrawerTitle;
-  private CharSequence mTitle;
-  private String[] mTitles;
   private static final String TAG = "BaseMenuActivity";
-  private FragmentManager fragmentManager;
-  private Fragment fragmentMotion;
   private static final String MOTION_FRAGMENT_TAG = "motionFragment";
   private static final String MUSIC_FRAGMENT_TAG = "musicFragment";
 
+  private DrawerLayout mDrawerLayout;
+  private ListView mDrawerList;
+  private ActionBarDrawerToggle mDrawerToggle;
+  private CharSequence mDrawerTitle;
+  private CharSequence mTitle;
+  private FragmentManager fragmentManager;
+  private Fragment fragmentMotion;
   private MenuItem mMotionFragmentSave;
   private String[] menuItems;
 
-
+  private boolean menu_play;
+  private boolean menu_save;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -51,92 +49,72 @@ public class BaseMenuActivity extends FragmentActivity {
     fragmentManager = getSupportFragmentManager();
 
     mTitle = mDrawerTitle = getTitle();
-    mTitles = getResources().getStringArray(R.array.menu_items);
     mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-//    mDrawerList = (ListView) findViewById(R.id.left_drawer);
-
-    // set a custom shadow that overlays the main content when the drawer opens
+    mDrawerList = (ListView) findViewById(R.id.left_drawer);
     mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
-    // set up the drawer's list view with items and click listener
-//    mDrawerList.setAdapter(new ArrayAdapter<String>(this, R.layout.drawer_list_item, mTitles));
-//    mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-      initMenu();
+    initListMenu();
 
-    // enable ActionBar app icon to behave as action to toggle nav drawer
     getActionBar().setDisplayHomeAsUpEnabled(true);
     getActionBar().setHomeButtonEnabled(true);
 
-    // ActionBarDrawerToggle ties together the the proper interactions
-    // between the sliding drawer and the action bar app icon
-    mDrawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
-        mDrawerLayout, /* DrawerLayout object */
-        R.drawable.ic_drawer, /* nav drawer image to replace 'Up' caret */
-        R.string.drawer_open, /* "open drawer" description for accessibility */
-        R.string.drawer_close /* "close drawer" description for accessibility */
+    mDrawerToggle = new ActionBarDrawerToggle(this,
+        mDrawerLayout,
+        R.drawable.ic_drawer,
+        R.string.drawer_open,
+        R.string.drawer_close
     ) {
       public void onDrawerClosed(View view) {
         getActionBar().setTitle(mTitle);
-        invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+        invalidateOptionsMenu();
       }
 
       public void onDrawerOpened(View drawerView) {
         getActionBar().setTitle(mDrawerTitle);
-        invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+        invalidateOptionsMenu();
       }
     };
     mDrawerLayout.setDrawerListener(mDrawerToggle);
-
     if (savedInstanceState == null) {
       selectItem(1);
     }
   }
 
+  private void initListMenu() {
 
-    private void initMenu(){
+    ListMenuAdapter mAdapter = new ListMenuAdapter(this);
 
-        NsMenuAdapter mAdapter = new NsMenuAdapter(this);
+    mAdapter.addHeader(R.string.ns_menu_main_header);
 
-        // Add Header
-        mAdapter.addHeader(R.string.ns_menu_main_header);
+    menuItems = getResources().getStringArray(
+        R.array.ns_menu_items);
+    String[] menuItemsIcon = getResources().getStringArray(
+        R.array.ns_menu_items_icon);
 
-        // Add first block
+    int res = 0;
 
-        menuItems = getResources().getStringArray(
-                R.array.ns_menu_items);
-        String[] menuItemsIcon = getResources().getStringArray(
-                R.array.ns_menu_items_icon);
+    for (String item : menuItems) {
+      int id_title = getResources().getIdentifier(item, "string",
+          this.getPackageName());
+      int id_icon = getResources().getIdentifier(menuItemsIcon[res],
+          "drawable", this.getPackageName());
 
-        int res = 0;
-        for (String item : menuItems) {
-
-            int id_title = getResources().getIdentifier(item, "string",
-                    this.getPackageName());
-            int id_icon = getResources().getIdentifier(menuItemsIcon[res],
-                    "drawable", this.getPackageName());
-
-            NsMenuItemModel mItem = new NsMenuItemModel(id_title, id_icon);
-//			if (res==1) mItem.counter=12; //it is just an example...
-            if (res==2) mAdapter.addHeader(R.string.ns_menu_main_header2); //it is just an example...
-//            if (res==3) mItem.counter=3; //it is just an example...
-            mAdapter.addItem(mItem);
-            res++;
-        }
-
-//		mAdapter.addHeader(R.string.ns_menu_main_header2);
-
-        mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        if (mDrawerList != null)
-            mDrawerList.setAdapter(mAdapter);
-
-        mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+      ListMenuItemModel mItem = new ListMenuItemModel(id_title, id_icon);
+      if (res == 2) {
+        mAdapter.addHeader(R.string.ns_menu_main_header2);
+      }
+      mAdapter.addItem(mItem);
+      res++;
 
     }
+    if (mDrawerList != null) {
+      mDrawerList.setAdapter(mAdapter);
+    }
+    mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
+  }
 
 
-
-
-    @Override
+  @Override
   public boolean onCreateOptionsMenu(Menu menu) {
 
     MenuInflater inflater = getMenuInflater();
@@ -149,18 +127,22 @@ public class BaseMenuActivity extends FragmentActivity {
   /* Called whenever we call invalidateOptionsMenu() */
   @Override
   public boolean onPrepareOptionsMenu(Menu menu) {
-    // If the nav drawer is open, hide action items related to the content view
     boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
-//    menu.findItem(R.id.action_settings).setVisible(!drawerOpen);
-    menu.findItem(R.id.menu_save).setVisible(!drawerOpen);
-    menu.findItem(R.id.play).setVisible(!drawerOpen);
+
+    Log.d("BaseMenu", "boolean: " + drawerOpen);
+
+    if (drawerOpen) {
+      menu_play = false;
+      menu_save = false;
+    }
+
+    menu.findItem(R.id.menu_save).setVisible(menu_save);
+    menu.findItem(R.id.menu_play).setVisible(menu_play);
     return super.onPrepareOptionsMenu(menu);
   }
 
   @Override
   public boolean onOptionsItemSelected(MenuItem item) {
-    // The action bar home/up action should open or close the drawer.
-    // ActionBarDrawerToggle will take care of this.
     if (mDrawerToggle.onOptionsItemSelected(item)) {
       return true;
     }
@@ -174,7 +156,7 @@ public class BaseMenuActivity extends FragmentActivity {
       case R.id.menu_save:
         motionF.addListElement();
         return true;
-      case R.id.play:
+      case R.id.menu_play:
         motionF.play();
         return true;
       default:
@@ -191,11 +173,16 @@ public class BaseMenuActivity extends FragmentActivity {
     }
   }
 
-  private void costumizeActionBarMenuItems(){
+  private void costumizeActionBarMenuItems() {
 
     mMotionFragmentSave.setVisible(false);
     invalidateOptionsMenu();
 
+  }
+
+  private void hideABMenuItems(){
+    menu_save = false;
+    menu_play = false;
   }
 
   private void selectItem(int position) {
@@ -211,41 +198,48 @@ public class BaseMenuActivity extends FragmentActivity {
     // FragmentManager fragmentManager = getFragmentManager();
     // fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
 
-    switch (position) {
-//      case 4:
-//        Fragment fragmentAlarmClock = new AlarmClockFragment();
-//        fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentAlarmClock).commit();
-//        costumizeActionBarMenuItems();
-//        break;
-      case 1:
+    ListMenuItemModel item = (ListMenuItemModel) mDrawerList.getItemAtPosition(position);
+
+    switch (item.title) {
+
+      case R.string.ns_menu_snippet1:
 
         Fragment fragmentColorControl = new ColorControlImageFragment();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentColorControl).commit();
+        hideABMenuItems();
 
         break;
-      case 2:
+      case R.string.ns_menu_snippet2:
 
         fragmentMotion = new MotionFragment();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMotion, MOTION_FRAGMENT_TAG).commit();
 
+        menu_save = true;
+        menu_play = true;
+
         break;
-      case 3:
+      case R.string.ns_menu_snippet3:
 
         Fragment fragmentMusicV = new MusicVisualizationFragment();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMusicV, MUSIC_FRAGMENT_TAG).commit();
+        hideABMenuItems();
         break;
-      case 4:
+      case R.string.ns_menu_snippet4:
 
         Fragment fragmentNotifications = new NotificationsFragment();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentNotifications).commit();
+        hideABMenuItems();
         break;
     }
 
     // update selected item and title, then close the drawer
     mDrawerList.setItemChecked(position, true);
-    setTitle(mTitles[position - 1]);
+
+    String title = getResources().getString(item.title);
+    setTitle(title);
     mDrawerLayout.closeDrawer(mDrawerList);
   }
+
 
   @Override
   public void setTitle(CharSequence title) {

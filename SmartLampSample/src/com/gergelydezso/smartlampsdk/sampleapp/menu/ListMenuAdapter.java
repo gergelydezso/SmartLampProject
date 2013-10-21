@@ -26,27 +26,22 @@ import android.widget.TextView;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 
-public class NsMenuAdapter extends ArrayAdapter<NsMenuItemModel> {
+public class ListMenuAdapter extends ArrayAdapter<ListMenuItemModel> {
 
-	/*
-	 * public NsMenuAdapter(Context context, int resource, int
-	 * textViewResourceId, String[] objects) { super(context,
-	 * R.layout.ns_menu_row, textViewResourceId, objects); }
-	 */
 
-	public NsMenuAdapter(Context context) {
+	public ListMenuAdapter(Context context) {
 		super(context, 0);
 	}
 
 	public void addHeader(int title) {
-		add(new NsMenuItemModel(title, -1, true));
+		add(new ListMenuItemModel(title, -1, true));
 	}
 
 	public void addItem(int title, int icon) {
-		add(new NsMenuItemModel(title, icon, false));
+		add(new ListMenuItemModel(title, icon, false));
 	}
 
-	public void addItem(NsMenuItemModel itemModel) {
+	public void addItem(ListMenuItemModel itemModel) {
 		add(itemModel);
 	}
 
@@ -79,7 +74,7 @@ public class NsMenuAdapter extends ArrayAdapter<NsMenuItemModel> {
 
 	public View getView(int position, View convertView, ViewGroup parent) {
 
-		NsMenuItemModel item = getItem(position);
+		ListMenuItemModel item = getItem(position);
 		ViewHolder holder = null;
 		View view = convertView;
 

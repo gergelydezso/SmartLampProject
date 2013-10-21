@@ -9,10 +9,10 @@
     </string-array>
 
     <array name="ns_menu_items_icon">
-        <item>color_c</item>
-        <item>motion_c</item>
-        <item>music_v</item>
-        <item>notifications</item>
+        <item>color_c_s</item>
+        <item>motion_c_s</item>
+        <item>music_v_s</item>
+        <item>notifications_s</item>
     </array>
 
 </resources>

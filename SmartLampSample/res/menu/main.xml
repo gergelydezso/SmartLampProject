@@ -13,7 +13,7 @@
       android:title="save"/>
 
   <item
-      android:id="@+id/play"
+      android:id="@+id/menu_play"
       android:icon="@drawable/av_play"
       android:showAsAction="ifRoom|withText"
       android:title="play"/>

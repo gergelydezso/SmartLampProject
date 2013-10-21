@@ -3,11 +3,10 @@
              android:layout_height="match_parent"
              android:background="@drawable/bg">
 
-
   <ImageView
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:id="@+id/circle"
       android:layout_gravity="center"
-      android:src="@drawable/circle"/>
+      android:src="@drawable/music"/>
 </FrameLayout>

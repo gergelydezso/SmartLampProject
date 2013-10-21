@@ -69,7 +69,7 @@ public class NotificationsFragment extends Fragment {
     notificationItemsLayout.addView(smsItem.getRoot());
 
     phoneCallItem = new NotificationItem(inflater.inflate(R.layout.notification_item, null));
-    phoneCallItem.setNotificationImageId(R.drawable.call_logo);
+    phoneCallItem.setNotificationImageId(R.drawable.call_new);
     phoneCallItem.setNotificationItemText("Call Notifications");
     phoneCallItem.setColor(getNotificationColor(Notification.CALL));
     phoneCallItem.setEnabled(isNotificationEnabled(Notification.CALL));

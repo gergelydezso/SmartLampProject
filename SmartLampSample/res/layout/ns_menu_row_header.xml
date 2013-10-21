@@ -17,12 +17,14 @@
         android:text=""
         android:textAllCaps="true"
         android:textAppearance="?android:attr/textAppearanceListItemSmall"
-        android:textColor="#fff"
+        android:textColor="#acacac"
         android:textStyle="bold" />
 
     <ImageView
             android:id="@+id/menu_divider"
             android:layout_width="match_parent"
+            android:layout_marginBottom="1dp"
+            android:layout_marginTop="1dp"
             android:layout_height="1dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="20dp"
