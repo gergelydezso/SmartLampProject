@@ -42,6 +42,8 @@ public class BluetoothConnectionService {
   public static final int STATE_CONNECTING = 2;
   public static final int STATE_CONNECTED = 3;
 
+  private BluetoothDevice currentDevice;
+
   public BluetoothConnectionService(Handler handler) {
 
     mAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -278,6 +280,7 @@ public class BluetoothConnectionService {
         try {
           bytes = mmInStream.read(buffer);
           String inValue = new String(buffer, 0, 1);
+          Log.d("BluetoothConnectionService","InValue: "+inValue);
 
           if (inValue.equals(mOutValue)) {
             mCallback.onSuccess();

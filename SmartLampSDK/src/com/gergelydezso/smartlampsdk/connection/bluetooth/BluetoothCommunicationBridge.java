@@ -11,7 +11,6 @@ public class BluetoothCommunicationBridge implements SmartLampCommunicationBridg
 
   private BluetoothConnectionService mConnectionService;
   private ConnectedListener mListener;
-
   public BluetoothCommunicationBridge() {
   }
 

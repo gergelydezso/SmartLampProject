@@ -6,7 +6,7 @@ public interface ConnectionStatusListener {
 
   public void onConnectionReady(SmartLampAPI api);
 
-  public void onConnectionFaild();
+  public void onConnectionFailed();
 
   public void onConnectionLost();
 
