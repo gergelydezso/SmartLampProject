@@ -9,7 +9,6 @@ public class SmartLampSampleApplication extends Application {
   @Override
   public void onCreate() {
     DeviceNotifications.init(getApplicationContext());
-
   }
 
 }

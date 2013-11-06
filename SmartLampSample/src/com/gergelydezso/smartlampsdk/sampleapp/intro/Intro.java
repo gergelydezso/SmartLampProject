@@ -32,7 +32,7 @@ public class Intro extends Activity {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_intro);
 
-    // *** Make the SmartLamp connection and get the SmartLamp API ***
+    // Make the SmartLamp connection and get the SmartLamp API
 
     SmartLampConnectionManager manager = new SmartLampConnectionManager(Intro.this);
     manager.makeConnection(ConnectionType.BLUETOOTH, new ConnectionStatusListener() {
@@ -40,42 +40,33 @@ public class Intro extends Activity {
       @Override
       public void onConnectionReady(SmartLampAPI api) {
         mApiHolder.setAPI(api);
-
       }
 
       @Override
-      public void onConnectionFaild() {
-
+      public void onConnectionFailed() {
       }
 
       @Override
       public void onConnectionLost() {
-
+      }
+    });
+    mImageStart = (ImageView) findViewById(R.id.image_start);
+    mVideoIntro = (VideoView) findViewById(R.id.video_intro);
+    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.lamp);
+    mVideoIntro.setVideoURI(uri);
+    mVideoIntro.setOnCompletionListener(new OnCompletionListener() {
+      @Override
+      public void onCompletion(MediaPlayer mp) {
       }
     });
 
-//    mImageStart = (ImageView) findViewById(R.id.image_start);
-//    mVideoIntro = (VideoView) findViewById(R.id.video_intro);
-//    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.huh_1);
-//    mVideoIntro.setVideoURI(uri);
-//    mVideoIntro.setOnCompletionListener(new OnCompletionListener() {
-//      @Override
-//      public void onCompletion(MediaPlayer mp) {
-//
-//      }
-//    });
-//
     mButtonPlay = (ImageButton) findViewById(R.id.ImageButton_paly);
     mButtonPlay.setOnClickListener(new OnClickListener() {
-
       @Override
       public void onClick(View v) {
-
         startBaseActivity();
-
       }
     });
-
   }
 
   public void startBaseActivity() {
@@ -86,8 +77,8 @@ public class Intro extends Activity {
   @Override
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-//    mImageStart.setVisibility(View.INVISIBLE);
-//    mVideoIntro.start();
+    mImageStart.setVisibility(View.INVISIBLE);
+    mVideoIntro.start();
   }
 
   @Override

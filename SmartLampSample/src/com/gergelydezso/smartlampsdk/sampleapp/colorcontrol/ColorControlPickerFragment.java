@@ -8,11 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
-import com.larswerkman.colorpicker .ColorPicker;
-import com.larswerkman.colorpicker.ColorPicker.OnColorChangedListener;
-import com.larswerkman.colorpicker.OpacityBar;
-import com.larswerkman.colorpicker.SaturationBar;
-import com.larswerkman.colorpicker.ValueBar;
+import com.larswerkman.holocolorpicker.ColorPicker;
+import com.larswerkman.holocolorpicker.OpacityBar;
+import com.larswerkman.holocolorpicker.SaturationBar;
+import com.larswerkman.holocolorpicker.ValueBar;
+
 
 public class ColorControlPickerFragment extends Fragment {
 
@@ -24,14 +24,13 @@ public class ColorControlPickerFragment extends Fragment {
     View rootView = inflater.inflate(R.layout.fragment_color_control_picker, container, false);
 
     picker = (ColorPicker) rootView.findViewById(R.id.picker);
-    picker.setOnColorChangedListener(new OnColorChangedListener() {
-
+    picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
       @Override
       public void onColorChanged(int color) {
         Log.d(TAG, "" + picker.getColor());
+
       }
     });
-
     OpacityBar opacityBar = (OpacityBar) rootView.findViewById(R.id.opacitybar);
     SaturationBar saturationBar = (SaturationBar) rootView.findViewById(R.id.saturationbar);
     ValueBar valueBar = (ValueBar) rootView.findViewById(R.id.valuebar);

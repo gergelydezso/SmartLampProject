@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -98,14 +99,17 @@ public class ColorControlImageFragment extends Fragment implements OnTouchListen
 
           @Override
           public void onSuccess() {
+            Log.d("ColorControlImageFragment","OnSuccess");
           }
 
           @Override
           public void onResult(String state) {
+            Log.d("ColorControlImageFragment","OnResult");
           }
 
           @Override
           public void onError() {
+            Log.d("ColorControlImageFragment","OnError");
           }
         });
         break;

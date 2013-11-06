@@ -14,8 +14,8 @@ import android.widget.RelativeLayout;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.notifications.NotificationItem.NotificationItemCallback;
-import com.larswerkman.colorpicker.ColorPicker;
-import com.larswerkman.colorpicker.ColorPicker.OnColorChangedListener;
+import com.larswerkman.holocolorpicker.ColorPicker;
+
 
 public class NotificationsFragment extends Fragment {
 
@@ -103,13 +103,13 @@ public class NotificationsFragment extends Fragment {
         }
       });
       final ColorPicker picker = new ColorPicker(getActivity());
-      picker.setOnColorChangedListener(new OnColorChangedListener() {
-
+      picker.setOnColorChangedListener(new ColorPicker.OnColorChangedListener() {
         @Override
         public void onColorChanged(int color) {
           currentColor = color;
         }
       });
+
       FrameLayout.LayoutParams plLp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
           LayoutParams.MATCH_PARENT);
       contentView.addView(pickerLayout, plLp);
