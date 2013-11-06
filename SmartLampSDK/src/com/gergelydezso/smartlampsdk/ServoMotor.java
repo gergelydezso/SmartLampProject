@@ -15,6 +15,8 @@ public class ServoMotor {
   }
 
   public void setServoPosition(ServoMotorEntity id, int degree, CommandCallback callback) {
+    // TODO - CODE REVIEW - andrei|Oct 29, 2013 - Proposal: mBridge.executeCommand(command). Internally
+    // command.translate() is called which prvides a byte[] of bytes that can be sent to the Arduino module.
     mBridge.sendSetServoCommand(id, degree, callback);
     Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
   }

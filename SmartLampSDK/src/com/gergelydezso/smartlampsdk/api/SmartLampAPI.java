@@ -61,6 +61,16 @@ public class SmartLampAPI {
     Command servoSet = new ServoSetCommand(mLamp, servoPin, value, callback);
     servoSet.setTimeTicket(System.currentTimeMillis());
     filterManager.sendCommand(servoSet);
+    /*
+     * TODO
+     * CommandFilterChain chain...
+     * CommandEngine engine..
+     * if(chain.fiter(servoSet)){
+     *    commandEngine.execute(servoSet);
+     *    sau
+     *    bridge.executeCommand(servoSet);
+     * }
+     */
   }
 
   /**

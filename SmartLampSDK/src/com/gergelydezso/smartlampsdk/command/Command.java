@@ -14,5 +14,5 @@ public interface Command {
   public void setTimeTicket(long time);
 
   public long getTimeTicket();
-
+  
 }

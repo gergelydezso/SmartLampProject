@@ -34,6 +34,7 @@ public class ServoSetCommand implements Command {
     mServo.setServoPosition(mId, mDegree, mCallback);
   }
 
+  // TODO - CODE REVIEW - andrei|Oct 29, 2013 - use timeStamp
   @Override
   public void setTimeTicket(long time) {
     this.mTimeTicket = time;

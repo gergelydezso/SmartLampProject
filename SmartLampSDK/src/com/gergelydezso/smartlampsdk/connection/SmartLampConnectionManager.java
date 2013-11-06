@@ -4,6 +4,7 @@ import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
 
 import android.content.Context;
 
+// TODO - CODE REVIEW - andrei|Oct 29, 2013 - don't see it's purpose
 public class SmartLampConnectionManager {
 
   private ConnectionFactory mFactory = new ConnectionFactory();

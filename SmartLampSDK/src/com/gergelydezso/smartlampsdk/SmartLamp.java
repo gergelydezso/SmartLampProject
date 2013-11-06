@@ -2,6 +2,7 @@ package com.gergelydezso.smartlampsdk;
 
 import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
 
+// TODO - CODE REVIEW - andrei|Oct 29, 2013 - javadoc
 public class SmartLamp {
 
   private LedRGB mLed = null;
