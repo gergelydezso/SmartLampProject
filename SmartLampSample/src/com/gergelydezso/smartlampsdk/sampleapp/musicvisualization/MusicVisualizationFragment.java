@@ -2,8 +2,6 @@ package com.gergelydezso.smartlampsdk.sampleapp.musicvisualization;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
@@ -17,10 +15,8 @@ import android.widget.Toast;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist.PlayListItem;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist.PlaylistActivity;
-import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.renderer.BarGraphRenderer;
 
 public class MusicVisualizationFragment extends Fragment {
-
     private static final String TAG = MusicVisualizationFragment.class.getSimpleName();
 
     private Button         startBtn;
@@ -52,11 +48,17 @@ public class MusicVisualizationFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             PlayListItem playListItem = data.getParcelableExtra(PlayListItem.ID);
             if (playListItem != null) {
-                Toast.makeText(getActivity(), playListItem.getDisplayName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Now playing: " + playListItem.getDisplayName(), Toast.LENGTH_SHORT).show();
                 Uri uri = Uri.parse(playListItem.getUri());
                 mediaPlayer = createMediaPlayer(uri);
             }
         }
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        stopPlaying();
     }
 
     private void initListeners() {
@@ -91,17 +93,16 @@ public class MusicVisualizationFragment extends Fragment {
 
     private void startPlaying() {
         if (mediaPlayer != null) {
-            mediaPlayer.setVolume(0.2f, 0.2f);
-            //mediaPlayer.setLooping(true);
+            mediaPlayer.setLooping(true);
             mediaPlayer.start();
 
-//            visualizerView.link(mediaPlayer);
-            addBarGraphRenderers();
+            visualizerView.init(mediaPlayer.getAudioSessionId());
         }
     }
 
     private void stopPlaying() {
         if (mediaPlayer != null) {
+            mediaPlayer.setLooping(false);
             mediaPlayer.stop();
         }
     }
@@ -118,22 +119,5 @@ public class MusicVisualizationFragment extends Fragment {
 
     private MediaPlayer createMediaPlayer(Uri uri) {
         return MediaPlayer.create(getActivity(), uri);
-    }
-
-    private void addBarGraphRenderers()
-    {
-        Paint paint = new Paint();
-        paint.setStrokeWidth(50f);
-        paint.setAntiAlias(true);
-        paint.setColor(Color.argb(200, 56, 138, 252));
-        BarGraphRenderer barGraphRendererBottom = new BarGraphRenderer(16, paint, false);
-        visualizerView.addRenderer(barGraphRendererBottom);
-
-        Paint paint2 = new Paint();
-        paint2.setStrokeWidth(12f);
-        paint2.setAntiAlias(true);
-        paint2.setColor(Color.argb(200, 181, 111, 233));
-        BarGraphRenderer barGraphRendererTop = new BarGraphRenderer(4, paint2, true);
-        visualizerView.addRenderer(barGraphRendererTop);
     }
 }

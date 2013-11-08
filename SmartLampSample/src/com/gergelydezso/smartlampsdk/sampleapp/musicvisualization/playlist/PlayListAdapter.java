@@ -30,13 +30,13 @@ public class PlayListAdapter extends ArrayAdapter<PlayListItem> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.playlist_row_layout, parent, false);
-        TextView playListEntry = (TextView) rowView.findViewById(R.id.playlist_entry);
+        View playListRow = inflater.inflate(R.layout.playlist_row_layout, parent, false);
+        TextView playListEntry = (TextView) playListRow.findViewById(R.id.playlist_entry);
+
         PlayListItem currentItem = playListItems.get(position);
-
         playListEntry.setText(currentItem.getDisplayName());
-        rowView.setTag(currentItem);
+        playListRow.setTag(currentItem);
 
-        return rowView;
+        return playListRow;
     }
 }
