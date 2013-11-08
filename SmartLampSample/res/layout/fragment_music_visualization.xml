@@ -1,12 +1,48 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:background="@drawable/bg">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg">
 
-  <ImageView
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:id="@+id/circle"
-      android:layout_gravity="center"
-      android:src="@drawable/music"/>
-</FrameLayout>
+  <FrameLayout
+          android:id="@+id/visualizerContainer"
+          android:layout_marginTop="100dp"
+          android:layout_height="300dp"
+          android:layout_width="fill_parent">
+    <com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.VisualizerView
+            android:id="@+id/visualizerView"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"/>
+  </FrameLayout>
+
+  <LinearLayout
+          android:id="@+id/playerControls"
+          android:layout_height="wrap_content"
+          android:layout_width="fill_parent"
+          android:orientation="horizontal"
+          android:layout_alignParentBottom="true"
+          android:gravity="center_horizontal">
+
+    <Button android:id="@+id/start_music_btn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/start"/>
+
+    <Button android:id="@+id/stop_music_btn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/stop"/>
+
+
+    <Button android:id="@+id/pause_music_btn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/pause"/>
+
+    <Button android:id="@+id/show_playlist_btn"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:text="@string/playlist"/>
+
+  </LinearLayout>
+
+</RelativeLayout>
