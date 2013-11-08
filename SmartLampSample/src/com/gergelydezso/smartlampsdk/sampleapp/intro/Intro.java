@@ -6,10 +6,13 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
@@ -33,7 +36,6 @@ public class Intro extends Activity {
     setContentView(R.layout.activity_intro);
 
     // Make the SmartLamp connection and get the SmartLamp API
-
     SmartLampConnectionManager manager = new SmartLampConnectionManager(Intro.this);
     manager.makeConnection(ConnectionType.BLUETOOTH, new ConnectionStatusListener() {
 
@@ -52,7 +54,7 @@ public class Intro extends Activity {
     });
     mImageStart = (ImageView) findViewById(R.id.image_start);
     mVideoIntro = (VideoView) findViewById(R.id.video_intro);
-    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.lamp);
+    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_startup);
     mVideoIntro.setVideoURI(uri);
     mVideoIntro.setOnCompletionListener(new OnCompletionListener() {
       @Override
@@ -77,8 +79,10 @@ public class Intro extends Activity {
   @Override
   public void onWindowFocusChanged(boolean hasFocus) {
     super.onWindowFocusChanged(hasFocus);
-    mImageStart.setVisibility(View.INVISIBLE);
-    mVideoIntro.start();
+      if (hasFocus){
+        mImageStart.setVisibility(View.INVISIBLE);
+        mVideoIntro.start();
+      }
   }
 
   @Override

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorControlImageFragment;
 import com.gergelydezso.smartlampsdk.sampleapp.motioncontrol.MotionFragment;
@@ -265,4 +266,9 @@ public class BaseMenuActivity extends FragmentActivity {
     mDrawerToggle.onConfigurationChanged(newConfig);
   }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        moveTaskToBack(true);
+    }
 }
