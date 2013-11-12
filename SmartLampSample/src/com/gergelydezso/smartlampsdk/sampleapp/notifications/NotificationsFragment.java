@@ -14,7 +14,7 @@ import android.widget.RelativeLayout;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.notifications.NotificationItem.NotificationItemCallback;
-import com.larswerkman.holocolorpicker.ColorPicker;
+import com.larswerkman.colorpicker.ColorPicker;
 
 
 public class NotificationsFragment extends Fragment {

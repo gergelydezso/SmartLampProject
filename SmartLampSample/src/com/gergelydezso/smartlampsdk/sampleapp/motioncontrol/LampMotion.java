@@ -1,7 +1,5 @@
 package com.gergelydezso.smartlampsdk.sampleapp.motioncontrol;
 
-import com.gergelydezso.smartlampsdk.sampleapp.R;
-
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -13,6 +11,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+
+import com.gergelydezso.smartlampsdk.sampleapp.R;
 
 public class LampMotion extends View {
 
