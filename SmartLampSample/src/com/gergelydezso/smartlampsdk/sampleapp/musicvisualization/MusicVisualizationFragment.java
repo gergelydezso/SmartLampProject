@@ -9,7 +9,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.Button;
 import android.widget.Toast;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
@@ -17,8 +16,8 @@ import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist.PlayL
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist.PlaylistActivity;
 
 public class MusicVisualizationFragment extends Fragment {
-    private static final String TAG = MusicVisualizationFragment.class.getSimpleName();
 
+    private static final String TAG = MusicVisualizationFragment.class.getSimpleName();
     private Button         startBtn;
     private Button         stopBtn;
     private Button         pauseBtn;
@@ -48,7 +47,8 @@ public class MusicVisualizationFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             PlayListItem playListItem = data.getParcelableExtra(PlayListItem.ID);
             if (playListItem != null) {
-                Toast.makeText(getActivity(), "Now playing: " + playListItem.getDisplayName(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Loaded: " + playListItem.getDisplayName(), Toast.LENGTH_SHORT)
+                        .show();
                 Uri uri = Uri.parse(playListItem.getUri());
                 mediaPlayer = createMediaPlayer(uri);
             }
@@ -94,14 +94,17 @@ public class MusicVisualizationFragment extends Fragment {
     private void startPlaying() {
         if (mediaPlayer != null) {
             mediaPlayer.setLooping(true);
+            mediaPlayer.setVolume(.01f, .01f);
             mediaPlayer.start();
 
             visualizerView.init(mediaPlayer.getAudioSessionId());
+            visualizerView.startVisualization();
         }
     }
 
     private void stopPlaying() {
         if (mediaPlayer != null) {
+            visualizerView.stopVisualization();
             mediaPlayer.setLooping(false);
             mediaPlayer.stop();
         }
