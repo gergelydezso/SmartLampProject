@@ -8,10 +8,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.gergelydezso.smartlampsdk.sampleapp.R;
-import com.larswerkman.holocolorpicker.ColorPicker;
-import com.larswerkman.holocolorpicker.OpacityBar;
-import com.larswerkman.holocolorpicker.SaturationBar;
-import com.larswerkman.holocolorpicker.ValueBar;
+import com.larswerkman.colorpicker.ColorPicker;
+import com.larswerkman.colorpicker.OpacityBar;
+import com.larswerkman.colorpicker.SaturationBar;
+import com.larswerkman.colorpicker.ValueBar;
 
 
 public class ColorControlPickerFragment extends Fragment {

@@ -15,7 +15,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
-import com.gergelydezso.smartlampsdk.command.AllCommandConfiguration;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
