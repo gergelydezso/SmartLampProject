@@ -295,8 +295,6 @@ out/production/sample/sample.unaligned.apk
 .idea/vcs.xml
 .idea/workspace.xml
 SmartLampSample/res/drawable-hdpi/lamp.png
-SmartLampSample/src/com/gergelydezso/smartlampsdk/sampleapp/colorcontrol/ColorPickerView.java
-SmartLampSample/src/com/gergelydezso/smartlampsdk/sampleapp/colorcontrol/LightView.java
 out/production/SmartLampSample/com/gergelydezso/smartlampsdk/sampleapp/colorcontrol/ColorPickerView$OnColorChangedListener.class
 out/production/SmartLampSample/com/gergelydezso/smartlampsdk/sampleapp/colorcontrol/ColorPickerView.class
 out/production/SmartLampSample/com/gergelydezso/smartlampsdk/sampleapp/colorcontrol/LightView.class
