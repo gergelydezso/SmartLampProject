@@ -1,12 +1,12 @@
 package com.gergelydezso.smartlampsdk.sampleapp.notifications;
 
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-
 import android.accessibilityservice.AccessibilityService;
 import android.accessibilityservice.AccessibilityServiceInfo;
 import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
+
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class AccesibilityNotificationListenerService extends AccessibilityService {
 

@@ -1,63 +1,70 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg" >
+    android:background="@drawable/bg">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:id="@+id/hex_color_layout"
+        android:layout_height="70dp"
+        android:layout_width="fill_parent"
+        android:background="#6E6E6E"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp">
 
-        <FrameLayout
-            android:id="@+id/frameLayout1"
+        <TextView
+            android:id="@+id/hex_color_label"
+            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <ImageView
-                android:id="@+id/imageView_color_image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:src="@drawable/kid" />
-
-            <com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorPickerCustomView
-                android:id="@+id/color_picker"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </FrameLayout>
-
-        <!-- <it.sephiroth.android.library.widget.HorizontalVariableListView -->
-        <!-- android:id="@+id/color_list" -->
-        <!-- android:layout_width="match_parent" -->
-        <!-- android:layout_height="150dp" -->
-        <!-- android:layout_alignParentBottom="true" -->
-        <!-- android:layout_alignParentLeft="true" -->
-        <!-- android:background="#222222" -->
-        <!-- android:gravity="bottom|center_vertical" -->
-        <!-- android:paddingBottom="0dp" -->
-        <!-- android:paddingTop="0dp" > -->
-        <!-- </it.sephiroth.android.library.widget.HorizontalVariableListView> -->
-
-
-        <!-- <SeekBar -->
-        <!-- android:id="@+id/seekBar_b" -->
-        <!-- android:layout_width="match_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_below="@+id/frameLayout1" -->
-        <!-- android:layout_centerHorizontal="true" -->
-        <!-- android:layout_marginLeft="40dp" -->
-        <!-- android:layout_marginTop="20dp" /> -->
-
-
-        <!-- <SeekBar -->
-        <!-- android:id="@+id/seekBar1" -->
-        <!-- android:layout_width="match_parent" -->
-        <!-- android:layout_height="wrap_content" -->
-        <!-- android:layout_below="@+id/seekBar_b" -->
-        <!-- android:layout_centerHorizontal="true" -->
-        <!-- android:layout_marginLeft="40dp" /> -->
-
-
-
+            android:layout_centerInParent="true"
+            android:textColor="#FFFFFF"
+            android:text="000000"
+            android:textSize="40sp" />
     </RelativeLayout>
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/color_layout"
+        android:orientation="horizontal"
+        android:layout_height="10dp"
+        android:layout_width="fill_parent"
+        android:layout_below="@+id/hex_color_layout"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#000000"></LinearLayout>
+
+    <com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.LightView
+        android:id="@+id/light_view"
+        android:layout_height="80dp"
+        android:layout_width="140dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginLeft="66dp"
+        android:layout_below="@+id/color_layout" />
+
+    <ImageView
+        android:id="@+id/lamp"
+        android:layout_height="250dp"
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/color_layout"
+        android:src="@drawable/lamp" />
+
+    <com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorPickerView
+        android:id="@+id/color_picker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/lamp"
+        android:layout_alignParentBottom="true"
+        android:paddingBottom="5dp"
+        android:layerType="software" />
+</RelativeLayout>
+
+    <!-- <it.sephiroth.android.library.widget.HorizontalVariableListView --><!-- android:id="@+id/color_list" --><!-- android:layout_width="match_parent" --><!-- android:layout_height="150dp" --><!-- android:layout_alignParentBottom="true" --><!-- android:layout_alignParentLeft="true" --><!-- android:background="#222222" --><!-- android:gravity="bottom|center_vertical" --><!-- android:paddingBottom="0dp" --><!-- android:paddingTop="0dp" > --><!-- </it.sephiroth.android.library.widget.HorizontalVariableListView> -->
+
+
+    <!-- <SeekBar --><!-- android:id="@+id/seekBar_b" --><!-- android:layout_width="match_parent" --><!-- android:layout_height="wrap_content" --><!-- android:layout_below="@+id/frameLayout1" --><!-- android:layout_centerHorizontal="true" --><!-- android:layout_marginLeft="40dp" --><!-- android:layout_marginTop="20dp" /> -->
+
+
+    <!-- <SeekBar --><!-- android:id="@+id/seekBar1" --><!-- android:layout_width="match_parent" --><!-- android:layout_height="wrap_content" --><!-- android:layout_below="@+id/seekBar_b" --><!-- android:layout_centerHorizontal="true" --><!-- android:layout_marginLeft="40dp" /> -->
+

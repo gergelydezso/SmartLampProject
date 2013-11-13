@@ -16,7 +16,7 @@
     <orderEntry type="library" exported="" name="android-support-v4" level="project" />
     <orderEntry type="module" module-name="SmartLampSDK" exported="" />
     <orderEntry type="module" module-name="HoloColorPicker" exported="" />
-    <orderEntry type="module" module-name="HorizontalVariableListView" exported="" />
+    <orderEntry type="library" exported="" name="ColorPicker" level="project" />
   </component>
 </module>
 

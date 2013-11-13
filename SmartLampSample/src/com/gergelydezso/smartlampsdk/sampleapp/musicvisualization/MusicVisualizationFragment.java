@@ -9,15 +9,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.Button;
 import android.widget.Toast;
-
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist.PlayListItem;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist.PlaylistActivity;
 
-
-// TODO - CODE REVIEW - andrei|Nov 12, 2013 - please format the code: use iQuest's code style xml.
 public class MusicVisualizationFragment extends Fragment {
 
     private static final String TAG = MusicVisualizationFragment.class.getSimpleName();

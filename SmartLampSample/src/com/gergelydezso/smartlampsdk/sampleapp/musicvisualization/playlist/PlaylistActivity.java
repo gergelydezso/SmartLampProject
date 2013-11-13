@@ -1,8 +1,5 @@
 package com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
@@ -12,11 +9,15 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.method.CharacterPickerDialog;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListAdapter;
 import android.widget.ListView;
-
 import com.gergelydezso.smartlampsdk.sampleapp.R;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Displays the available musics to play.

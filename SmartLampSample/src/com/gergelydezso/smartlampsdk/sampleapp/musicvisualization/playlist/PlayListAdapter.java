@@ -1,15 +1,14 @@
 package com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.playlist;
 
-import java.util.List;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-
 import com.gergelydezso.smartlampsdk.sampleapp.R;
+
+import java.util.List;
 
 /**
  * An adapter for the playlist.
