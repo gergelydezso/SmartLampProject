@@ -1,13 +1,13 @@
 package com.gergelydezso.smartlampsdk.sampleapp.notifications;
 
-import java.util.Set;
-import java.util.concurrent.CopyOnWriteArraySet;
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.telephony.TelephonyManager;
 import android.util.Log;
+
+import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 
 public class CallReceiver extends BroadcastReceiver {
 

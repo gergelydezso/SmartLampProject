@@ -6,13 +6,10 @@ import android.media.MediaPlayer;
 import android.media.MediaPlayer.OnCompletionListener;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
@@ -54,7 +51,7 @@ public class Intro extends Activity {
     });
     mImageStart = (ImageView) findViewById(R.id.image_start);
     mVideoIntro = (VideoView) findViewById(R.id.video_intro);
-    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.video_startup);
+    Uri uri = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.intro_video);
     mVideoIntro.setVideoURI(uri);
     mVideoIntro.setOnCompletionListener(new OnCompletionListener() {
       @Override
