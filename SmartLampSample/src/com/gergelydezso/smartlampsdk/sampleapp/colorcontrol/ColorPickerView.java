@@ -73,8 +73,8 @@ public class ColorPickerView extends View {
     private float 		mSat = 0f;
     private float 		mVal = 0f;
 
-    private int 		mSliderTrackerColor = 0xff1c1c1c;
-    private int 		mBorderColor = 0xff6E6E6E;
+    private int 		mSliderTrackerColor = 0xFF1C1C1C;
+    private int 		mBorderColor = 0xFF000000;
 
     private int			mLastTouchedPanel = PANEL_SAT_VAL;
 
