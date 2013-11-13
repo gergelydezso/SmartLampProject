@@ -13,7 +13,6 @@ import com.larswerkman.holocolorpicker.OpacityBar;
 import com.larswerkman.holocolorpicker.SaturationBar;
 import com.larswerkman.holocolorpicker.ValueBar;
 
-
 public class ColorControlPickerFragment extends Fragment {
 
   private ColorPicker picker;

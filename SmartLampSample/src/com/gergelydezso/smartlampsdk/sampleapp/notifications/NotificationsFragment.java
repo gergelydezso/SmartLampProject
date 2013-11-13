@@ -16,7 +16,6 @@ import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorPickerView;
 import com.gergelydezso.smartlampsdk.sampleapp.notifications.NotificationItem.NotificationItemCallback;
 
-
 public class NotificationsFragment extends Fragment {
 
     private NotificationItem gmailItem;

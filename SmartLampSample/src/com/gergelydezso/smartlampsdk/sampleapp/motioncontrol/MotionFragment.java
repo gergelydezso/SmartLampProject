@@ -1,7 +1,9 @@
 package com.gergelydezso.smartlampsdk.sampleapp.motioncontrol;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.graphics.Bitmap;
-import android.graphics.Point;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -19,18 +21,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
-import android.widget.SeekBar;
-import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.widget.TextView;
-import com.gergelydezso.smartlampsdk.ServoMotorEntity;
+
 import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
-import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
 import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class MotionFragment extends Fragment implements OnClickListener, View.OnTouchListener,
     View.OnLongClickListener {
