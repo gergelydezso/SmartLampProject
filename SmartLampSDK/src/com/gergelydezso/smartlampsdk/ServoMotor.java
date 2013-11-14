@@ -8,7 +8,6 @@ import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
 public class ServoMotor {
 
   private SmartLampCommunicationBridge mBridge;
-  private static final String mServoId = "servo";
 
   public ServoMotor(SmartLampCommunicationBridge bridge) {
     mBridge = bridge;
@@ -19,11 +18,6 @@ public class ServoMotor {
     // command.translate() is called which prvides a byte[] of bytes that can be sent to the Arduino module.
     mBridge.sendSetServoCommand(id, degree, callback);
     Log.v("ServoMotor", "ServoID: " + id + " Degree: " + degree);
-  }
-
-  public void getServoState(CommandCallback callback) {
-    mBridge.sendRequestCommand(mServoId, callback);
-
   }
 
 }

@@ -11,6 +11,7 @@ public class BluetoothCommunicationBridge implements SmartLampCommunicationBridg
 
   private BluetoothConnectionService mConnectionService;
   private ConnectedListener mListener;
+
   public BluetoothCommunicationBridge() {
   }
 
@@ -31,15 +32,21 @@ public class BluetoothCommunicationBridge implements SmartLampCommunicationBridg
 
       @Override
       public void onConnectionFailed() {
+        mListener.onConnectionFailed();
 
       }
 
       @Override
       public void onConnectionLost() {
-
+        mListener.onConnectionLost();
       }
     });
 
+  }
+
+  @Override
+  public void disconnect() {
+    mConnectionService.disconnect();
   }
 
   @Override
@@ -55,8 +62,8 @@ public class BluetoothCommunicationBridge implements SmartLampCommunicationBridg
   }
 
   @Override
-  public void sendRequestCommand(String id, CommandCallback callback) {
-    mConnectionService.write("R" + id, callback);
+  public void sendRequestCommand(CommandCallback callback) {
+    mConnectionService.write("Status", callback);
   }
 
   @Override

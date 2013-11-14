@@ -6,7 +6,7 @@ import android.util.Log;
 
 import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 import com.gergelydezso.smartlampsdk.command.Command;
-import com.gergelydezso.smartlampsdk.command.ServoSetCommand;
+import com.gergelydezso.smartlampsdk.command.ServoCommand;
 
 public class TimeCommandFilter implements CommandFilter {
 
@@ -24,12 +24,12 @@ public class TimeCommandFilter implements CommandFilter {
   @Override
   public boolean execute(Command commandToBeFiltered) {
 
-    if (commandToBeFiltered instanceof ServoSetCommand) {
-      ServoSetCommand servoSet = (ServoSetCommand) commandToBeFiltered;
+    if (commandToBeFiltered instanceof ServoCommand) {
+      ServoCommand servoSet = (ServoCommand) commandToBeFiltered;
 
       ServoMotorEntity servoID = servoSet.getServoID();
       long previousTime = mMap.get(servoID);
-      long actualTime = servoSet.getTimeTicket();
+      long actualTime = servoSet.getTimeStamp();
       long diffTime = actualTime - previousTime;
 
       if (diffTime > 1000) {
@@ -38,8 +38,8 @@ public class TimeCommandFilter implements CommandFilter {
       }
 
     }
-    else if ((commandToBeFiltered.getTimeTicket() - mPreviousTime) > 500) {
-      mPreviousTime = commandToBeFiltered.getTimeTicket();
+    else if ((commandToBeFiltered.getTimeStamp() - mPreviousTime) > 200) {
+      mPreviousTime = commandToBeFiltered.getTimeStamp();
       Log.d(TAG, "Led Time filter ok");
       return true;
     }

@@ -1,25 +1,24 @@
 package com.gergelydezso.smartlampsdk.command;
 
-
 import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
 
-public class SetAllCommand implements Command {
+/**
+ * Created by dezso.gergely on 11/14/13.
+ */
+public class StatusCommand implements Command {
 
   private long mTimeStamp;
   private CommandCallback mCallback;
   private SmartLampCommunicationBridge mBridge;
-  private ComponentsBatchBuilder mConfig;
 
-
-  public SetAllCommand(SmartLampCommunicationBridge bridge, ComponentsBatchBuilder config, CommandCallback callback) {
-    this.mCallback = callback;
-    this.mConfig = config;
+  public StatusCommand(SmartLampCommunicationBridge bridge, CommandCallback callback) {
     this.mBridge = bridge;
+    this.mCallback = callback;
   }
 
   @Override
   public void execute() {
-    mBridge.sendSetAllCommand(mConfig.getCommand(), mCallback);
+    mBridge.sendRequestCommand(mCallback);
   }
 
   @Override
@@ -31,5 +30,4 @@ public class SetAllCommand implements Command {
   public long getTimeStamp() {
     return mTimeStamp;
   }
-
 }

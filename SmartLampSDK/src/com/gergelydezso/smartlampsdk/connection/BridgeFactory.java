@@ -3,14 +3,12 @@ package com.gergelydezso.smartlampsdk.connection;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothCommunicationBridge;
 import com.gergelydezso.smartlampsdk.connection.bluetooth.ConnectedListener;
 
-// TODO - CODE REVIEW - andrei|Oct 29, 2013 - this is a Bridge Factory
-public class ConnectionFactory {
+public class BridgeFactory {
 
   private SmartLampCommunicationBridge bridge;
-  private BridgeBuildCallback mCallback;
+  private BridgeCreationListener mCallback;
 
-  // TODO - CODE REVIEW - andrei|Oct 29, 2013 - take care with correct spelling
-  public void bulidBridge(ConnectionType type, BridgeBuildCallback callback) {
+  public void buildBridge(ConnectionType type, BridgeCreationListener callback) {
 
     this.mCallback = callback;
 
@@ -26,11 +24,13 @@ public class ConnectionFactory {
 
         @Override
         public void onConnectionFailed() {
+          mCallback.onConnectionFailed();
 
         }
 
         @Override
         public void onConnectionLost() {
+          mCallback.onConnectionLost();
 
         }
       });
