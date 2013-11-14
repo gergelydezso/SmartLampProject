@@ -18,7 +18,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 
-
+// TODO - CODE REVIEW - andrei|Nov 14, 2013 - Please use code formatting!
 public class ColorPickerView extends View {
 
 
