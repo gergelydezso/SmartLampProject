@@ -21,16 +21,14 @@ import android.view.View;
 // TODO - CODE REVIEW - andrei|Nov 14, 2013 - Please use code formatting!
 public class ColorPickerView extends View {
 
-
-
-    private final static int	PANEL_SAT_VAL = 0;
-    private final static int	PANEL_HUE = 1;
+    private final static int PANEL_SAT_VAL = 0;
+    private final static int PANEL_HUE = 1;
 
     /**
      * The width in pixels of the border
      * surrounding all color panels.
      */
-    private final static float	BORDER_WIDTH_PX = 1;
+    private final static float BORDER_WIDTH_PX = 1;
 
     /**
      * The width in dp of the hue panel.
@@ -40,46 +38,45 @@ public class ColorPickerView extends View {
      * The distance in dp between the different
      * color panels.
      */
-    private float 		PANEL_SPACING = 10f;
+    private float PANEL_SPACING = 10f;
     /**
      * The radius in dp of the color palette tracker circle.
      */
-    private float 		PALETTE_CIRCLE_TRACKER_RADIUS = 12f;
+    private float PALETTE_CIRCLE_TRACKER_RADIUS = 12f;
     /**
      * The dp which the tracker of the hue or alpha panel
      * will extend outside of its bounds.
      */
-    private float		RECTANGLE_TRACKER_OFFSET = 2f;
+    private float RECTANGLE_TRACKER_OFFSET = 2f;
 
 
-    private float 		mDensity = 1f;
+    private float mDensity = 1f;
 
-    private OnColorChangedListener	mListener;
+    private OnColorChangedListener mListener;
 
-    private Paint       mSatValPaint;
-    private Paint		mSatValTrackerPaint;
+    private Paint mSatValPaint;
+    private Paint mSatValTrackerPaint;
 
-    private Paint		mHuePaint;
-    private Paint		mHueTrackerPaint;
+    private Paint mHuePaint;
+    private Paint mHueTrackerPaint;
 
-    private Paint		mBorderPaint;
+    private Paint mBorderPaint;
 
-    private Shader      mValShader;
-    private Shader		mSatShader;
-    private Shader		mHueShader;
+    private Shader mValShader;
+    private Shader mSatShader;
+    private Shader mHueShader;
 
-    private int			mAlpha = 0xff;
-    private float		mHue = 360f;
-    private float 		mSat = 0f;
-    private float 		mVal = 0f;
+    private int mAlpha = 0xff;
+    private float mHue = 360f;
+    private float mSat = 0f;
+    private float mVal = 0f;
 
-    private int 		mSliderTrackerColor = 0xFF1C1C1C;
-    private int 		mBorderColor = 0xFF000000;
+    private int mSliderTrackerColor = 0xFF1C1C1C;
+    private int mBorderColor = 0xFF000000;
 
-    private int			mLastTouchedPanel = PANEL_SAT_VAL;
+    private int mLastTouchedPanel = PANEL_SAT_VAL;
 
-    private float 		mDrawingOffset;
-
+    private float mDrawingOffset;
 
     /*
      * Distance form the edges of the view
@@ -87,8 +84,8 @@ public class ColorPickerView extends View {
      */
     private RectF mDrawingRect;
 
-    private RectF	mSatValRect;
-    private RectF 	mHueRect;
+    private RectF mSatValRect;
+    private RectF mHueRect;
 
     private Point mStartTouchPoint = null;
 
@@ -96,7 +93,7 @@ public class ColorPickerView extends View {
         public void onColorChanged(int color);
     }
 
-    public ColorPickerView(Context context){
+    public ColorPickerView(Context context) {
         this(context, null);
     }
 
@@ -109,7 +106,7 @@ public class ColorPickerView extends View {
         init();
     }
 
-    private void init(){
+    private void init() {
         mDensity = getContext().getResources().getDisplayMetrics().density;
         PALETTE_CIRCLE_TRACKER_RADIUS *= mDensity;
         RECTANGLE_TRACKER_OFFSET *= mDensity;
@@ -125,7 +122,7 @@ public class ColorPickerView extends View {
         setFocusableInTouchMode(true);
     }
 
-    private void initPaintTools(){
+    private void initPaintTools() {
 
         mSatValPaint = new Paint();
         mSatValTrackerPaint = new Paint();
@@ -144,12 +141,12 @@ public class ColorPickerView extends View {
     }
 
 
-    private int[] buildHueColorArray(){
+    private int[] buildHueColorArray() {
 
         int[] hue = new int[361];
 
         int count = 0;
-        for(int i = hue.length -1; i >= 0; i--, count++){
+        for (int i = hue.length - 1; i >= 0; i--, count++) {
             hue[count] = Color.HSVToColor(new float[]{i, 1f, 1f});
         }
 
@@ -160,18 +157,18 @@ public class ColorPickerView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
 
-        if(mDrawingRect.width() <= 0 || mDrawingRect.height() <= 0) return;
+        if (mDrawingRect.width() <= 0 || mDrawingRect.height() <= 0) return;
 
         drawSatValPanel(canvas);
         drawHuePanel(canvas);
 
     }
 
-    private void drawSatValPanel(Canvas canvas){
+    private void drawSatValPanel(Canvas canvas) {
 
-        final RectF	rect = mSatValRect;
+        final RectF rect = mSatValRect;
 
-        if(BORDER_WIDTH_PX > 0){
+        if (BORDER_WIDTH_PX > 0) {
             mBorderPaint.setColor(mBorderColor);
             canvas.drawRect(mDrawingRect.left, mDrawingRect.top, rect.right + BORDER_WIDTH_PX, rect.bottom + BORDER_WIDTH_PX, mBorderPaint);
         }
@@ -181,7 +178,7 @@ public class ColorPickerView extends View {
                     0xffffffff, 0xff000000, Shader.TileMode.CLAMP);
         }
 
-        int rgb = Color.HSVToColor(new float[]{mHue,1f,1f});
+        int rgb = Color.HSVToColor(new float[]{mHue, 1f, 1f});
 
         mSatShader = new LinearGradient(rect.left, rect.top, rect.right, rect.top,
                 0xffffffff, rgb, Shader.TileMode.CLAMP);
@@ -201,11 +198,11 @@ public class ColorPickerView extends View {
 
     }
 
-    private void drawHuePanel(Canvas canvas){
+    private void drawHuePanel(Canvas canvas) {
 
         final RectF rect = mHueRect;
 
-        if(BORDER_WIDTH_PX > 0){
+        if (BORDER_WIDTH_PX > 0) {
             mBorderPaint.setColor(mBorderColor);
             canvas.drawRect(rect.left - BORDER_WIDTH_PX,
                     rect.top - BORDER_WIDTH_PX,
@@ -234,7 +231,7 @@ public class ColorPickerView extends View {
 
     }
 
-    private Point hueToPoint(float hue){
+    private Point hueToPoint(float hue) {
 
         final RectF rect = mHueRect;
         final float width = rect.width();
@@ -247,7 +244,7 @@ public class ColorPickerView extends View {
         return p;
     }
 
-    private Point satValToPoint(float sat, float val){
+    private Point satValToPoint(float sat, float val) {
 
         final RectF rect = mSatValRect;
         final float height = rect.height();
@@ -255,13 +252,13 @@ public class ColorPickerView extends View {
 
         Point p = new Point();
 
-        p.x = (int) (sat * width + rect.left );
+        p.x = (int) (sat * width + rect.left);
         p.y = (int) ((1f - val) * height + rect.top);
 
         return p;
     }
 
-    private float[] pointToSatVal(float x, float y){
+    private float[] pointToSatVal(float x, float y) {
 
         final RectF rect = mSatValRect;
         float[] result = new float[2];
@@ -269,23 +266,19 @@ public class ColorPickerView extends View {
         float width = rect.width();
         float height = rect.height();
 
-        if (x < rect.left){
+        if (x < rect.left) {
             x = 0f;
-        }
-        else if(x > rect.right){
+        } else if (x > rect.right) {
             x = width;
-        }
-        else{
+        } else {
             x = x - rect.left;
         }
 
-        if (y < rect.top){
+        if (y < rect.top) {
             y = 0f;
-        }
-        else if(y > rect.bottom){
+        } else if (y > rect.bottom) {
             y = height;
-        }
-        else{
+        } else {
             y = y - rect.top;
         }
 
@@ -296,19 +289,17 @@ public class ColorPickerView extends View {
         return result;
     }
 
-    private float pointToHue(float x){
+    private float pointToHue(float x) {
 
         final RectF rect = mHueRect;
 
         float width = rect.width();
 
-        if (x < rect.left){
+        if (x < rect.left) {
             x = 0f;
-        }
-        else if (x > rect.right){
+        } else if (x > rect.right) {
             x = width;
-        }
-        else{
+        } else {
             x = x - rect.left;
         }
 
@@ -324,28 +315,26 @@ public class ColorPickerView extends View {
         boolean update = false;
 
 
-        if(event.getAction() == MotionEvent.ACTION_MOVE){
+        if (event.getAction() == MotionEvent.ACTION_MOVE) {
 
-            switch(mLastTouchedPanel){
+            switch (mLastTouchedPanel) {
 
                 case PANEL_SAT_VAL:
 
                     float sat, val;
 
-                    sat = mSat + x/50f;
-                    val = mVal - y/50f;
+                    sat = mSat + x / 50f;
+                    val = mVal - y / 50f;
 
-                    if(sat < 0f){
+                    if (sat < 0f) {
                         sat = 0f;
-                    }
-                    else if(sat > 1f){
+                    } else if (sat > 1f) {
                         sat = 1f;
                     }
 
-                    if(val < 0f){
+                    if (val < 0f) {
                         val = 0f;
-                    }
-                    else if(val > 1f){
+                    } else if (val > 1f) {
                         val = 1f;
                     }
 
@@ -360,10 +349,9 @@ public class ColorPickerView extends View {
 
                     float hue = mHue - x * 10f;
 
-                    if(hue < 0f){
+                    if (hue < 0f) {
                         hue = 0f;
-                    }
-                    else if(hue > 360f){
+                    } else if (hue > 360f) {
                         hue = 360f;
                     }
 
@@ -374,14 +362,12 @@ public class ColorPickerView extends View {
                     break;
 
             }
-
-
         }
 
 
-        if(update){
+        if (update) {
 
-            if(mListener != null){
+            if (mListener != null) {
                 mListener.onColorChanged(Color.HSVToColor(mAlpha, new float[]{mHue, mSat, mVal}));
             }
 
@@ -398,11 +384,11 @@ public class ColorPickerView extends View {
 
         boolean update = false;
 
-        switch(event.getAction()){
+        switch (event.getAction()) {
 
             case MotionEvent.ACTION_DOWN:
 
-                mStartTouchPoint = new Point((int)event.getX(), (int)event.getY());
+                mStartTouchPoint = new Point((int) event.getX(), (int) event.getY());
 
                 update = moveTrackersIfNeeded(event);
 
@@ -424,9 +410,9 @@ public class ColorPickerView extends View {
 
         }
 
-        if(update){
+        if (update) {
 
-            if(mListener != null){
+            if (mListener != null) {
                 mListener.onColorChanged(Color.HSVToColor(mAlpha, new float[]{mHue, mSat, mVal}));
             }
 
@@ -438,9 +424,9 @@ public class ColorPickerView extends View {
         return super.onTouchEvent(event);
     }
 
-    private boolean moveTrackersIfNeeded(MotionEvent event){
+    private boolean moveTrackersIfNeeded(MotionEvent event) {
 
-        if(mStartTouchPoint == null) return false;
+        if (mStartTouchPoint == null) return false;
 
         boolean update = false;
 
@@ -448,14 +434,13 @@ public class ColorPickerView extends View {
         int startY = mStartTouchPoint.y;
 
 
-        if(mHueRect.contains(startX, startY)){
+        if (mHueRect.contains(startX, startY)) {
             mLastTouchedPanel = PANEL_HUE;
 
             mHue = pointToHue(event.getX());
 
             update = true;
-        }
-        else if(mSatValRect.contains(startX, startY)){
+        } else if (mSatValRect.contains(startX, startY)) {
 
             mLastTouchedPanel = PANEL_SAT_VAL;
 
@@ -475,32 +460,32 @@ public class ColorPickerView extends View {
 
         mDrawingRect = new RectF();
         mDrawingRect.left = mDrawingOffset;
-        mDrawingRect.right  =  w - mDrawingOffset;
-        mDrawingRect.top =  mDrawingOffset;
-        mDrawingRect.bottom = mDrawingOffset+PANEL_HEIGHT;
+        mDrawingRect.right = w - mDrawingOffset;
+        mDrawingRect.top = mDrawingOffset;
+        mDrawingRect.bottom = mDrawingOffset + PANEL_HEIGHT;
 
         setUpSatValRect();
         setUpHueRect();
     }
 
-    private void setUpSatValRect(){
+    private void setUpSatValRect() {
 
-        final RectF	dRect = mDrawingRect;
+        final RectF dRect = mDrawingRect;
 
         float left = dRect.left;
         float top = dRect.top + PANEL_HEIGHT + PANEL_SPACING;
-        float bottom = dRect.bottom + PANEL_HEIGHT +PANEL_SPACING;
+        float bottom = dRect.bottom + PANEL_HEIGHT + PANEL_SPACING;
         float right = dRect.right;
 
-        mSatValRect = new RectF(left,top, right, bottom);
+        mSatValRect = new RectF(left, top, right, bottom);
     }
 
-    private void setUpHueRect(){
-        final RectF	dRect = mDrawingRect;
+    private void setUpHueRect() {
+        final RectF dRect = mDrawingRect;
 
         float left = dRect.left;
-        float top = dRect.top  ;
-        float bottom = dRect.bottom ;
+        float top = dRect.top;
+        float bottom = dRect.bottom;
         float right = dRect.right;
 
 
@@ -511,33 +496,37 @@ public class ColorPickerView extends View {
     /**
      * Set a OnColorChangedListener to get notified when the color
      * selected by the user has changed.
+     *
      * @param listener
      */
-    public void setOnColorChangedListener(OnColorChangedListener listener){
+    public void setOnColorChangedListener(OnColorChangedListener listener) {
         mListener = listener;
     }
 
     /**
      * Get the current color this view is showing.
+     *
      * @return the current color.
      */
-    public int getColor(){
-        return Color.HSVToColor(new float[]{mHue,mSat,mVal});
+    public int getColor() {
+        return Color.HSVToColor(new float[]{mHue, mSat, mVal});
     }
 
     /**
      * Set the color the view should show.
+     *
      * @param color The color that should be selected.
      */
-    public void setColor(int color){
+    public void setColor(int color) {
         setColor(color, false);
     }
 
     /**
      * Set the color this view should show.
-     * @param color The color that should be selected.
+     *
+     * @param color    The color that should be selected.
      * @param callback If you want to get a callback to
-     * your OnColorChangedListener.
+     *                 your OnColorChangedListener.
      */
     public void setColor(int color, boolean callback) {
 
@@ -553,7 +542,7 @@ public class ColorPickerView extends View {
         mVal = hsv[2];
 
         if (callback && mListener != null) {
-            mListener.onColorChanged(Color.HSVToColor(mAlpha, new float[] { mHue, mSat, mVal }));
+            mListener.onColorChanged(Color.HSVToColor(mAlpha, new float[]{mHue, mSat, mVal}));
         }
 
         invalidate();
