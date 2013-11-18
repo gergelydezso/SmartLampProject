@@ -94,7 +94,7 @@ public class NotificationsFragment extends Fragment {
             currentColor = item.getColor();
             final FrameLayout contentView = (FrameLayout) item.getRoot().getRootView().findViewById(android.R.id.content);
             final RelativeLayout pickerLayout = new RelativeLayout(getActivity());
-            pickerLayout.setBackgroundColor(getResources().getColor(R.color.semi_trans_black));
+            pickerLayout.setBackgroundColor(getResources().getColor(android.R.color.black));
             pickerLayout.setOnClickListener(new OnClickListener() {
 
                 @Override

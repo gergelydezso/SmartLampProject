@@ -87,8 +87,8 @@ public class BluetoothDeviceFinder {
 
       if (BluetoothDevice.ACTION_FOUND.equals(action)) {
         BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-        if (device != null && device.getBondState() != BluetoothDevice.BOND_BONDED) {
-          if ("SmartLamp".equals(device.getName())) {
+        if (device.getBondState() != BluetoothDevice.BOND_BONDED) {
+          if (device.getName().equals("SmartLamp")) {
             Log.d(TAG, "SmartLamp found!");
             mCallback.foundSmartLamp(device.getAddress());
             mBtAdapter.cancelDiscovery();

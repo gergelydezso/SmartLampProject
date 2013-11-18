@@ -21,8 +21,8 @@ import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
  * @author robert.fejer
  */
 public class VisualizerView extends View {
-
     private static final String TAG = VisualizerView.class.getSimpleName();
+
     private Visualizer visualizer;
     private Canvas     canvas;
     private Bitmap     bitmap;
@@ -41,18 +41,12 @@ public class VisualizerView extends View {
 
     /**
      * Initialize the visualizer.
-     *
      * @param audioSessionId required by the {@link android.media.audiofx.Visualizer}. Specifies the MediaPlayer / audio session to attach to.
      */
     public void init(int audioSessionId) {
         visualizer = new Visualizer(audioSessionId);
         visualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
         createAndSetCaptureListener();
-
-        paint = new Paint();
-        paint.setStrokeWidth(3f);
-        paint.setAntiAlias(true);
-        paint.setColor(Color.argb(255, 222, 92, 143));
 
         fadePaint.setColor(Color.argb(238, 255, 255, 255)); // Adjust alpha to change how quickly the image fades
         fadePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
@@ -95,7 +89,7 @@ public class VisualizerView extends View {
         Visualizer.OnDataCaptureListener captureListener = new Visualizer.OnDataCaptureListener() {
             @Override
             public void onWaveFormDataCapture(Visualizer visualizer, byte[] bytes, int samplingRate) {
-                handleWaveFormDataCapture(bytes);
+                handleWaveformDataCapture(bytes);
             }
 
             @Override
@@ -107,9 +101,7 @@ public class VisualizerView extends View {
         visualizer.setDataCaptureListener(captureListener, Visualizer.getMaxCaptureRate() / 2, true, true);
     }
 
-    private void handleWaveFormDataCapture(byte[] bytes) {
-        waveFormBytes = bytes;
-        int half = bytes.length / 2;
+    private void handleWaveformDataCapture(byte[] bytes) {
 
         int rectWidth = 300;
         int rectHeight = 300;
@@ -138,62 +130,6 @@ public class VisualizerView extends View {
 
     private void handleFFTDataCapture(byte[] bytes) {
 
-    }
-
-    private float convertPCMValueToDP(byte pcmValue) {
-        float ret = 0f;
-
-        float pcmPercent = 100 * pcmValue / Byte.MAX_VALUE;
-        if (pcmValue >= 0) {
-            ret = (300 / 2) * (pcmPercent / 100);
-        }
-        else {
-            ret = (-300 / 2) * (pcmPercent / 100);
-        }
-
-        return ret;
-    }
-
-    private void render(byte[] bytes, Rect rect) {
-        float[] points = new float[bytes.length * 4];
-        for (int i = 0; i < bytes.length - 1; i++) {
-            float[] cartPoint = {
-                    (float) i / (bytes.length - 1),
-                    rect.height() / 2 + ((byte) (bytes[i] + 128)) * (rect.height() / 2) / 128
-            };
-
-            float[] polarPoint = toPolar(cartPoint, rect);
-            points[i * 4] = polarPoint[0];
-            points[i * 4 + 1] = polarPoint[1];
-
-            float[] cartPoint2 = {
-                    (float) (i + 1) / (bytes.length - 1),
-                    rect.height() / 2 + ((byte) (bytes[i + 1] + 128)) * (rect.height() / 2) / 128
-            };
-
-            float[] polarPoint2 = toPolar(cartPoint2, rect);
-            points[i * 4 + 2] = polarPoint2[0];
-            points[i * 4 + 3] = polarPoint2[1];
-        }
-
-        canvas.drawLines(points, paint);
-
-        // Controls the pulsing rate
-        modulation += 0.04;
-    }
-
-    private float[] toPolar(float[] cartesian, Rect rect) {
-        double cX = rect.width() / 2;
-        double cY = rect.height() / 2;
-        double angle = (cartesian[0]) * 2 * Math.PI;
-        double radius =
-                ((rect.width() / 2) * (1 - aggresive) + aggresive * cartesian[1] / 2) * (1.2 + Math.sin(modulation))
-                        / 2.2;
-        float[] out = {
-                (float) (cX + radius * Math.sin(angle)),
-                (float) (cY + radius * Math.cos(angle))
-        };
-        return out;
     }
 
     private void cycleColor() {
