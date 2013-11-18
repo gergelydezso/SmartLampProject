@@ -38,7 +38,7 @@ public class TimeCommandFilter implements CommandFilter {
       }
 
     }
-    else if ((commandToBeFiltered.getTimeTicket() - mPreviousTime) > 500) {
+    else if ((commandToBeFiltered.getTimeTicket() - mPreviousTime) > 100) {
       mPreviousTime = commandToBeFiltered.getTimeTicket();
       Log.d(TAG, "Led Time filter ok");
       return true;

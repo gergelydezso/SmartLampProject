@@ -95,7 +95,7 @@ public class MusicVisualizationFragment extends Fragment {
     private void startPlaying() {
         if (mediaPlayer != null) {
             mediaPlayer.setLooping(true);
-            mediaPlayer.setVolume(.01f, .01f);
+            mediaPlayer.setVolume(.1f, .1f);
             mediaPlayer.start();
 
             visualizerView.init(mediaPlayer.getAudioSessionId());

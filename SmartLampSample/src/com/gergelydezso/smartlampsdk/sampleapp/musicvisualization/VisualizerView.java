@@ -6,10 +6,16 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.media.audiofx.Visualizer;
 import android.util.AttributeSet;
 import android.view.View;
+import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.command.CommandCallback;
+import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothCommunicationBridge;
+import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
 
 /**
  * @author robert.fejer
@@ -21,10 +27,13 @@ public class VisualizerView extends View {
     private Canvas     canvas;
     private Bitmap     bitmap;
     private Paint      paint;
-    private float modulation = 0;
-    private float aggresive  = 0.33f;
+    private float modulation   = 0;
+    private float aggresive    = 0.33f;
+    private float colorCounter = 0;
     private byte[] waveFormBytes;
-    private Rect rect = new Rect();
+    private SmartLampAPI api       = SmartLampAPIHolder.getApi();
+    private Rect         rect      = new Rect();
+    private Paint        fadePaint = new Paint();
 
     public VisualizerView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -44,6 +53,9 @@ public class VisualizerView extends View {
         paint.setStrokeWidth(3f);
         paint.setAntiAlias(true);
         paint.setColor(Color.argb(255, 222, 92, 143));
+
+        fadePaint.setColor(Color.argb(238, 255, 255, 255)); // Adjust alpha to change how quickly the image fades
+        fadePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
     }
 
     public void startVisualization() {
@@ -58,6 +70,8 @@ public class VisualizerView extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
+        cycleColor();
+
         rect.set(0, 0, getWidth(), getHeight());
 
         if (bitmap == null) {
@@ -71,6 +85,8 @@ public class VisualizerView extends View {
         if (waveFormBytes != null) {
             render(waveFormBytes, rect);
         }
+
+        this.canvas.drawPaint(fadePaint);
 
         canvas.drawBitmap(bitmap, new Matrix(), null);
     }
@@ -115,7 +131,7 @@ public class VisualizerView extends View {
 
             Paint paint = new Paint();
             paint.setColor(Color.GREEN);
-            canvas.drawPoints(points, paint);
+            //canvas.drawPoints(points, paint);
             invalidate();
         }
     }
@@ -179,4 +195,33 @@ public class VisualizerView extends View {
         };
         return out;
     }
+
+    private void cycleColor() {
+        if (paint != null) {
+            int r = (int) Math.floor(128 * (Math.sin(colorCounter) + 1));
+            int g = (int) Math.floor(128 * (Math.sin(colorCounter + 2) + 1));
+            int b = (int) Math.floor(128 * (Math.sin(colorCounter + 4) + 1));
+            paint.setColor(Color.argb(128, r, g, b));
+            colorCounter += 0.03;
+
+            api.setLedValue(r, g, b, commandCallback);
+        }
+    }
+
+    private CommandCallback commandCallback = new CommandCallback() {
+        @Override
+        public void onSuccess() {
+
+        }
+
+        @Override
+        public void onError() {
+
+        }
+
+        @Override
+        public void onResult(String state) {
+
+        }
+    };
 }
