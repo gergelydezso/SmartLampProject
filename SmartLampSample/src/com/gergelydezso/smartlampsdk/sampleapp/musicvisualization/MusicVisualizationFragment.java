@@ -48,7 +48,6 @@ public class MusicVisualizationFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             PlayListItem playListItem = data.getParcelableExtra(PlayListItem.ID);
             if (playListItem != null) {
-                        .show();
                 Uri uri = Uri.parse(playListItem.getUri());
                 mediaPlayer = createMediaPlayer(uri);
             }
@@ -104,6 +103,7 @@ public class MusicVisualizationFragment extends Fragment {
 
     private void stopPlaying() {
         if (mediaPlayer != null) {
+            visualizerView.stopVisualization();
             mediaPlayer.setLooping(false);
             mediaPlayer.stop();
         }
