@@ -3,6 +3,7 @@ package com.gergelydezso.smartlampsdk.command;
 
 import com.gergelydezso.smartlampsdk.connection.SmartLampCommunicationBridge;
 
+// TODO - CODE REVIEW - andrei|Nov 18, 2013 - BatchCommand is a more suitable name
 public class SetAllCommand implements Command {
 
   private long mTimeStamp;

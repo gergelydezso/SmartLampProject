@@ -32,6 +32,7 @@ public class TimeCommandFilter implements CommandFilter {
       long actualTime = servoSet.getTimeStamp();
       long diffTime = actualTime - previousTime;
 
+      // TODO - CODE REVIEW - andrei|Nov 18, 2013 - extract time units into constants
       if (diffTime > 1000) {
         mMap.put(servoID, actualTime);
         return true;

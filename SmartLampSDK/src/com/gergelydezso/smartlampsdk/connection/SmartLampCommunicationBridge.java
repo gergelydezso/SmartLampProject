@@ -39,6 +39,7 @@ public interface SmartLampCommunicationBridge {
    * State request command.
    * @param callback - retrieve the result of command.
    */
+  // TODO - CODE REVIEW - andrei|Nov 18, 2013 - Why not call it sendRequestStateCommand?
   public void sendRequestCommand(CommandCallback callback);
 
 }
