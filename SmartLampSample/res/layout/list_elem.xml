@@ -2,7 +2,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/list_elem_layout"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="#222021">
 
   <ImageView
       android:id="@+id/list_image"
@@ -10,24 +11,24 @@
       android:layout_height="wrap_content"/>
 
   <ImageView
-      android:paddingLeft="5dp"
       android:id="@+id/remove_icon"
+      android:layout_height="wrap_content"
       android:layout_width="wrap_content"
+      android:layout_alignParentEnd="true"
       android:layout_alignParentRight="true"
       android:layout_alignParentTop="true"
-      android:layout_height="wrap_content"
       android:visibility="invisible"
-      android:src="@drawable/icon_close_dark"/>
+      android:src="@drawable/remove_image_icon"/>
 
-  <ImageView
-      android:paddingRight="5dp"
-      android:id="@+id/settings_icon"
-      android:layout_width="wrap_content"
-      android:layout_alignParentLeft="true"
-      android:layout_alignParentTop="true"
-      android:layout_height="wrap_content"
-      android:visibility="invisible"
-      android:src="@android:drawable/ic_menu_manage"/>
+  <!--<ImageView-->
+      <!--android:paddingRight="5dp"-->
+      <!--android:id="@+id/settings_icon"-->
+      <!--android:layout_width="wrap_content"-->
+      <!--android:layout_alignParentLeft="true"-->
+      <!--android:layout_alignParentTop="true"-->
+      <!--android:layout_height="wrap_content"-->
+      <!--android:visibility="invisible"-->
+      <!--android:src="@android:drawable/ic_menu_manage"/>-->
 
 
   <!--<TextView-->
