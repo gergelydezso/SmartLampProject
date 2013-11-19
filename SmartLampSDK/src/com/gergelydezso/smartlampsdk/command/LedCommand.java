@@ -1,8 +1,7 @@
 package com.gergelydezso.smartlampsdk.command;
 
 import com.gergelydezso.smartlampsdk.LedRGB;
-import com.gergelydezso.smartlampsdk.SmartLamp;
-// TODO - CODE REVIEW - andrei|Nov 18, 2013 - please watch out for unused imports.
+
 public class LedCommand implements Command {
 
   private int mRed;

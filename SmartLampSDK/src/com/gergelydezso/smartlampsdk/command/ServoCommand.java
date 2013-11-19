@@ -2,7 +2,6 @@ package com.gergelydezso.smartlampsdk.command;
 
 import com.gergelydezso.smartlampsdk.ServoMotor;
 import com.gergelydezso.smartlampsdk.ServoMotorEntity;
-import com.gergelydezso.smartlampsdk.SmartLamp;
 
 public class ServoCommand implements Command {
 

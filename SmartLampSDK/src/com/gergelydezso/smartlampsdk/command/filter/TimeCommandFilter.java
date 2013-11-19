@@ -13,6 +13,8 @@ public class TimeCommandFilter implements CommandFilter {
   private static final String TAG = "TimeCommandFilter";
   private HashMap<ServoMotorEntity, Long> mMap;
   private long mPreviousTime;
+  private static final int SERVO_TIME_FILTER = 1000;
+  private static final int LED_TIME_FILTER = 150;
 
   public TimeCommandFilter() {
     mMap = new HashMap<ServoMotorEntity, Long>();
@@ -32,14 +34,12 @@ public class TimeCommandFilter implements CommandFilter {
       long actualTime = servoSet.getTimeStamp();
       long diffTime = actualTime - previousTime;
 
-      // TODO - CODE REVIEW - andrei|Nov 18, 2013 - extract time units into constants
-      if (diffTime > 1000) {
+      if (diffTime > SERVO_TIME_FILTER) {
         mMap.put(servoID, actualTime);
         return true;
       }
-
     }
-    else if ((commandToBeFiltered.getTimeStamp() - mPreviousTime) > 200) {
+    else if ((commandToBeFiltered.getTimeStamp() - mPreviousTime) > LED_TIME_FILTER) {
       mPreviousTime = commandToBeFiltered.getTimeStamp();
       Log.d(TAG, "Led Time filter ok");
       return true;
