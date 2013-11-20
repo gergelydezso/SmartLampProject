@@ -48,7 +48,6 @@ public class MusicVisualizationFragment extends Fragment {
         if (resultCode == Activity.RESULT_OK) {
             PlayListItem playListItem = data.getParcelableExtra(PlayListItem.ID);
             if (playListItem != null) {
-                Toast.makeText(getActivity(), "Now playing: " + playListItem.getDisplayName(), Toast.LENGTH_SHORT).show();
                 Uri uri = Uri.parse(playListItem.getUri());
                 mediaPlayer = createMediaPlayer(uri);
             }
@@ -94,14 +93,17 @@ public class MusicVisualizationFragment extends Fragment {
     private void startPlaying() {
         if (mediaPlayer != null) {
             mediaPlayer.setLooping(true);
+            mediaPlayer.setVolume(.1f, .1f);
             mediaPlayer.start();
 
             visualizerView.init(mediaPlayer.getAudioSessionId());
+            visualizerView.startVisualization();
         }
     }
 
     private void stopPlaying() {
         if (mediaPlayer != null) {
+            visualizerView.stopVisualization();
             mediaPlayer.setLooping(false);
             mediaPlayer.stop();
         }
