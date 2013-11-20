@@ -2,10 +2,10 @@ package com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.lamp;
 
 import android.graphics.Rect;
 import android.util.Log;
-import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+
+import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothCommunicationBridge;
-import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
+import com.gergelydezso.smartlampsdk.sampleapp.SmartLampHolder;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.VisualizerCapturedDataHandler;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.VisualizerDataHandler;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.renderer.CirclePatternRenderer;
@@ -28,7 +28,7 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
     private long            creationTime;
     private PatternRenderer patternRenderer;
     private int[]           actualColor;
-    private SmartLampAPI smartLampAPI       = SmartLampAPIHolder.getApi();
+    private SmartLamp smartLamp       = SmartLampHolder.getSmartLamp();
     private int[]        servo1Positions    = {0, 30, 90, 30, 120, 150, 90, 30, 0};
     private int          servoPositionIndex = 1;
 
@@ -78,9 +78,9 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
     }
 
     private void changeLedColor() {
-        if (smartLampAPI != null) {
+        if (smartLamp != null) {
           Log.d(TAG, "changeLedColor()::smartLampAPI - NOT NULL");
-          smartLampAPI.setLedValue(actualColor[0], actualColor[1], actualColor[2], commandCallback);
+            smartLamp.adjustLedComponent(actualColor[0], actualColor[1], actualColor[2], commandCallback);
         }
         else {
             Log.d(TAG, "changeLedColor()::smartLampAPI - NULL");
@@ -88,7 +88,7 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
     }
 
     private void changeLampPosition(int index) {
-        if (smartLampAPI != null) {
+        if (smartLamp != null) {
             Log.d(TAG, "changeLampPosition()::smartLampAPI - NOT NULL :: servo_pos: " + servo1Positions[index-1]);
             //smartLampAPI.setServoPosition(ServoMotorEntity.SERVO1, servo1Positions[index-1], commandCallback);
         }
