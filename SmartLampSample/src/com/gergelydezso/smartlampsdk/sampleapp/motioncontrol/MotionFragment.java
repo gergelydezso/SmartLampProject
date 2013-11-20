@@ -385,6 +385,20 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                 public void onResult(String state) {
                 }
             });
+
+            mApi.setServoPosition(ServoMotorEntity.SERVO5, positionList.get(i).getServo5Angle(), new CommandCallback() {
+                @Override
+                public void onSuccess() {
+                }
+
+                @Override
+                public void onError() {
+                }
+
+                @Override
+                public void onResult(String state) {
+                }
+            });
         }
     }
 

@@ -212,19 +212,21 @@
 
     </AbsoluteLayout>
 
-    <LinearLayout android:id="@+id/play_layout"
+    <LinearLayout
+        android:id="@+id/play_layout"
         android:layout_height="50dp"
         android:layout_width="fill_parent"
         android:layout_below="@id/absolute_layout"
         android:background="#232122"
         android:visibility="invisible">
 
-        <Button android:id="@+id/play_button"
+        <Button
+            android:id="@+id/play_button"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:text="  Play All "
             android:textColor="#222021"
-            android:drawableLeft="@drawable/play_icon"/>
+            android:drawableLeft="@drawable/play_icon" />
 
     </LinearLayout>
 
@@ -261,8 +263,7 @@
                 android:id="@+id/horizontal_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                ></LinearLayout>
+                android:orientation="horizontal"></LinearLayout>
 
         </HorizontalScrollView>
 

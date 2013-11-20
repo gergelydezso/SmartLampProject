@@ -93,40 +93,18 @@ public class NotificationsFragment extends Fragment {
         public void onNotificationColorRequest(final NotificationItem item) {
             currentColor = item.getColor();
             final FrameLayout contentView = (FrameLayout) item.getRoot().getRootView().findViewById(android.R.id.content);
-            final RelativeLayout pickerLayout = new RelativeLayout(getActivity());
-            pickerLayout.setBackgroundColor(getResources().getColor(android.R.color.black));
-            pickerLayout.setOnClickListener(new OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    // ignore
-                }
-            });
-
-            final ColorPickerView picker = new ColorPickerView(getActivity());
+            LayoutInflater inflater =
+                    (LayoutInflater) getActivity().getSystemService(getActivity().LAYOUT_INFLATER_SERVICE);
+            final View view = inflater.inflate(R.layout.notification_color, null);
+            ColorPickerView picker = (ColorPickerView) view.findViewById(R.id.color_picker);
             picker.setOnColorChangedListener(new ColorPickerView.OnColorChangedListener() {
                 @Override
                 public void onColorChanged(int color) {
                     currentColor = color;
                 }
             });
-            FrameLayout.LayoutParams plLp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
-                    LayoutParams.MATCH_PARENT);
-            contentView.addView(pickerLayout, plLp);
-
-            RelativeLayout.LayoutParams pLp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT);
-            pLp.topMargin = 250;
-            pickerLayout.addView(picker, pLp);
-
-            Button okButton = new Button(getActivity());
-            RelativeLayout.LayoutParams bLp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-                    LayoutParams.WRAP_CONTENT);
-            bLp.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-            bLp.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
-            bLp.bottomMargin = 230;
-            okButton.setText("Pick color");
-            okButton.setOnClickListener(new OnClickListener() {
+            Button pickColorButton = (Button) view.findViewById(R.id.pick_color);
+            pickColorButton.setOnClickListener(new OnClickListener() {
 
                 @Override
                 public void onClick(View v) {
@@ -137,12 +115,15 @@ public class NotificationsFragment extends Fragment {
                             item.setColor(currentColor);
                             Notification notification = (Notification) item.getTag();
                             setNotificationColor(notification, currentColor);
-                            contentView.removeView(pickerLayout);
+                            contentView.removeView(view);
                         }
                     });
                 }
             });
-            pickerLayout.addView(okButton, bLp);
+            FrameLayout.LayoutParams plLp = new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT,
+                    LayoutParams.MATCH_PARENT);
+            contentView.addView(view, plLp);
+
             contentView.invalidate();
         }
 
