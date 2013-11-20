@@ -1,5 +1,6 @@
 package com.gergelydezso.smartlampsdk;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.Log;
 import com.gergelydezso.smartlampsdk.command.BatchCommand;
@@ -55,17 +56,11 @@ public class SmartLamp {
    * @param connectionType  type of the connection.
    * @param listener        onConnectionReady()/onConnectionFailed()/onConnectionLost
    */
-  public static void connect(Context activityContext, ConnectionType connectionType,
+  public static void connect(Activity activityContext, ConnectionType connectionType,
       final ConnectionListener listener) {
 
-    // Dezso - We need to get the host activity context, so I think it is ok.
-
-    // TODO - CODE REVIEW - andrei|Nov 18, 2013 - I would rename the activityContext param to packageContext. We don't
-    // want to reference activities.
     if (!isConnected) {
       UserAppContextHolder contextHolder = new UserAppContextHolder();
-      // TODO - CODE REVIEW - andrei|Nov 18, 2013 - Maybe we should make sure we always keep a reference to a package
-      // context: activityContext.getApplicationContext()
       contextHolder.setContext(activityContext);
       BridgeFactory factory = new BridgeFactory();
       factory.buildBridge(connectionType, new BridgeCreationListener() {
