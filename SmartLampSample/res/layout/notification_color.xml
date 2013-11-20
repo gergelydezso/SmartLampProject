@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black">
+
+    <com.gergelydezso.smartlampsdk.sampleapp.colorcontrol.ColorPickerView
+        android:id="@+id/color_picker"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="250dp"
+        android:layerType="software" />
+    <Button android:id="@+id/pick_color"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Pick a color"
+        android:layout_below="@id/color_picker"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="230dp"/>
+
+</RelativeLayout>
