@@ -11,8 +11,8 @@ public interface Command {
 
   public void execute();
 
-  public void setTimeTicket(long time);
+  public void setTimeStamp(long time);
 
-  public long getTimeTicket();
+  public long getTimeStamp();
   
 }

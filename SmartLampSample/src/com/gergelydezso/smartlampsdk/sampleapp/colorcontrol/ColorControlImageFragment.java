@@ -10,17 +10,17 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
-import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
+import com.gergelydezso.smartlampsdk.sampleapp.SmartLampHolder;
 
 public class ColorControlImageFragment extends Fragment {
 
     private ColorPickerView mColorPicker;
     @SuppressWarnings("unused")
     private int w, h;
-    private SmartLampAPI mApi = null;
+    private SmartLamp mApi = null;
     private LightView lightView;
     private TextView hexCodeColor;
     private LinearLayout linearLayoutColor;
@@ -29,7 +29,7 @@ public class ColorControlImageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-        mApi = SmartLampAPIHolder.getApi();
+        mApi = SmartLampHolder.getSmartLamp();
 
         View rootView = inflater.inflate(R.layout.fragment_color_control_image, container, false);
 
@@ -55,7 +55,7 @@ public class ColorControlImageFragment extends Fragment {
 
                 if (mApi != null) {
 
-                    mApi.setLedValue(redValue, blueValue, greenValue, new CommandCallback() {
+                    mApi.adjustLedComponent(redValue, blueValue, greenValue, new CommandCallback() {
 
                         @Override
                         public void onSuccess() {

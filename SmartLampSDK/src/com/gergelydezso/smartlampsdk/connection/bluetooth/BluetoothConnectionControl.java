@@ -56,36 +56,40 @@ public class BluetoothConnectionControl {
     @Override
     public void handleMessage(Message msg) {
       switch (msg.what) {
-      case MESSAGE_STATE_CHANGE:
-        if (D)
-          Log.i(TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
-
-        switch (msg.arg1) {
-        case BluetoothConnectionService.STATE_CONNECTED:
-          BluetoothConnectionHolder connectionHolder = new BluetoothConnectionHolder();
-          connectionHolder.setConnection(mConnectionService);
-
-          mListener.onConnectionReady();
-
-          Toast.makeText(mContext, "Connected to SmartLamp", Toast.LENGTH_LONG).show();
+        case MESSAGE_STATE_CHANGE:
+          if (D) {
+            Log.i(TAG, "MESSAGE_STATE_CHANGE: " + msg.arg1);
+          }
+          switch (msg.arg1) {
+            case BluetoothConnectionService.STATE_CONNECTED:
+              BluetoothConnectionHolder connectionHolder = new BluetoothConnectionHolder();
+              connectionHolder.setConnection(mConnectionService);
+              mListener.onConnectionReady();
+              Toast.makeText(mContext, "Connected to SmartLamp", Toast.LENGTH_LONG).show();
+              break;
+            case BluetoothConnectionService.STATE_CONNECTING:
+              // TODO
+              break;
+            case BluetoothConnectionService.STATE_NONE:
+              // TODO
+              break;
+          }
           break;
-        case BluetoothConnectionService.STATE_CONNECTING:
-          // TODO
+        case MESSAGE_WRITE:
           break;
-        case BluetoothConnectionService.STATE_NONE:
-          // TODO
+        case MESSAGE_READ:
           break;
-        }
-        break;
-      case MESSAGE_WRITE:
-        break;
-      case MESSAGE_READ:
-        break;
-      case MESSAGE_DEVICE_NAME:
-        break;
-      case MESSAGE_TOAST:
-        Toast.makeText(mContext, msg.getData().getString(TOAST), Toast.LENGTH_LONG).show();
-        break;
+        case MESSAGE_DEVICE_NAME:
+          break;
+        case MESSAGE_TOAST:
+          Toast.makeText(mContext, msg.getData().getString(TOAST), Toast.LENGTH_LONG).show();
+          if (msg.getData().getString(TOAST).equals("Device connection was lost")) {
+            mListener.onConnectionLost();
+          }
+          if (msg.getData().getString(TOAST).equals("Unable to connect device")) {
+            mListener.onConnectionFailed();
+          }
+          break;
       }
     }
   };

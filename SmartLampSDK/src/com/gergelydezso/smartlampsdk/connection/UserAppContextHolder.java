@@ -1,16 +1,16 @@
 package com.gergelydezso.smartlampsdk.connection;
 
-import android.content.Context;
+import android.app.Activity;
 
 public class UserAppContextHolder {
 
-  private static Context mContext;
+  private static Activity mContext;
 
-  public void setContext(Context context) {
+  public void setContext(Activity context) {
     UserAppContextHolder.mContext = context;
   }
 
-  public static Context getContext() {
+  public static Activity getContext() {
     return UserAppContextHolder.mContext;
   }
 

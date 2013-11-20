@@ -1,18 +1,13 @@
 package com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.lamp;
 
-import android.graphics.Rect;
 import android.util.Log;
-import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
-import com.gergelydezso.smartlampsdk.connection.bluetooth.BluetoothCommunicationBridge;
-import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
+import com.gergelydezso.smartlampsdk.sampleapp.SmartLampHolder;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.VisualizerCapturedDataHandler;
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.VisualizerDataHandler;
-import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.renderer.CirclePatternRenderer;
-import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.renderer.PatternRenderer;
 
 import java.util.Calendar;
-import java.util.List;
 import java.util.Stack;
 
 /**
@@ -26,8 +21,8 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
 
     private long  creationTime;
     private int[] actualColor;
-    private SmartLampAPI smartLampAPI       = SmartLampAPIHolder.getApi();
-    private int          servoPositionIndex = 1;
+    private SmartLamp smartLamp = SmartLampHolder.getSmartLamp();
+    private int       servoPositionIndex = 1;
     private Stack<LampHeadState> motion;
 
     public LampMusicVisualizer() {
@@ -75,22 +70,22 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
     }
 
     private void changeLedColor() {
-        if (smartLampAPI != null) {
-          Log.d(TAG, "changeLedColor()::smartLampAPI - NOT NULL");
-          smartLampAPI.setLedValue(actualColor[0], actualColor[1], actualColor[2], commandCallback);
+        if (smartLamp != null) {
+          Log.d(TAG, "changeLedColor()::smartLamp - NOT NULL");
+          smartLamp.adjustLedComponent(actualColor[0], actualColor[1], actualColor[2], commandCallback);
         }
         else {
-            //Log.d(TAG, "changeLedColor()::smartLampAPI - NULL");
+            //Log.d(TAG, "changeLedColor()::smartLamp - NULL");
         }
     }
 
     private void changeLampPosition(LampHeadState lampHeadState) {
-        if (smartLampAPI != null || true) {
-            Log.d(TAG, "changeLampPosition()::smartLampAPI - NOT NULL :: lampHeadState: " + lampHeadState);
-            smartLampAPI.setServoPosition(lampHeadState.getServoMotorEntity(), lampHeadState.getServoPositon(), commandCallback);
+        if (smartLamp != null) {
+            Log.d(TAG, "changeLampPosition()::smartLamp - NOT NULL :: lampHeadState: " + lampHeadState);
+            smartLamp.adjustServoComponent(lampHeadState.getServoMotorEntity(), lampHeadState.getServoPositon(), commandCallback);
         }
         else {
-            //Log.d(TAG, "changeLampPosition()::smartLampAPI - NULL");
+            //Log.d(TAG, "changeLampPosition()::smartLamp - NULL");
         }
     }
 
