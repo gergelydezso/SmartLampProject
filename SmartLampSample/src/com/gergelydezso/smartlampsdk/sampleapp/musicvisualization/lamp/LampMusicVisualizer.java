@@ -12,28 +12,27 @@ import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.renderer.Circl
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.renderer.PatternRenderer;
 
 import java.util.Calendar;
+import java.util.List;
+import java.util.Stack;
 
 /**
- *
+ * Used for applying music visualization on the lamp.
  *
  * @author robert.fejer
  */
 public class LampMusicVisualizer implements VisualizerDataHandler {
 
-    private static final String TAG                       = "LampMusicVisualizer";//LampMusicVisualizer.class.getSimpleName();
-    private static final int    LED_COLOR_CHANGE_INTERVAL = 300;
-    private static final int    MOTION_CHANGE_INTERVAL    = 10000;
+    private static final String TAG = "LampMusicVisualizer";//LampMusicVisualizer.class.getSimpleName();
 
-    private Rect            rect;
-    private long            creationTime;
-    private PatternRenderer patternRenderer;
-    private int[]           actualColor;
+    private long  creationTime;
+    private int[] actualColor;
     private SmartLampAPI smartLampAPI       = SmartLampAPIHolder.getApi();
-    private int[]        servo1Positions    = {0, 30, 90, 30, 120, 150, 90, 30, 0};
     private int          servoPositionIndex = 1;
+    private Stack<LampHeadState> motion;
 
-    public LampMusicVisualizer(Rect rect) {
-        this.rect = rect;
+    public LampMusicVisualizer() {
+        motion = new Stack<LampHeadState>();
+        motion.addAll(LampStateFactory.createHeadMotion());
         init();
     }
 
@@ -55,17 +54,15 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
         int firstDigitOfTheLastThree = findTheFirstNDigitsOfTheLastNDigits(1, 3, elapsedTime);
         if (firstDigitOfTheLastThree > 0 && firstDigitOfTheLastThree % 3 == 0) {
             changeLedColor();
-            Log.d(TAG, "changeLedColor() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime % 1000 + " - "
-                    + firstDigitOfTheLastThree);
+            //Log.d(TAG, "changeLedColor() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime % 1000 + " - " + firstDigitOfTheLastThree);
         }
 
-        // tenth seconds
-        int firstDigitOfTheLastFive = findTheFirstNDigitsOfTheLastNDigits(1, 5, elapsedTime);
-        if (firstDigitOfTheLastFive > 0 && firstDigitOfTheLastFive == servoPositionIndex) {
-            //changeLampPosition(servoPositionIndex);
-            ++servoPositionIndex;
-            if (servoPositionIndex > servo1Positions.length) {
-                servoPositionIndex = 1;
+        if (!motion.empty()) {
+            LampHeadState currentHeadState = motion.peek();
+            if (currentHeadState.getTimeInSeconds() == elapsedTime / 1000) {
+                Log.d(TAG, "changeLampPosition() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime / 1000);
+                changeLampPosition(currentHeadState);
+                motion.pop();
             }
         }
     }
@@ -83,17 +80,17 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
           smartLampAPI.setLedValue(actualColor[0], actualColor[1], actualColor[2], commandCallback);
         }
         else {
-            Log.d(TAG, "changeLedColor()::smartLampAPI - NULL");
+            //Log.d(TAG, "changeLedColor()::smartLampAPI - NULL");
         }
     }
 
-    private void changeLampPosition(int index) {
-        if (smartLampAPI != null) {
-            Log.d(TAG, "changeLampPosition()::smartLampAPI - NOT NULL :: servo_pos: " + servo1Positions[index-1]);
-            //smartLampAPI.setServoPosition(ServoMotorEntity.SERVO1, servo1Positions[index-1], commandCallback);
+    private void changeLampPosition(LampHeadState lampHeadState) {
+        if (smartLampAPI != null || true) {
+            Log.d(TAG, "changeLampPosition()::smartLampAPI - NOT NULL :: lampHeadState: " + lampHeadState);
+            smartLampAPI.setServoPosition(lampHeadState.getServoMotorEntity(), lampHeadState.getServoPositon(), commandCallback);
         }
         else {
-            Log.d(TAG, "changeLampPosition()::smartLampAPI - NULL");
+            //Log.d(TAG, "changeLampPosition()::smartLampAPI - NULL");
         }
     }
 
@@ -106,7 +103,6 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
         VisualizerCapturedDataHandler visualizerCapturedDataHandler = VisualizerCapturedDataHandler.getInstance();
         visualizerCapturedDataHandler.registerDataHandler(this);
         creationTime = Calendar.getInstance().getTimeInMillis();
-        patternRenderer = new CirclePatternRenderer();
     }
 
     private CommandCallback commandCallback = new CommandCallback() {

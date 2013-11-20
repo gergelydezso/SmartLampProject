@@ -62,7 +62,7 @@ public class VisualizerView extends View implements VisualizerDataHandler {
         fadePaint.setColor(Color.argb(238, 255, 255, 255));
         fadePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
 
-        lampMusicVisualizer = new LampMusicVisualizer(rect);
+        lampMusicVisualizer = new LampMusicVisualizer();
     }
 
     public void startVisualization() {
