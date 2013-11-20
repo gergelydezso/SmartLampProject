@@ -4,7 +4,6 @@ package com.gergelydezso.smartlampsdk.command;
  * Callback for commands.
  */
 public interface CommandCallback {
-  // TODO - change to interface
 
   /**
    * Called when the command has been executed correctly.

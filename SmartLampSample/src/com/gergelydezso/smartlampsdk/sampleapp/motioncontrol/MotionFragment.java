@@ -24,10 +24,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.gergelydezso.smartlampsdk.ServoMotorEntity;
-import com.gergelydezso.smartlampsdk.api.SmartLampAPI;
+import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
 import com.gergelydezso.smartlampsdk.sampleapp.R;
-import com.gergelydezso.smartlampsdk.sampleapp.SmartLampAPIHolder;
+import com.gergelydezso.smartlampsdk.sampleapp.SmartLampHolder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,7 +38,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
 
     private final static String TAG = "MotionFragment";
     public ImageView mImageCoordonate;
-    private SmartLampAPI mApi;
+    private SmartLamp mApi;
     private LinearLayout lLayout;
     private List<LampModel> positionList;
     private HorizontalScrollView hScroll;
@@ -132,7 +132,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
 
 
         View rootView = inflater.inflate(R.layout.fragment_motion_control, container, false);
-        mApi = SmartLampAPIHolder.getApi();
+        mApi = SmartLampHolder.getSmartLamp();
 
         mainLayout = (AbsoluteLayout) rootView.findViewById(R.id.absolute_layout);
         mainLayout.setDrawingCacheEnabled(true);
@@ -358,7 +358,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
         Log.d("MotionFragment", "command value: " + positionList.get(i).getServo1Angle());
 
         if (mApi != null) {
-            mApi.setServoPosition(ServoMotorEntity.SERVO1, positionList.get(i).getServo1Angle(), new CommandCallback() {
+            mApi.adjustServoComponent(ServoMotorEntity.SERVO1, positionList.get(i).getServo1Angle(), new CommandCallback() {
                 @Override
                 public void onSuccess() {
                 }
@@ -372,33 +372,33 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                 }
             });
 
-            mApi.setServoPosition(ServoMotorEntity.SERVO2, positionList.get(i).getServo2Angle(), new CommandCallback() {
-                @Override
-                public void onSuccess() {
-                }
-
-                @Override
-                public void onError() {
-                }
-
-                @Override
-                public void onResult(String state) {
-                }
-            });
-
-            mApi.setServoPosition(ServoMotorEntity.SERVO5, positionList.get(i).getServo5Angle(), new CommandCallback() {
-                @Override
-                public void onSuccess() {
-                }
-
-                @Override
-                public void onError() {
-                }
-
-                @Override
-                public void onResult(String state) {
-                }
-            });
+//            mApi.adjustServoComponent(ServoMotorEntity.SERVO2, positionList.get(i).getServo2Angle(), new CommandCallback() {
+//                @Override
+//                public void onSuccess() {
+//                }
+//
+//                @Override
+//                public void onError() {
+//                }
+//
+//                @Override
+//                public void onResult(String state) {
+//                }
+//            });
+//
+//            mApi.adjustServoComponent(ServoMotorEntity.SERVO5, positionList.get(i).getServo5Angle(), new CommandCallback() {
+//                @Override
+//                public void onSuccess() {
+//                }
+//
+//                @Override
+//                public void onError() {
+//                }
+//
+//                @Override
+//                public void onResult(String state) {
+//                }
+//            });
         }
     }
 

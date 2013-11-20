@@ -2,7 +2,10 @@ package com.gergelydezso.smartlampsdk.command;
 
 import com.gergelydezso.smartlampsdk.ServoMotorEntity;
 
-public class AllCommandConfiguration {
+/**
+ * ComponentsBatchBuilder class.
+ */
+public class ComponentsBatchBuilder {
 
   private int mServo1Value;
   private int mServo2Value;
@@ -13,9 +16,16 @@ public class AllCommandConfiguration {
   private int mLedGreenValue;
   private int mLedBlueValue;
 
-  public void setServoValue(ServoMotorEntity id, int value) {
 
-    switch (id.getValue()) {
+  /**
+   * Adjust servo motor components.
+   *
+   * @param servoPin ServoMotor identifier.
+   * @param value    angle of the ServoMotor.
+   */
+  public void adjustServoComponent(ServoMotorEntity servoPin, int value) {
+
+    switch (servoPin.getValue()) {
       case 1:
         this.mServo1Value = value;
         break;
@@ -32,17 +42,22 @@ public class AllCommandConfiguration {
         this.mServo5Value = value;
         break;
     }
-
   }
 
-  public void setLedColor(int redVlue, int greenValue, int blueValue) {
-    this.mLedRedValue = redVlue;
+  /**
+   * Adjust the LED components.
+   *
+   * @param redValue   LedRGB red pin value
+   * @param greenValue LedRGB green pin value
+   * @param blueValue  LedRGB blue pin value
+   */
+  public void adjustLedComponent(int redValue, int greenValue, int blueValue) {
+    this.mLedRedValue = redValue;
     this.mLedGreenValue = greenValue;
     this.mLedBlueValue = blueValue;
   }
 
   public String getCommand() {
-    return "111111111111111111111111";
+    return "translated batch command";
   }
-
 }
