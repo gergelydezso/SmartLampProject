@@ -13,7 +13,7 @@ public class TimeCommandFilter implements CommandFilter {
   private static final String TAG = "TimeCommandFilter";
   private HashMap<ServoMotorEntity, Long> mMap;
   private long mPreviousTime;
-  private static final int SERVO_TIME_FILTER = 1000;
+  private static final int SERVO_TIME_FILTER = 400;
   private static final int LED_TIME_FILTER = 150;
 
   public TimeCommandFilter() {

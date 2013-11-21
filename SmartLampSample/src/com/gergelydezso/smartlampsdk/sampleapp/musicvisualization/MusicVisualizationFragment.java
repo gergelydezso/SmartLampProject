@@ -94,7 +94,7 @@ public class MusicVisualizationFragment extends Fragment {
         if (mediaPlayer != null) {
             mediaPlayer.start();
 
-            visualizerView.init(mediaPlayer.getAudioSessionId());
+            visualizerView.init(mediaPlayer);
             visualizerView.startVisualization();
         }
     }

@@ -1,5 +1,6 @@
 package com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.lamp;
 
+import android.media.MediaPlayer;
 import android.util.Log;
 import com.gergelydezso.smartlampsdk.SmartLamp;
 import com.gergelydezso.smartlampsdk.command.CommandCallback;
@@ -23,10 +24,12 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
 
     private long  creationTime;
     private int[] actualColor;
-    private SmartLamp smartLamp          = SmartLampHolder.getSmartLamp();
+    private SmartLamp smartLamp = SmartLampHolder.getSmartLamp();
+    private final MediaPlayer mediaPlayer;
     private TreeSet<LampHeadState> motion;
 
-    public LampMusicVisualizer() {
+    public LampMusicVisualizer(MediaPlayer mediaPlayer) {
+        this.mediaPlayer = mediaPlayer;
         motion = new TreeSet<LampHeadState>();
         motion.addAll(LampStateFactory.createHeadMotion());
         init();
@@ -39,7 +42,7 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
     @Override
     public void handleWaveFormData(byte[] bytes) {
         long currentTime = Calendar.getInstance().getTimeInMillis();
-        long elapsedTime = currentTime - creationTime;
+        long elapsedTime = mediaPlayer.getCurrentPosition();
 
         // hundred milliseconds
         int firstDigitOfTheLastThree = findTheFirstNDigitsOfTheLastNDigits(1, 3, elapsedTime);
@@ -50,8 +53,8 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
 
         if (!motion.isEmpty()) {
             LampHeadState currentHeadState = motion.first();
-            if (currentHeadState.getTimeInSeconds() == elapsedTime / 1000) {
-                Log.d(TAG, "changeLampPosition() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime / 1000);
+            if (shouldChangeLampPosition(currentHeadState, elapsedTime))  { //(currentHeadState.getTimeInSeconds() * 10 == elapsedTime / 100)
+                Log.d(TAG, "changeLampPosition() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime / 100);
                 changeLampPosition(currentHeadState);
                 motion.pollFirst();
             }
@@ -63,6 +66,37 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
         double firstNDigits = lastNDigits / Math.pow(10, numberOfLastN - numberOfFirstN);
 
         return (int) firstNDigits;
+    }
+
+    private boolean shouldChangeLampPosition(LampHeadState currentHeadState, long elapsedTime) {
+        boolean shouldChange = false;
+
+        int timeInSeconds = (int) (currentHeadState.getTimeInSeconds() * 10);
+        long elapsedTimeInclTenthMSec = elapsedTime / 100;
+
+        int tenthMSecPartOfTimeInSeconds = timeInSeconds % 10;
+        int tenthMSecPartOfElapsedTime = (int) elapsedTimeInclTenthMSec % 10;
+
+        int secPartOfTimeInSeconds = (int) currentHeadState.getTimeInSeconds();
+        long secPartOfElapsedTime = elapsedTime / 1000;
+
+        if (secPartOfTimeInSeconds == secPartOfElapsedTime) {
+            if ( (tenthMSecPartOfTimeInSeconds >= 0 && tenthMSecPartOfTimeInSeconds < 5) && (tenthMSecPartOfElapsedTime >= 0 && tenthMSecPartOfElapsedTime < 5) ) {
+                shouldChange = true;
+            }
+            else if ( (tenthMSecPartOfTimeInSeconds >= 5 && tenthMSecPartOfTimeInSeconds <= 9) && (tenthMSecPartOfElapsedTime >= 5 && tenthMSecPartOfElapsedTime <= 9) ) {
+                shouldChange = true;
+            }
+/*
+            Log.d(TAG, "shouldChangeLampPosition() - CALLED! - elapsedTime: " + elapsedTime +
+                    ", tenthMSecPartOfElapsedTime: " + tenthMSecPartOfElapsedTime +
+                    ", timeInSeconds: " + timeInSeconds +
+                    ", tenthMSecPartOfTimeInSeconds: " + tenthMSecPartOfTimeInSeconds +
+                    ", secPartOfTimeInSeconds: " + secPartOfTimeInSeconds +
+                    ", secPartOfElapsedTime: " + secPartOfElapsedTime);*/
+        }
+
+        return shouldChange;
     }
 
     private void changeLedColor() {

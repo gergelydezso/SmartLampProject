@@ -9,6 +9,7 @@ import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
+import android.media.MediaPlayer;
 import android.media.audiofx.Visualizer;
 import android.util.AttributeSet;
 import android.view.View;
@@ -46,8 +47,8 @@ public class VisualizerView extends View implements VisualizerDataHandler {
      *
      * @param audioSessionId required by the {@link android.media.audiofx.Visualizer}. Specifies the MediaPlayer / audio session to attach to.
      */
-    public void init(int audioSessionId) {
-        visualizer = new Visualizer(audioSessionId);
+    public void init(MediaPlayer mediaPlayer) {
+        visualizer = new Visualizer(mediaPlayer.getAudioSessionId());
         visualizer.setCaptureSize(Visualizer.getCaptureSizeRange()[1]);
         createAndSetCaptureListener();
 
@@ -59,7 +60,7 @@ public class VisualizerView extends View implements VisualizerDataHandler {
         fadePaint.setColor(Color.argb(238, 255, 255, 255));
         fadePaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
 
-        lampMusicVisualizer = new LampMusicVisualizer();
+        lampMusicVisualizer = new LampMusicVisualizer(mediaPlayer);
     }
 
     public void startVisualization() {

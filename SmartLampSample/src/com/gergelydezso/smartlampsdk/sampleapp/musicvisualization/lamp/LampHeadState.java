@@ -9,7 +9,7 @@ import com.gergelydezso.smartlampsdk.ServoMotorEntity;
  */
 public class LampHeadState implements Comparable<LampHeadState> {
 
-    private int              timeInSeconds;
+    private double              timeInSeconds;
     private ServoMotorEntity servoMotorEntity;
     private int              servoPositon;
 
@@ -17,17 +17,17 @@ public class LampHeadState implements Comparable<LampHeadState> {
 
     }
 
-    public LampHeadState(int timeInSeconds, ServoMotorEntity servoMotorEntity, int servoPositon) {
+    public LampHeadState(double timeInSeconds, ServoMotorEntity servoMotorEntity, int servoPositon) {
         this.timeInSeconds = timeInSeconds;
         this.servoMotorEntity = servoMotorEntity;
         this.servoPositon = servoPositon;
     }
 
-    public int getTimeInSeconds() {
+    public double getTimeInSeconds() {
         return timeInSeconds;
     }
 
-    public void setTimeInSeconds(int timeInSeconds) {
+    public void setTimeInSeconds(double timeInSeconds) {
         this.timeInSeconds = timeInSeconds;
     }
 
