@@ -20,19 +20,19 @@ public class LampModel {
   }
 
   public void setServo2Angle(int angle) {
-    this.servo1Angle = angle;
+    this.servo2Angle = angle;
   }
 
   public void setServo3Angle(int angle) {
-    this.servo1Angle = angle;
+    this.servo3Angle = angle;
   }
 
   public void setServo4Angle(int angle) {
-    this.servo1Angle = angle;
+    this.servo4Angle = angle;
   }
 
   public void setServo5Angle(int angle) {
-    this.servo1Angle = angle;
+    this.servo5Angle = angle;
   }
 
   public int getServo1Angle() {

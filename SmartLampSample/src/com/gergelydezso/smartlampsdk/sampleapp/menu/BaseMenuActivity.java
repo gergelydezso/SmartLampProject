@@ -130,9 +130,12 @@ public class BaseMenuActivity extends FragmentActivity {
         boolean drawerOpen = mDrawerLayout.isDrawerOpen(mDrawerList);
 
         Log.d("BaseMenu", "boolean: " + drawerOpen);
-
+        String title = getActionBar().getTitle().toString();
+        Log.d("BaseMenu", "title : " + title);
         if (drawerOpen) {
             menu_save = false;
+        } else if (title.equals(getResources().getString(R.string.ns_menu_snippet2))) {
+            menu_save = true;
         }
 
         menu.findItem(R.id.menu_save).setVisible(menu_save);
