@@ -8,7 +8,9 @@ import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.VisualizerCapt
 import com.gergelydezso.smartlampsdk.sampleapp.musicvisualization.VisualizerDataHandler;
 
 import java.util.Calendar;
+import java.util.SortedSet;
 import java.util.Stack;
+import java.util.TreeSet;
 
 /**
  * Used for applying music visualization on the lamp.
@@ -21,12 +23,11 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
 
     private long  creationTime;
     private int[] actualColor;
-    private SmartLamp smartLamp = SmartLampHolder.getSmartLamp();
-    private int       servoPositionIndex = 1;
-    private Stack<LampHeadState> motion;
+    private SmartLamp smartLamp          = SmartLampHolder.getSmartLamp();
+    private TreeSet<LampHeadState> motion;
 
     public LampMusicVisualizer() {
-        motion = new Stack<LampHeadState>();
+        motion = new TreeSet<LampHeadState>();
         motion.addAll(LampStateFactory.createHeadMotion());
         init();
     }
@@ -40,11 +41,6 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
         long currentTime = Calendar.getInstance().getTimeInMillis();
         long elapsedTime = currentTime - creationTime;
 
-        String actualColorString = "";
-        if (actualColor != null) {
-            actualColorString = " - actualColor: " + actualColor[0] + "," + actualColor[1] + "," + actualColor[2];
-        }
-
         // hundred milliseconds
         int firstDigitOfTheLastThree = findTheFirstNDigitsOfTheLastNDigits(1, 3, elapsedTime);
         if (firstDigitOfTheLastThree > 0 && firstDigitOfTheLastThree % 3 == 0) {
@@ -52,12 +48,12 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
             //Log.d(TAG, "changeLedColor() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime % 1000 + " - " + firstDigitOfTheLastThree);
         }
 
-        if (!motion.empty()) {
-            LampHeadState currentHeadState = motion.peek();
+        if (!motion.isEmpty()) {
+            LampHeadState currentHeadState = motion.first();
             if (currentHeadState.getTimeInSeconds() == elapsedTime / 1000) {
                 Log.d(TAG, "changeLampPosition() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime / 1000);
                 changeLampPosition(currentHeadState);
-                motion.pop();
+                motion.pollFirst();
             }
         }
     }
@@ -71,7 +67,7 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
 
     private void changeLedColor() {
         if (smartLamp != null) {
-          Log.d(TAG, "changeLedColor()::smartLamp - NOT NULL");
+          //Log.d(TAG, "changeLedColor()::smartLamp - NOT NULL");
           smartLamp.adjustLedComponent(actualColor[0], actualColor[1], actualColor[2], commandCallback);
         }
         else {

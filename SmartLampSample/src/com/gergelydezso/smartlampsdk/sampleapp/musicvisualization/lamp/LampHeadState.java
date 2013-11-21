@@ -52,8 +52,8 @@ public class LampHeadState implements Comparable<LampHeadState> {
         StringBuilder strBuilder = new StringBuilder();
 
         strBuilder.append("LampHeadState [timeInSeconds = " + timeInSeconds);
-        strBuilder.append(", [servoMotorEntity = " + servoMotorEntity.name());
-        strBuilder.append(", [servoPositon = " + servoPositon);
+        strBuilder.append(", servoMotorEntity = " + servoMotorEntity.name());
+        strBuilder.append(", servoPositon = " + servoPositon);
         strBuilder.append("]");
 
         return strBuilder.toString();
@@ -63,10 +63,10 @@ public class LampHeadState implements Comparable<LampHeadState> {
     public int compareTo(LampHeadState otherLampHeadState) {
         int ret = 0;
 
-        if (getTimeInSeconds() > otherLampHeadState.getTimeInSeconds()) {
+        if (getTimeInSeconds() < otherLampHeadState.getTimeInSeconds()) {
             ret = -1;
         }
-        else if (getTimeInSeconds() < otherLampHeadState.getTimeInSeconds()) {
+        else if (getTimeInSeconds() > otherLampHeadState.getTimeInSeconds()) {
             ret = 1;
         }
 
