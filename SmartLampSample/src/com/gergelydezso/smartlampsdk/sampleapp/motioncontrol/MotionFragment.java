@@ -37,6 +37,12 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
         View.OnLongClickListener {
 
     private final static String TAG = "MotionFragment";
+    public static final int MIN_SERVO1 = 35;
+    public static final int MAX_SERVO1 = 179;
+    public static final int MIN_SERVO2 = 1;
+    public static final int MAX_SERVO2 = 165;
+    public static final int MIN_SERVO5 = 15;
+    public static final int MAX_SERVO5 = 172;
     public ImageView mImageCoordonate;
     private SmartLamp mApi;
     private LinearLayout lLayout;
@@ -71,7 +77,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
     private AbsoluteLayout mainLayout;
 
     private int servo1Angle = 90;
-    private int servo2Angle = 135;
+    private int servo2Angle = MIN_SERVO2;
     private int servo5Angle = 180;
     private VerticalSeekBarView seekBar;
     private LinearLayout textVerticalLayout;
@@ -104,6 +110,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
             R.drawable.circle150, R.drawable.circle135, R.drawable.circle120, R.drawable.circle105,
             R.drawable.circle90, R.drawable.circle75, R.drawable.circle60, R.drawable.circle45,
             R.drawable.circle30, R.drawable.circle15, R.drawable.circle0};
+    private Thread sendCommandThread;
 
     public MotionFragment() {
         positionList = new ArrayList<LampModel>();
@@ -129,7 +136,6 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
 
         View rootView = inflater.inflate(R.layout.fragment_motion_control, container, false);
         mApi = SmartLampHolder.getSmartLamp();
@@ -195,6 +201,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 motionControl(progress);
+                //seekBar.setProgress(progress);
             }
 
             @Override
@@ -204,7 +211,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-
+                servo1Angle = seekBar.getProgress();
             }
         };
     }
@@ -217,51 +224,62 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
         for (int index = 0; index < controlImageResourceList.length; index++) {
             if (x < 60) {
                 imageControl.setImageResource(controlImageResourceList[0]);
-                servo5Angle = 0;
+                servo5Angle = MIN_SERVO5;
                 break;
             }
             if (x > 660) {
                 imageControl.setImageResource(controlImageResourceList[12]);
-                servo5Angle = 180;
+                servo5Angle = MAX_SERVO5;
                 break;
             } else {
                 int lowerLimit = index * step + 60;
                 int upperLimit = (index + 1) * step + 60;
                 if (x > lowerLimit && x <= upperLimit) {
                     imageControl.setImageResource(controlImageResourceList[index]);
-                    setServo5Angle(index);
+                    setServo5Anglee(index);
                     break;
                 }
             }
         }
     }
 
-    private void setServo5Angle(int index) {
+    private void setServo5Anglee(int index) {
         switch (index) {
             case 0:
-                servo5Angle = 180;
+                servo5Angle = MAX_SERVO5;
+                break;
             case 1:
-                servo5Angle = 165;
+                servo5Angle = MAX_SERVO5;
+                break;
             case 2:
                 servo5Angle = 150;
+                break;
             case 3:
                 servo5Angle = 135;
+                break;
             case 4:
                 servo5Angle = 120;
+                break;
             case 5:
                 servo5Angle = 105;
+                break;
             case 6:
                 servo5Angle = 90;
+                break;
             case 7:
                 servo5Angle = 75;
+                break;
             case 8:
                 servo5Angle = 60;
+                break;
             case 9:
                 servo5Angle = 45;
+                break;
             case 10:
                 servo5Angle = 30;
+                break;
             case 11:
-                servo5Angle = 15;
+                servo5Angle = MIN_SERVO5;
                 break;
         }
     }
@@ -308,6 +326,13 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
     }
 
     public void play() {
+//        if (positionList.size()>0){
+//            for (int i=0;i<positionList.size();i++){
+//                Log.d(TAG ,String.valueOf(positionList.get(i).getServo1Angle()));
+//                Log.d(TAG ,String.valueOf(positionList.get(i).getServo2Angle()));
+//                Log.d(TAG ,String.valueOf(positionList.get(i).getServo5Angle()));
+//            }
+//        }
         if (!overImages.isEmpty()) {
             playLayout.setVisibility(View.INVISIBLE);
             mainLayout.setVisibility(View.INVISIBLE);
@@ -321,7 +346,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
 
             final Handler handler = new Handler();
 
-            Runnable r = new Runnable() {
+            sendCommandThread = new Thread() {
                 int i = 0;
 
                 @Override
@@ -329,7 +354,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                     overLayer.setImageBitmap(overImages.get(i));
                     overLayer.startAnimation(alphaIn);
                     lLayout.removeView(elements.get(i));
-                    handler.postDelayed(this, 1000);
+                    handler.postDelayed(this, 2000);
                     sendCommand(i);
                     i++;
 
@@ -348,16 +373,15 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                 }
             };
 
-            handler.post(r);
+            handler.post(sendCommandThread);
         }
 
     }
 
     public void sendCommand(int i) {
 
-        Log.d("MotionFragment", "command value: " + positionList.get(i).getServo1Angle());
-
         if (mApi != null) {
+            Log.d("MotionFragment", "command value 1: " + positionList.get(i).getServo1Angle());
             mApi.adjustServoComponent(ServoMotorEntity.SERVO1, positionList.get(i).getServo1Angle(), new CommandCallback() {
                 @Override
                 public void onSuccess() {
@@ -372,33 +396,49 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                 }
             });
 
-//            mApi.adjustServoComponent(ServoMotorEntity.SERVO2, positionList.get(i).getServo2Angle(), new CommandCallback() {
-//                @Override
-//                public void onSuccess() {
-//                }
-//
-//                @Override
-//                public void onError() {
-//                }
-//
-//                @Override
-//                public void onResult(String state) {
-//                }
-//            });
-//
-//            mApi.adjustServoComponent(ServoMotorEntity.SERVO5, positionList.get(i).getServo5Angle(), new CommandCallback() {
-//                @Override
-//                public void onSuccess() {
-//                }
-//
-//                @Override
-//                public void onError() {
-//                }
-//
-//                @Override
-//                public void onResult(String state) {
-//                }
-//            });
+            try {
+                sendCommandThread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Log.d("MotionFragment", "command value 2: " + positionList.get(i).getServo2Angle());
+            mApi.adjustServoComponent(ServoMotorEntity.SERVO2, positionList.get(i).getServo2Angle(), new CommandCallback() {
+                @Override
+                public void onSuccess() {
+                }
+
+                @Override
+                public void onError() {
+                }
+
+                @Override
+                public void onResult(String state) {
+                }
+            });
+
+
+            try {
+                sendCommandThread.sleep(500);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Log.d("MotionFragment", "command value 5: " + positionList.get(i).getServo5Angle());
+
+            mApi.adjustServoComponent(ServoMotorEntity.SERVO5, positionList.get(i).getServo5Angle(), new CommandCallback() {
+                @Override
+                public void onSuccess() {
+                }
+
+                @Override
+                public void onError() {
+                }
+
+                @Override
+                public void onResult(String state) {
+                }
+            });
         }
     }
 
@@ -441,6 +481,11 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
 
         LampModel model = new LampModel();
         servo1Angle = seekBar.getProgress();
+        if (servo1Angle < MIN_SERVO1) {
+            servo1Angle = MIN_SERVO1;
+        } else if (servo1Angle > MAX_SERVO1) {
+            servo1Angle = MAX_SERVO1;
+        }
         model.setServo1Angle(servo1Angle);
         model.setServo2Angle(servo2Angle);
         model.setServo5Angle(servo5Angle);
@@ -525,15 +570,20 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                     centerX = paramsImageLampArm1.x;
                     centerY = paramsImageLampArm1.y + 200;
                     degree = calculateAngle(x, y, centerX, centerY, false);
-
+                    Log.d(TAG + "degree", String.valueOf(degree));
                     if ((degree > 0) && (degree < 135)) {
                         imageLampHead.setRotation((int) (degree - 90));
-                        servo2Angle = (int) (degree - 90);
+                        servo2Angle = (int) (115 - degree);
+                        if (servo2Angle < MIN_SERVO2) {
+                            servo2Angle = MIN_SERVO2;
+                        } else if (servo2Angle > MAX_SERVO2) {
+                            servo2Angle = MAX_SERVO2;
+                        }
                     }
                     break;
                 case R.id.image_control:
                     controlImage(x);
-
+                    break;
             }
         }
         return true;
