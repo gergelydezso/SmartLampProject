@@ -32,17 +32,6 @@
             android:layout_width="wrap_content"
             android:text="@string/stop"/>
 
-
-    <Button android:id="@+id/pause_music_btn"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/pause"/>
-
-    <Button android:id="@+id/show_playlist_btn"
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="@string/playlist"/>
-
   </LinearLayout>
 
 </RelativeLayout>
