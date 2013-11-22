@@ -37,8 +37,8 @@
         android:id="@+id/light_view"
         android:layout_height="80dp"
         android:layout_width="140dp"
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="66dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginLeft="179dp"
         android:layout_below="@+id/color_layout" />
 
     <ImageView

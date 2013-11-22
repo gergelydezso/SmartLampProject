@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.gergelydezso.smartlampsdk.SmartLamp;
@@ -18,12 +19,12 @@ import com.gergelydezso.smartlampsdk.sampleapp.SmartLampHolder;
 public class ColorControlImageFragment extends Fragment {
 
     private ColorPickerView mColorPicker;
-    @SuppressWarnings("unused")
-    private int w, h;
+
     private SmartLamp mApi = null;
     private LightView lightView;
     private TextView hexCodeColor;
     private LinearLayout linearLayoutColor;
+    private RelativeLayout hexColorLayout;
 
 
     @Override
@@ -33,6 +34,7 @@ public class ColorControlImageFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_color_control_image, container, false);
 
+        hexColorLayout = (RelativeLayout) rootView.findViewById(R.id.hex_color_layout);
         hexCodeColor = (TextView) rootView.findViewById(R.id.hex_color_label);
         linearLayoutColor = (LinearLayout) rootView.findViewById(R.id.color_layout);
         lightView = (LightView) rootView.findViewById(R.id.light_view);
@@ -46,7 +48,12 @@ public class ColorControlImageFragment extends Fragment {
                 hexCodeColor.setText(hexCode.toUpperCase());
                 linearLayoutColor.setBackgroundColor(intColor);
                 setColorLight(intColor);
+            }
+        });
 
+        hexColorLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
                 int pixelColor = mColorPicker.getColor();
 
                 int redValue = Color.red(pixelColor);
@@ -75,7 +82,6 @@ public class ColorControlImageFragment extends Fragment {
                 }
             }
         });
-
         return rootView;
 
     }

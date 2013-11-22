@@ -40,6 +40,8 @@ public class BaseMenuActivity extends FragmentActivity {
     private String[] menuItems;
 
     private boolean menu_save;
+    private NotificationsFragment fragmentNotifications = new NotificationsFragment();
+    ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,14 +204,14 @@ public class BaseMenuActivity extends FragmentActivity {
             case R.string.ns_menu_snippet1:
 
                 Fragment fragmentColorControl = new ColorControlImageFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentColorControl).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentColorControl).addToBackStack(null).commit();
                 hideABMenuItems();
 
                 break;
             case R.string.ns_menu_snippet2:
 
                 fragmentMotion = new MotionFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMotion, MOTION_FRAGMENT_TAG).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMotion, MOTION_FRAGMENT_TAG).addToBackStack(null).commit();
 
                 menu_save = true;
 
@@ -217,13 +219,13 @@ public class BaseMenuActivity extends FragmentActivity {
             case R.string.ns_menu_snippet3:
 
                 Fragment fragmentMusicV = new MusicVisualizationFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMusicV, MUSIC_FRAGMENT_TAG).commit();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentMusicV, MUSIC_FRAGMENT_TAG).addToBackStack(null).commit();
                 hideABMenuItems();
                 break;
             case R.string.ns_menu_snippet4:
 
-                Fragment fragmentNotifications = new NotificationsFragment();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentNotifications).commit();
+                // fragmentNotifications = new NotificationsFragment();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fragmentNotifications).addToBackStack(null).commit();
                 hideABMenuItems();
                 break;
         }
@@ -264,6 +266,7 @@ public class BaseMenuActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+
         moveTaskToBack(true);
     }
 }

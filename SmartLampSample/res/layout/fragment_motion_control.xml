@@ -44,9 +44,17 @@
             android:id="@+id/image_control"
             android:layout_height="wrap_content"
             android:layout_width="600px"
-            android:src="@drawable/circle180"
+            android:src="@drawable/circle75"
             android:layout_x="60px"
             android:layout_y="470px" />
+
+        <TextView android:id="@+id/servo5TextView"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_y="640px"
+            android:layout_x="350px"
+            android:text="83"
+            android:textColor="@android:color/black"/>
 
         <ImageView
             android:id="@+id/image_lamp_base"
@@ -84,7 +92,8 @@
                 android:gravity="center_horizontal"
                 android:text="180"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text165"
@@ -94,7 +103,9 @@
                 android:gravity="center_horizontal"
                 android:text="165"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"
+                />
 
             <TextView
                 android:id="@+id/text150"
@@ -104,7 +115,8 @@
                 android:gravity="center_horizontal"
                 android:text="150"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text135"
@@ -114,7 +126,8 @@
                 android:gravity="center_horizontal"
                 android:text="135"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text120"
@@ -124,7 +137,8 @@
                 android:gravity="center_horizontal"
                 android:text="120"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text105"
@@ -134,7 +148,8 @@
                 android:gravity="center_horizontal"
                 android:text="105"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text90"
@@ -143,8 +158,8 @@
                 android:layout_weight="1"
                 android:gravity="center_horizontal"
                 android:text="90"
-                android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textColor="#05A5E1"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/text75"
@@ -154,7 +169,8 @@
                 android:gravity="center_horizontal"
                 android:text="75"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text60"
@@ -164,7 +180,8 @@
                 android:gravity="center_horizontal"
                 android:text="60"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text45"
@@ -174,7 +191,8 @@
                 android:gravity="center_horizontal"
                 android:text="45"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text30"
@@ -184,7 +202,8 @@
                 android:gravity="center_horizontal"
                 android:text="30"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
             <TextView
                 android:id="@+id/text15"
@@ -194,7 +213,9 @@
                 android:gravity="center_horizontal"
                 android:text="15"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"
+                />
 
             <TextView
                 android:id="@+id/text0"
@@ -204,7 +225,8 @@
                 android:gravity="center_horizontal"
                 android:text="0"
                 android:textColor="@android:color/white"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:visibility="invisible"/>
 
 
             />

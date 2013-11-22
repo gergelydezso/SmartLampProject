@@ -94,6 +94,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
     private TextView text150;
     private TextView text165;
     private TextView text180;
+    private TextView servo5TextView;
     private TextView[] textArray;
     private int textColor = 0xFF05A5E1;
     ArrayList<TextView> textList;
@@ -173,6 +174,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
         seekBar.setOnSeekBarChangeListener(verticalSeekBarListener());
 
         textVerticalLayout = (LinearLayout) rootView.findViewById(R.id.text_vertical_layout);
+        servo5TextView = (TextView) rootView.findViewById(R.id.servo5TextView);
         text0 = (TextView) rootView.findViewById(R.id.text0);
         text15 = (TextView) rootView.findViewById(R.id.text15);
         text30 = (TextView) rootView.findViewById(R.id.text30);
@@ -201,7 +203,6 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
                 motionControl(progress);
-                //seekBar.setProgress(progress);
             }
 
             @Override
@@ -224,12 +225,12 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
         for (int index = 0; index < controlImageResourceList.length; index++) {
             if (x < 60) {
                 imageControl.setImageResource(controlImageResourceList[0]);
-                servo5Angle = MIN_SERVO5;
+                servo5Angle = MAX_SERVO5;
                 break;
             }
             if (x > 660) {
                 imageControl.setImageResource(controlImageResourceList[12]);
-                servo5Angle = MAX_SERVO5;
+                servo5Angle = MIN_SERVO5;
                 break;
             } else {
                 int lowerLimit = index * step + 60;
@@ -241,6 +242,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                 }
             }
         }
+        servo5TextView.setText(String.valueOf(servo5Angle));
     }
 
     private void setServo5Anglee(int index) {
@@ -280,6 +282,8 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                 break;
             case 11:
                 servo5Angle = MIN_SERVO5;
+            case 12:
+                servo5Angle = MIN_SERVO5;
                 break;
         }
     }
@@ -288,9 +292,11 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
         int step = 15;
         for (int i = 0; i < textList.size(); i++) {
             textList.get(i).setTextColor(Color.WHITE);
+            textList.get(i).setVisibility(View.INVISIBLE);
         }
         for (int index = 0; index < textList.size(); index++) {
             if (progress == 0) {
+                textList.get(0).setVisibility(View.VISIBLE);
                 textList.get(0).setTextColor(textColor);
                 imageLampHead.setImageResource(resourceList[0]);
                 break;
@@ -298,6 +304,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
                 int lowerLimit = index * step;
                 int upperLimit = (index + 1) * step;
                 if (progress > lowerLimit && progress <= upperLimit) {
+                    textList.get(index + 1).setVisibility(View.VISIBLE);
                     textList.get(index + 1).setTextColor(textColor);
                     imageLampHead.setImageResource(resourceList[index + 1]);
                     break;
@@ -445,6 +452,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
 
     public void addListElement() {
 
+        servo5TextView.setVisibility(View.INVISIBLE);
         seekBar.setVisibility(View.INVISIBLE);
         textVerticalLayout.setVisibility(View.INVISIBLE);
         mainLayout.setDrawingCacheEnabled(true);
@@ -478,6 +486,7 @@ public class MotionFragment extends Fragment implements OnClickListener, View.On
         mainLayout.setDrawingCacheEnabled(false);
         seekBar.setVisibility(View.VISIBLE);
         textVerticalLayout.setVisibility(View.VISIBLE);
+        servo5TextView.setVisibility(View.VISIBLE);
 
         LampModel model = new LampModel();
         servo1Angle = seekBar.getProgress();
