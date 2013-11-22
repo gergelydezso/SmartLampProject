@@ -45,7 +45,7 @@ public class VisualizerView extends View implements VisualizerDataHandler {
     /**
      * Initialize the visualizer.
      *
-     * @param audioSessionId required by the {@link android.media.audiofx.Visualizer}. Specifies the MediaPlayer / audio session to attach to.
+     * @param mediaPlayer required by the {@link android.media.audiofx.Visualizer}. Specifies the MediaPlayer / audio session to attach to.
      */
     public void init(MediaPlayer mediaPlayer) {
         visualizer = new Visualizer(mediaPlayer.getAudioSessionId());

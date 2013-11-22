@@ -53,7 +53,7 @@ public class LampMusicVisualizer implements VisualizerDataHandler {
 
         if (!motion.isEmpty()) {
             LampHeadState currentHeadState = motion.first();
-            if (shouldChangeLampPosition(currentHeadState, elapsedTime))  { //(currentHeadState.getTimeInSeconds() * 10 == elapsedTime / 100)
+            if (currentHeadState.getTimeInSeconds() == elapsedTime / 1000)  { //(currentHeadState.getTimeInSeconds() * 10 == elapsedTime / 100)
                 Log.d(TAG, "changeLampPosition() - CALLED! - elapsedTime: " + elapsedTime + " - " + elapsedTime / 100);
                 changeLampPosition(currentHeadState);
                 motion.pollFirst();

@@ -118,6 +118,7 @@ public class MusicVisualizationFragment extends Fragment {
     }
 
     private MediaPlayer createMediaPlayer(Uri uri) {
-        return MediaPlayer.create(getActivity(), uri);
+      Uri uri2 = Uri.parse("android.resource://" + getActivity().getPackageName() + "/" + R.raw.ilike);
+        return MediaPlayer.create(getActivity(), uri2);
     }
 }

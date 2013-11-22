@@ -115,6 +115,9 @@ public class BluetoothConnectionService {
   }
 
   public void write(String out, CommandCallback callback) {
+
+    Log.d("BluetoothConnectionService", "command: " + out);
+
     this.mCallback = callback;
     this.mOutValue = out;
     ConnectedThread connectedThread;
