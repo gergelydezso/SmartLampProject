@@ -47,7 +47,7 @@ public class TimeCommandFilter implements CommandFilter {
 
     if (commandToBeFiltered instanceof ServoCommand) {
       mPreviousTime = commandToBeFiltered.getTimeStamp();
-//      return true;
+      return true;
     }
     else {
       if ((commandToBeFiltered.getTimeStamp() - mPreviousTime) > 1000) {
